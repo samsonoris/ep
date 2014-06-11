@@ -2,7 +2,7 @@
 DROP TABLE IF EXISTS account;
 
 CREATE TABLE account (
-	userid		INTEGER PRIMARY KEY,
+	userid		serial,
 	firstname	text,
 	lastname	text,
 	email		text,
