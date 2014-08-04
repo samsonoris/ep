@@ -1,4 +1,37 @@
 
+	var activeElement;
+
+	var	creator = $('<div id="creator">' +
+			'<button onclick="changeMenu(gridMaker)">New grid row</button>' +
+			'<button onclick="append(\'article\')">New article</button>' +
+			'</div>'
+	);
+
+	var gridMaker = $('<div id="gridMaker">' +
+			'<h5>Grid Maker Menu</h5>' +
+			'<label for="columns">Content columns:</label>' +
+			'<input name="columns" type="text"><hr>' +
+			'<label for="col-sm">Columns per row sm:</label>' +
+			'<input name="col-sm" type="text" />' +
+			'<label for="col-md">Columns per row md:</label>' +
+			'<input name="col-md" type="text" />' +
+			'<label for="col-lg">Columns per row lg:</label>' +
+			'<input name="col-lg" type="text" />' +
+			'</div>'
+	);
+
+	var	editor = $('<div id="editor">' +
+			'<h5>Editor</h5>' +
+			'<button onclick="doCommand(\'bold\')">B</button>' +
+			'<button onclick="doCommand(\'italic\')">I</button>' +
+			'<button onclick="doCommand(\'underline\')">U</button><br>' +
+			'<button onclick="doCommand(\'justifyLeft\')">Left</button>' +
+			'<button onclick="doCommand(\'justifyRight\')">Right</button>' +
+			'<button onclick="doCommand(\'justifyCenter\')">Center</button>' +
+			'<button onclick="doCommand(\'justifyFull\')">Justified</button>' +
+			'</div>'
+	);
+
 	var mousex;
 	var mousey;
 	var move = false;
@@ -18,6 +51,9 @@
 		d.style.left = ldivx +'px';
 		d.style.top = ldivy +'px';
 		d.style.display = 'block';
+
+		
+		$('#dragme').append(creator);
 	}
 	 
 	function mousedown(e) {
@@ -57,6 +93,28 @@
 			d.style.top = ldivy +'px';
 		}
 	}
+
+	$(document).on('focus','.editable',function(){
+		activeElement = $(this);
+		document.execCommand('styleWithCss',false,true);
+		changeMenu(editor);
+	});
+
+	function changeMenu(menu){
+		$('#dragme').empty();
+		$('#dragme').append(menu);
+	}
+
+	function append(element) {
+		$("<" + element + " class='editable' contentEditable='true'></" + element + ">").appendTo(".container").focus();
+	}
+
+	function doCommand(command,argument){
+		document.execCommand(command,false,argument);
+		activeElement.focus();
+	}
+
+
 
 
 

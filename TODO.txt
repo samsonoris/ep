@@ -1,0 +1,43 @@
+EasyPress TODO
+
+- Logga in med olika typer av användare (admin, author)
+
+DATABASE
+
+- timestamps
+- tags
+- categories
+
+EDITOR 
+
+- WYSIWYG-interface  
+- WYSIWYG-backend
+
+- create: 
+	- Grid (layout)
+	- Themes
+	- Elements
+		- Blogg
+		- Image
+		- Image viewer
+		- Video
+		- Menu
+		- Sidebar
+		- Navbar
+		- Ordered list
+		- Unordered list
+		- Sociala länkar
+		- Tags
+
+- save 
+- publish
+
+ARCHIVE
+
+- sort modes: categories
+- sort modes: all versions, latest versions
+
+VIEW
+
+
+LIVE PAGE
