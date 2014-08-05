@@ -12,12 +12,11 @@ var setContent = function(elements){
 db.getContents(setContent);
 
 /* GET home page. */
+
 router.get('/', function(req, res) {
   res.render('index', { title: 'MyEasyPress', content: content });
 });
 
-router.get('/admin', function(req, res) {
-  res.render('admin', { title: 'EasyPress - admin'});
-});
+
 
 module.exports = router;

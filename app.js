@@ -22,14 +22,13 @@ app.use(bodyParser.urlencoded());
 app.use(cookieParser());
 
 var bootstrapPath = path.join(__dirname, 'node_modules', 'twitter-bootstrap');
-app.use(lessMiddleware(__dirname + '/public',{
-    debug:true
-}));
+//app.use(lessMiddleware(__dirname + '/public',{
+///    debug:true
+//}));
 
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(__dirname + '/public'));
 
 app.use('/', routes);
-app.use('/users', users);
 
 /// catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -37,8 +36,6 @@ app.use(function(req, res, next) {
     err.status = 404;
     next(err);
 });
-
-
 
 /// error handlers
 

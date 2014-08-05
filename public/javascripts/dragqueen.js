@@ -1,5 +1,5 @@
 
-	var activeElement;
+	var activeElement = $('.container');
 
 	var	creator = $('<div id="creator">' +
 			'<button onclick="changeMenu(gridMaker)">New grid row</button>' +
@@ -10,13 +10,15 @@
 	var gridMaker = $('<div id="gridMaker">' +
 			'<h5>Grid Maker Menu</h5>' +
 			'<label for="columns">Content columns:</label>' +
-			'<input name="columns" type="text"><hr>' +
+			'<input ng-model="colcount" name="columns" type="text"><hr>' +
 			'<label for="col-sm">Columns per row sm:</label>' +
-			'<input name="col-sm" type="text" />' +
+			'<input ng-model="colsm" name="col-sm" type="text" />' +
 			'<label for="col-md">Columns per row md:</label>' +
-			'<input name="col-md" type="text" />' +
+			'<input ng-model="colmd" name="col-md" type="text" />' +
 			'<label for="col-lg">Columns per row lg:</label>' +
-			'<input name="col-lg" type="text" />' +
+			'<input ng-model="collg" name="col-lg" type="text" />' +
+			'<button onclick="append(makeRow($scope.colcount,$scope.colsm,$scope.colmd,$scope.collg))">Apply</button>' + 
+			'<button onclick="changeMenu(creator)">Back</button>' + 
 			'</div>'
 	);
 
@@ -113,6 +115,32 @@
 		document.execCommand(command,false,argument);
 		activeElement.focus();
 	}
+
+	function makeRow(count,sm,md,lg) {
+		colnsole.log("In makeRow function...");
+		var row = "<div class='row'>";
+		if (sm) { smrow = count / sm; smstr = ' col-sm-' + smrow; }
+		if (md) { mdrow = count / md; mdstr = ' col-md-' + mdrow; }
+		if (lg) { lgrow = count / lg; lgstr = ' col-lg-' + lgrow; }
+		for (i = 0; i < count; i++) {
+			row += "<div class='" + smstr + mdstr + lgrow + "'></div>";
+			if (smrow && smrow == i) {
+				row += '<div class="clearfix visible-sm-block"></div>';
+			}
+			if (mdrow && mdrow == i) {
+				row += '<div class="clearfix visible-md-block"></div>';
+			}
+			if (lgrow && lgrow == i) {
+				row += '<div class="clearfix visible-lg-block"></div>';
+			}
+		}
+		row += '</div>';
+		console.log(row);
+		row = $(row);
+		console.log(row);
+		activeElement.append(row);
+	}
+
 
 
 

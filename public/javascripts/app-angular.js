@@ -7,18 +7,19 @@ var EasyPress = angular.module('EasyPress',[
 ]).
 
 config(['$routeProvider','$locationProvider',function($routeProvider,$locationProvider){
-	$locationProvider.hashPrefix();
+	$locationProvider.html5Mode(true);
+	console.log("In config");
 	$routeProvider.
 		when('/',{
-			templateUrl:'edit.hjs',
+			templateUrl:'views/edit.html',
 			controller:'EditCtrl'
 		}).
 		when('/archive',{
-			templateUrl:'archive.hjs',
+			templateUrl:'partials/archive.html',
 			controller:'ArchiveCtrl'
 		}).
 		when('/view',{
-			templateUrl:'view.hjs',
+			templateUrl:'partials/view.html',
 			controller:'ViewCtrl'
 		}).
 		otherwise({
