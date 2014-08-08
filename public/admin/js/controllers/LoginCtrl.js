@@ -1,6 +1,7 @@
  //Login controller
 
  EasyPress.controller('LoginCtrl', function($scope, $rootScope, $http, $location) {
+  $scope.$parent.title = "Log in";
   // This object will be filled by the form
   $scope.user = {};
 
@@ -18,6 +19,7 @@
     })
     .error(function(){
       // Error: authentication failed
+      $scope.wrongLogIn = "Username or password is incorrect. Please try again!";
       console.log('failed');
       $rootScope.message = 'Authentication failed.';
       $location.url('/login');
