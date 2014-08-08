@@ -7,7 +7,7 @@ config(['$routeProvider', '$locationProvider', function($routeProvider, $locatio
 
 		// home page
 		.when('/admin', {
-			templateUrl:'admin/partials/edit.html',
+			templateUrl:'admin/partials/login.html',
 			controller:'EditController'
 		})
 
