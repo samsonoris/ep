@@ -1,7 +1,8 @@
 
-	var activeElement = $('.container');
+	$scope.activeElement = $('.container');
 
 	var	creator = $('<div id="creator">' +
+			'<label>Active Element:</label>' +
 			'<button onclick="changeMenu(gridMaker)">New grid row</button>' +
 			'<button onclick="append(\'article\')">New article</button>' +
 			'</div>'
@@ -10,14 +11,14 @@
 	var gridMaker = $('<div id="gridMaker">' +
 			'<h5>Grid Maker Menu</h5>' +
 			'<label for="columns">Content columns:</label>' +
-			'<input ng-model="colcount" name="columns" type="text"><hr>' +
+			'<input name="columns" type="text"><hr>' +
 			'<label for="col-sm">Columns per row sm:</label>' +
-			'<input ng-model="colsm" name="col-sm" type="text" />' +
+			'<input name="col-sm" type="text" />' +
 			'<label for="col-md">Columns per row md:</label>' +
-			'<input ng-model="colmd" name="col-md" type="text" />' +
+			'<input name="col-md" type="text" />' +
 			'<label for="col-lg">Columns per row lg:</label>' +
-			'<input ng-model="collg" name="col-lg" type="text" />' +
-			'<button onclick="append(makeRow($scope.colcount,$scope.colsm,$scope.colmd,$scope.collg))">Apply</button>' + 
+			'<input name="col-lg" type="text" />' +
+			'<button onclick="makeRow()">Apply</button>' + 
 			'<button onclick="changeMenu(creator)">Back</button>' + 
 			'</div>'
 	);
@@ -98,49 +99,56 @@
 	}
 
 	$(document).on('focus','.editable',function(){
-		activeElement = $(this);
+		$scope.activeElement = $(this);
 		document.execCommand('styleWithCss',false,true);
 		changeMenu(editor);
 	});
 
-	function changeMenu(menu){
-		$('#dragme').empty();
-		$('#dragme').append(menu);
-	}
-
-	function append(element) {
-		$("<" + element + " class='editable' contentEditable='true'></" + element + ">").appendTo(".container").focus();
-	}
-
-	function doCommand(command,argument){
-		document.execCommand(command,false,argument);
-		activeElement.focus();
-	}
-
-	function makeRow(count,sm,md,lg) {
-		colnsole.log("In makeRow function...");
-		var row = "<div class='row'>";
-		if (sm) { smrow = count / sm; smstr = ' col-sm-' + smrow; }
-		if (md) { mdrow = count / md; mdstr = ' col-md-' + mdrow; }
-		if (lg) { lgrow = count / lg; lgstr = ' col-lg-' + lgrow; }
-		for (i = 0; i < count; i++) {
-			row += "<div class='" + smstr + mdstr + lgrow + "'></div>";
-			if (smrow && smrow == i) {
-				row += '<div class="clearfix visible-sm-block"></div>';
-			}
-			if (mdrow && mdrow == i) {
-				row += '<div class="clearfix visible-md-block"></div>';
-			}
-			if (lgrow && lgrow == i) {
-				row += '<div class="clearfix visible-lg-block"></div>';
-			}
+		function changeMenu(menu){
+			$('#dragme').empty();
+			$('#dragme').append(menu);
 		}
-		row += '</div>';
-		console.log(row);
-		row = $(row);
-		console.log(row);
-		activeElement.append(row);
-	}
+
+		function append(element) {
+			$("<" + element + " class='editable' contentEditable='true'></" + element + ">").appendTo(".container").focus();
+		}
+
+		function doCommand(command,argument){
+			document.execCommand(command,false,argument);
+			$scope.activeElement.focus();
+		}
+
+		function makeRow() {
+			console.log("In makeRow function...");
+			var row = "<div class='row'>";
+			var columns = $('input[name="columns"]').val();
+			var sm = $('input[name="col-sm"').val();
+			var md = $('input[name="col-md"').val();
+			var lg = $('input[name="col-lg"').val();
+			var smrow,smstr,mdrow,mdstr,lgrow,lgstr;
+			console.log(columns,sm,md,lg);
+			if (sm) { smrow = 12 / sm; smstr = ' col-sm-' + smrow; }
+			if (md) { mdrow = 12 / md; mdstr = ' col-md-' + mdrow; }
+			if (lg) { lgrow = 12 / lg; lgstr = ' col-lg-' + lgrow; }
+			for (i = 0; i < columns; i++) {
+				row += "<div class='" + smstr + mdstr + lgstr + "'></div>";
+				console.log("sm: ",sm, "i + 1: ", i+1);
+				if (sm && (i+1) % sm == 0) {
+					row += '<div class="clearfix visible-sm-block"></div>';
+				}
+				if (md && (i+1) % md == 0) {
+					row += '<div class="clearfix visible-md-block"></div>';
+				}
+				if (lg && (i+1) % lg == 0) {
+					row += '<div class="clearfix visible-lg-block"></div>';
+				}
+			}
+			row += '</div>';
+			console.log(row);
+			row = $(row);
+			console.log(row);
+			$scope.activeElement.append(row);
+		}
 
 
 

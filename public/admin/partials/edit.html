@@ -1,6 +1,58 @@
+<div id="main" class="container"></div>
+<div id="dragme">
 
+	<label>Active Element: {{ activeString }}</label>
 
-<div class="container"></div>
-<div id="dragme"></div>
+	<div id="creator" ng-show="creator" ng-hide="!creator">
+		<button ng-click="creator=false; pickElem=true">Select active element</button>
+		<button ng-click="creator=false; editElem=true">Edit active element</button>
+		<button ng-click="creator=false; gridMaker=true">New grid row</button>
+		<button ng-click="append('article')">New article</button>
+	</div>
 
+	<div id="pickElem" ng-show="pickElem" ng-hide="!pickElem">
+		<button ng-click="pickElem=false; creator=true">Back</button> 
+		<br>
+		<ul class="select">
+			<li ng-repeat="elem in elements" ng-click="setActive(elem)">{{ elem }}</li>
+		</ul>
+	</div>
+
+	<div id="editElem" ng-show="editElem" ng-hide="!editElem">
+		<h5>Edit new element</h5>
+		<div ng-repeat="(key,value) in elemProps">
+			<label>{{key}}:</label><input type="text" class="prop" value="{{value}}" name="{{key}}">
+		</div>
+		<button ng-click="setProperties()">Apply</button>
+	</div>
+
+	<div id="gridMaker" ng-show="gridMaker" ng-hide="!gridMaker">
+		<h5>Grid Maker Menu</h5>
+		<label for="columns">Content columns:</label>
+		<input name="columns" type="text"><hr>
+		<label for="col-sm">Columns per row sm:</label>
+		<input name="col-sm" type="text" />
+		<label for="col-md">Columns per row md:</label>
+		<input name="col-md" type="text" />
+		<label for="col-lg">Columns per row lg:</label>
+		<input name="col-lg" type="text" />
+		<button ng-click="makeRow()">Apply</button> 
+		<button ng-click="gridMaker=false; creator=true">Back</button> 
+	</div>
+
+	<div id="editor" ng-show="editor">
+		<h5>Editor</h5>
+		<button onclick="doCommand(\'bold\')">B</button>
+		<button onclick="doCommand(\'italic\')">I</button>
+		<button onclick="doCommand(\'underline\')">U</button><br>
+		<button onclick="doCommand(\'justifyLeft\')">Left</button>
+		<button onclick="doCommand(\'justifyRight\')">Right</button>
+		<button onclick="doCommand(\'justifyCenter\')">Center</button>
+		<button onclick="doCommand(\'justifyFull\')">Justified</button>
+	</div>
+
+</div>
+
+<!--
 <script src="admin/js/dragqueen.js"></script>
+-->

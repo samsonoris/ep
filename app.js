@@ -22,9 +22,9 @@ app.use(bodyParser.urlencoded());
 app.use(cookieParser());
 
 var bootstrapPath = path.join(__dirname, 'node_modules', 'twitter-bootstrap');
-//app.use(lessMiddleware(__dirname + '/public',{
-///    debug:true
-//}));
+app.use(lessMiddleware(__dirname + '/public',{
+    debug:true
+}));
 
 app.use(express.static(__dirname + '/public'));
 
