@@ -9,6 +9,7 @@ EasyPress.controller('EditController', function($scope) {
 	};
 	var activeBranch = $scope.elements["MainContent"];
 	$scope.elemProps = {};
+	articleCount = 1;
 
 	$scope.$watch('activeElement',function(){
 		$scope.activeString = $scope.activeElement.attr("id");
@@ -16,6 +17,8 @@ EasyPress.controller('EditController', function($scope) {
 
 	$scope.setActive = function(id) {
 		$scope.activeElement = $('#' + id);
+		$("*").css({"outline":"none"}).attr('contenteditable','false');
+		$scope.activeElement.css({"outline":"green solid thin"}).attr('contenteditable','true').focus();
 		$scope.activeString = id;
 		activeBranch = $scope.elements["MainContent"];
 		if (id != "MainContent") {
@@ -55,12 +58,12 @@ EasyPress.controller('EditController', function($scope) {
 	$scope.editor = false;
 
 	$scope.append = function(element) {
-		var count = $($scope.activeElement.id + ' > ' + element).length + 1;
-		var elem = $("<" + element + " id='" + element + count + "' class='editable' contentEditable='true'></" + element + ">");
-		elem.appendTo($scope.activeElement).focus();
-		$scope.activeElement = elem;
+		var elem = $("<" + element + " id='" + element + articleCount++ + "'></" + element + ">");
+		elem.appendTo($scope.activeElement);
 		activeBranch[elem.get(0).id] = {};
-		activeBranch = activeBranch[elem.id];
+		activeBranch = activeBranch[elem.get(0).id];
+		$scope.setActive(elem.attr('id'));
+		$scope.activeElement = elem;
 		$scope.prepareElement(elem);
 		$scope.creator = false;
 		$scope.editElem = true;
@@ -139,7 +142,10 @@ EasyPress.controller('EditController', function($scope) {
 	addListeners();
 
 	$(document).on('focus','.editable',function(){
+		console.log("On focus",$(this));
 		$scope.activeElement = $(this);
 		document.execCommand('styleWithCss',false,true);
 	});
+
+	console.log(activeBranch);
 });
