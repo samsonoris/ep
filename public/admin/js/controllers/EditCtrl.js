@@ -4,40 +4,47 @@ EasyPress.controller('EditController', function($scope) {
 	$scope.$parent.title = "Ep-admin Edit";
 
 	$scope.activeElement = $('.container');
-	$scope.elements = [$scope.activeElement.attr('id')];
+	$scope.elements = {
+		"MainContent": {}
+	};
+	var activeBranch = $scope.elements["MainContent"];
 	$scope.elemProps = {};
-	$scope.subElements = {};
 
-	$scope.$watch($scope.activeElement,function(){
+	$scope.$watch('activeElement',function(){
 		$scope.activeString = $scope.activeElement.attr("id");
 	});
 
 	$scope.setActive = function(id) {
 		$scope.activeElement = $('#' + id);
 		$scope.activeString = id;
+		activeBranch = $scope.elements["MainContent"];
+		if (id != "MainContent") {
+			var map = [id];
+			var elem = $scope.activeElement.get(0).parentNode;
+			while (elem.id != "MainContent") {
+				map.unshift(elem.id);
+				elem = elem.parentNode;
+			}
+			map.forEach(function(node){
+				activeBranch = activeBranch[node];
+			});
+		}
 		$scope.pickElem = false;
 		$scope.creator = true;
 	};
 
 	$scope.prepareElement = function(elem) {
-		console.log("In prepare element...", elem);
 		elem = elem.get(0);
-		console.log("elemProps: ",$scope.elemProps);
+		$scope.elemProps.id = elem.id;
+		$scope.elemProps.class = elem.className;
 		for (var i in elem.style) {
 			if (typeof elem.style[i] != "function" && !i.match(/^webkit/)) {
 				$scope.elemProps[i] = typeof elem.style[i] == "number" ? elem.style[i].toString() : elem.style[i];
 			}
 		}
-		console.log("elemProps 2: ",$scope.elemProps);
-		console.log($scope.elemProps);
 	};
 
 	$scope.setProperties = function() {
-		console.log(
-			"id: ",$('input[name="id"]').val(),
-			"\nclass: ", $('input[name="class"]').val(),
-			"\nborder: ", $('input[name="border"]').val()
-			);
 		$scope.editElem = false;
 		$scope.creator = true;
 	};
@@ -52,16 +59,17 @@ EasyPress.controller('EditController', function($scope) {
 		var elem = $("<" + element + " id='" + element + count + "' class='editable' contentEditable='true'></" + element + ">");
 		elem.appendTo($scope.activeElement).focus();
 		$scope.activeElement = elem;
-		//$scope.subElements[$scope.activeElement.attr('id')].push();
+		activeBranch[elem.get(0).id] = {};
+		activeBranch = activeBranch[elem.id];
 		$scope.prepareElement(elem);
 		$scope.creator = false;
 		$scope.editElem = true;
-	}
+	};
 
 	$scope.doCommand = function(command,argument){
 		document.execCommand(command,false,argument);
 		$scope.activeElement.focus();
-	}
+	};
 
 	var nextRow = 1;
 	$scope.makeRow = function() {
@@ -77,13 +85,13 @@ EasyPress.controller('EditController', function($scope) {
 		if (lg) { lgrow = 12 / lg; lgstr = ' col-lg-' + lgrow; }
 		for (i = 0; i < columns; i++) {
 			row += "<div id='row-" + nextRow + "-box-" + nextBox++ + "' class='" + smstr + mdstr + lgstr + "'></div>";
-			if (sm && (i+1) % sm == 0) {
+			if (sm && (i+1) % sm === 0) {
 				row += '<div class="clearfix visible-sm-block"></div>';
 			}
-			if (md && (i+1) % md == 0) {
+			if (md && (i+1) % md === 0) {
 				row += '<div class="clearfix visible-md-block"></div>';
 			}
-			if (lg && (i+1) % lg == 0) {
+			if (lg && (i+1) % lg === 0) {
 				row += '<div class="clearfix visible-lg-block"></div>';
 			}
 		}
