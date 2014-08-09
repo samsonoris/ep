@@ -109,20 +109,18 @@ EasyPress.controller('EditController', function($scope) {
 		$scope.creator = true;
 	};
 
-  // Drag box
+	// Drag box
 	var offX;
 	var offY;
 
-
 	function addListeners(){
-    document.getElementById('dragme').addEventListener('mousedown', mouseDown, false);
-    window.addEventListener('mouseup', mouseUp, false);
-
+		document.getElementById('dragme').addEventListener('mousedown', mouseDown, false);
+		window.addEventListener('mouseup', mouseUp, false);
 	}
 
 	function mouseUp(){
-    window.removeEventListener('mousemove', divMove, true);
-  }
+		window.removeEventListener('mousemove', divMove, true);
+	}
 
 	function mouseDown(e){
 		var div = document.getElementById('dragme');
@@ -132,10 +130,10 @@ EasyPress.controller('EditController', function($scope) {
 	}
 
 	function divMove(e){
-    var div = document.getElementById('dragme');
-    div.style.position = 'absolute';
-    div.style.top = (e.clientY-offY) + 'px';
-    div.style.left = (e.clientX-offX) + 'px';
+		var div = document.getElementById('dragme');
+		div.style.position = 'absolute';
+		div.style.top = (e.clientY-offY) + 'px';
+		div.style.left = (e.clientX-offX) + 'px';
 	}
 
 	addListeners();
@@ -144,6 +142,4 @@ EasyPress.controller('EditController', function($scope) {
 		$scope.activeElement = $(this);
 		document.execCommand('styleWithCss',false,true);
 	});
-
-
 });

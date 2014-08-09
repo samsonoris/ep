@@ -21,10 +21,10 @@
 	<label>Active Element: {{ activeString }}</label>
 
 	<div id="creator" ng-show="creator" ng-hide="!creator">
-		<button ng-click="creator=false; pickElem=true">Select active element</button>
-		<button ng-click="creator=false; editElem=true">Edit active element</button>
-		<button ng-click="creator=false; gridMaker=true">New grid row</button>
-		<button ng-click="append('article')">New article</button>
+		<button class="btn btn-default" ng-click="creator=false; pickElem=true">Select active element</button>
+		<button class="btn btn-default" ng-click="creator=false; editElem=true">Edit active element</button>
+		<button class="btn btn-default" ng-click="creator=false; gridMaker=true">New grid row</button>
+		<button class="btn btn-default" ng-click="append('article')">New article</button>
 	</div>
 
 	<div id="pickElem" ng-show="pickElem" ng-hide="!pickElem">
@@ -64,22 +64,22 @@
 
 	<div id="editor" ng-show="true">
 		<h5>Editor</h5>
-    <div class="btn-group">
-      <a class="btn btn-default" ng-click="doCommand('bold')"><i class="fa fa-bold"></i></a>
-      <a class="btn btn-default" ng-click="doCommand('italic')"><i class="fa fa-italic"></i></a>
-      <a class="btn btn-default" ng-click="doCommand('underline')"><i class="fa fa-underline"></i></a>
-      <a class="btn btn-default" ng-click="doCommand('fontName')"><i class="fa fa-font"></i></a>
-    </div>
-    <div class="btn-group">
-      <a class="btn btn-default" ng-click="doCommand('justifyLeft')"><i class="fa fa-align-left"></i></a>
-      <a class="btn btn-default" ng-click="doCommand('justifyCenter')"><i class="fa fa-align-center"></i></a>
-      <a class="btn btn-default" ng-click="doCommand('justifyRight')"><i class="fa fa-align-right"></i></a>
-      <a class="btn btn-default" ng-click="doCommand('justifyFull')"><i class="fa fa-align-justify"></i></a>
-    </div>
-    <div class="btn-group">
-      <a class="btn btn-default"><i class="fa fa-file-video-o"></i></a>
-      <a class="btn btn-default"><i class="fa fa-file-image-o"></i></a>
-    </div>
+		<div class="btn-group">
+		  <button ng-click="doCommand('bold')" class="btn btn-default fa fa-bold"></button>
+		  <button ng-click="doCommand('italic')" class="btn btn-default fa fa-italic"></button>
+		  <button ng-click="doCommand('underline')" class="btn btn-default fa fa-underline"></button>
+		  <button ng-click="doCommand('fontName')" class="btn btn-default fa fa-font"></button>
+		</div>
+		<div class="btn-group">
+		  <button ng-click="doCommand('justifyLeft')" class="btn btn-default fa fa-align-left"></button>
+		  <button ng-click="doCommand('justifyCenter')" class="btn btn-default fa fa-align-center"></button>
+		  <button ng-click="doCommand('justifyRight')" class="btn btn-default fa fa-align-right"></button>
+		  <button ng-click="doCommand('justifyFull')" class="btn btn-default fa fa-align-justify"></button>
+		</div>
+		<div class="btn-group">
+		  <button class="btn btn-default fa fa-file-video-o"></button>
+		  <button class="btn btn-default fa fa-file-image-o"></button>
+		</div>
 	</div>
 </div>
 
