@@ -22,7 +22,16 @@
   <a class="btn btn-default" href="#"><i class="fa fa-file-image-o"></i></a>
 </div>
 
-<div class="container"></div>
+<script type="text/ng-template"  id="tree_item_renderer.html">
+	<span class="select" ng-click="setActive(node)">{{node}}</span>
+<!--
+    <button ng-click="add(data)">Add node</button>
+    <button ng-click="delete(data)" ng-show="data.nodes.length > 0">Delete nodes</button>
+--> 
+	<ul class="tree">
+        <li ng-repeat="(node,nodes) in nodes" ng-include="'tree_item_renderer.html'"></li>
+    </ul>
+</script>
 
 <div id="dragme">
 
@@ -38,8 +47,13 @@
 	<div id="pickElem" ng-show="pickElem" ng-hide="!pickElem">
 		<button ng-click="pickElem=false; creator=true">Back</button> 
 		<br>
+		<!--
 		<ul class="select">
 			<li ng-repeat="elem in elements" ng-click="setActive(elem)">{{ elem }}</li>
+		</ul>
+		-->
+		<ul class="tree" ng-controller="TreeController">
+			<li ng-repeat="(node,nodes) in elements" ng-include="'tree_item_renderer.html'"></li>
 		</ul>
 	</div>
 
@@ -78,6 +92,4 @@
 
 </div>
 
-<!--
-<script src="admin/js/dragqueen.js"></script>
--->
+<div id="MainContent" class="container"></div>
