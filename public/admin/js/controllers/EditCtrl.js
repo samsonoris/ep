@@ -3,7 +3,7 @@ EasyPress.controller('EditController', function($scope) {
 
 	$scope.$parent.title = "Ep-admin Edit";
 
-	$scope.activeElement = $('.container')
+	$scope.activeElement = $('.container');
 	$scope.elements = [$scope.activeElement.attr('id')];
 	$scope.elemProps = {};
 	$scope.subElements = {};
@@ -30,7 +30,7 @@ EasyPress.controller('EditController', function($scope) {
 		}
 		console.log("elemProps 2: ",$scope.elemProps);
 		console.log($scope.elemProps);
-	}
+	};
 
 	$scope.setProperties = function() {
 		console.log(
@@ -99,66 +99,38 @@ EasyPress.controller('EditController', function($scope) {
 		nextRow++;
 		$scope.gridMaker = false;
 		$scope.creator = true;
+	};
+
+  // Drag box
+	var offX;
+	var offY;
+
+
+	function addListeners(){
+    document.getElementById('dragme').addEventListener('mousedown', mouseDown, false);
+    window.addEventListener('mouseup', mouseUp, false);
+
 	}
 
-	var mousex;
-	var mousey;
-	var move = false;
-	var ldivx = 200;
-	var ldivy = 200;
-	 
-	var IE = document.all?true:false;
-	if (!IE) document.captureEvents(Event.MOUSEMOVE)
+	function mouseUp(){
+    window.removeEventListener('mousemove', divMove, true);
+  }
 
-	function init() {
-		var d = document.getElementById('dragme');
-		d.onmousedown = mousedown;
-		d.onmouseup = mouseup;
-		d.onmousemove = mousemove;
-		d.style.left = ldivx +'px';
-		d.style.top = ldivy +'px';
-		d.style.display = 'block';
+	function mouseDown(e){
+		var div = document.getElementById('dragme');
+		offY = e.clientY-parseInt(div.offsetTop);
+		offX = e.clientX-parseInt(div.offsetLeft);
+		window.addEventListener('mousemove', divMove, true);
 	}
 
-	init();
-	 
-	function mousedown(e) {
-		document.getElementById('dragme').style.color = 'red';
-		move = true;
-	if (IE) {
-			mousex = event.clientX + document.body.scrollLeft;
-			mousey = event.clientY + document.body.scrollTop;
-		}
-		else {
-			mousex = e.pageX; 
-			mousey = e.pageY;
-		}
+	function divMove(e){
+    var div = document.getElementById('dragme');
+    div.style.position = 'absolute';
+    div.style.top = (e.clientY-offY) + 'px';
+    div.style.left = (e.clientX-offX) + 'px';
 	}
-	 
-	function mouseup(e) {
-		document.getElementById('dragme').style.color = 'black';
-		move = false;
-	}
-	 
-	function mousemove(e) {
-		if(move){
-			if (IE) {
-				ldivx = ldivx + event.clientX + document.body.scrollLeft - mousex;
-				ldivy = ldivy + event.clientY + document.body.scrollTop - mousey;
-				mousex = event.clientX + document.body.scrollLeft;
-				mousey = event.clientY + document.body.scrollTop;
-			} 
-			else {
-				ldivx = ldivx + e.pageX - mousex;
-				ldivy = ldivy + e.pageY - mousey;
-				mousex = e.pageX;
-				mousey = e.pageY;
-			}
-			var d = document.getElementById('dragme');
-			d.style.left = ldivx +'px';
-			d.style.top = ldivy +'px';
-		}
-	}
+
+	addListeners();
 
 	$(document).on('focus','.editable',function(){
 		$scope.activeElement = $(this);
