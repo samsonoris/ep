@@ -4,30 +4,13 @@
   <a href="#/" ng-click="logout()">Logout</a>
 </p>
 
-<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
-<div class="btn-group">
-  <a class="btn btn-default" href="#"><i class="fa fa-bold"></i></a>
-  <a class="btn btn-default" href="#"><i class="fa fa-italic"></i></a>
-  <a class="btn btn-default" href="#"><i class="fa fa-underline"></i></a>
-  <a class="btn btn-default" href="#"><i class="fa fa-font"></i></a>
-</div>
-<div class="btn-group">
-  <a class="btn btn-default" href="#"><i class="fa fa-align-left"></i></a>
-  <a class="btn btn-default" href="#"><i class="fa fa-align-center"></i></a>
-  <a class="btn btn-default" href="#"><i class="fa fa-align-right"></i></a>
-  <a class="btn btn-default" href="#"><i class="fa fa-align-justify"></i></a>
-</div>
-<div class="btn-group">
-  <a class="btn btn-default" href="#"><i class="fa fa-file-video-o"></i></a>
-  <a class="btn btn-default" href="#"><i class="fa fa-file-image-o"></i></a>
-</div>
 
 <script type="text/ng-template"  id="tree_item_renderer.html">
 	<span class="select" ng-click="setActive(node)">{{node}}</span>
 <!--
     <button ng-click="add(data)">Add node</button>
     <button ng-click="delete(data)" ng-show="data.nodes.length > 0">Delete nodes</button>
---> 
+-->
 	<ul class="tree">
         <li ng-repeat="(node,nodes) in nodes" ng-include="'tree_item_renderer.html'"></li>
     </ul>
@@ -45,7 +28,7 @@
 	</div>
 
 	<div id="pickElem" ng-show="pickElem" ng-hide="!pickElem">
-		<button ng-click="pickElem=false; creator=true">Back</button> 
+		<button ng-click="pickElem=false; creator=true">Back</button>
 		<br>
 		<!--
 		<ul class="select">
@@ -75,21 +58,29 @@
 		<input name="col-md" type="text" />
 		<label for="col-lg">Columns per row lg:</label>
 		<input name="col-lg" type="text" />
-		<button ng-click="makeRow()">Apply</button> 
-		<button ng-click="gridMaker=false; creator=true">Back</button> 
+		<button ng-click="makeRow()">Apply</button>
+		<button ng-click="gridMaker=false; creator=true">Back</button>
 	</div>
 
-	<div id="editor" ng-show="editor">
+	<div id="editor" ng-show="true">
 		<h5>Editor</h5>
-		<button onclick="doCommand(\'bold\')">B</button>
-		<button onclick="doCommand(\'italic\')">I</button>
-		<button onclick="doCommand(\'underline\')">U</button><br>
-		<button onclick="doCommand(\'justifyLeft\')">Left</button>
-		<button onclick="doCommand(\'justifyRight\')">Right</button>
-		<button onclick="doCommand(\'justifyCenter\')">Center</button>
-		<button onclick="doCommand(\'justifyFull\')">Justified</button>
+    <div class="btn-group">
+      <a class="btn btn-default" ng-click="doCommand('bold')"><i class="fa fa-bold"></i></a>
+      <a class="btn btn-default" ng-click="doCommand('italic')"><i class="fa fa-italic"></i></a>
+      <a class="btn btn-default" ng-click="doCommand('underline')"><i class="fa fa-underline"></i></a>
+      <a class="btn btn-default" ng-click="doCommand('fontName')"><i class="fa fa-font"></i></a>
+    </div>
+    <div class="btn-group">
+      <a class="btn btn-default" ng-click="doCommand('justifyLeft')"><i class="fa fa-align-left"></i></a>
+      <a class="btn btn-default" ng-click="doCommand('justifyCenter')"><i class="fa fa-align-center"></i></a>
+      <a class="btn btn-default" ng-click="doCommand('justifyRight')"><i class="fa fa-align-right"></i></a>
+      <a class="btn btn-default" ng-click="doCommand('justifyFull')"><i class="fa fa-align-justify"></i></a>
+    </div>
+    <div class="btn-group">
+      <a class="btn btn-default"><i class="fa fa-file-video-o"></i></a>
+      <a class="btn btn-default"><i class="fa fa-file-image-o"></i></a>
+    </div>
 	</div>
-
 </div>
 
 <div id="MainContent" class="container"></div>
