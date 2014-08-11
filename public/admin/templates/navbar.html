@@ -1,0 +1,53 @@
+
+<div>
+	<ul class="nav nav-tabs">
+		<li ng-click="currentNav='navbar'" class="active"><a href="">Navbar</a></li>
+		<li ng-click="currentNav='tabs'"><a href="">Tabs</a></li>
+		<li ng-click="currentNav='pills'"><a href="">Pills</a></li>
+	</ul>
+</div>
+
+<div ng-show="currentNav == 'navbar'" ng-hide="currentNav != 'navbar'">
+	<hr>
+	<div class="row">
+		<div class="col-xs-12 col-md-4">
+			<label class="text-left">Color:</label><br>
+			<div class="btn-group">
+				<label><input type="radio" name="nav-color" value="navbar-default" checked>Default color</label><br>
+				<label><input type="radio" name="nav-color" value="navbar-inverse">Inverse color</label>
+			</div>
+			<hr>
+			<label class="text-left">Placement:</label><br>
+			<div class="btn-group">
+				<label><input type="radio" name="nav-placement" value="navbar-fixed-top" checked>Fixed top</label><br>
+				<label><input type="radio" name="nav-placement" value="navbar-fixed-bottom">Fixed bottom</label><br>
+				<label><input type="radio" name="nav-placement" value="navbar-static-top">Static top</label>
+			</div>
+			<hr>
+		</div>
+		<div class="col-xs-12 col-md-4">
+			<div class="btn-group">
+				<label><input type="checkbox" name="navbar-header" value="navbar-header">Navbar header</label><br>
+				<label><input type="checkbox" name="navbar-collapse" value="navbar-collapse">Collapse</label><br>
+				<label><input type="checkbox" name="navbar-brand" value="navbar-brand">Brand</label><br>
+				<label>Text:<input type="text" name="brand-name" value=""></label><br>
+				<label>Url:<input type="text" name="brand-url" value="#"></label>	
+			</div>
+		</div>
+		<div class="col-xs-12 col-md-4">
+			<button class="btn btn-default" ng-click="addNavItem()">New navbar item</button>
+			<div id="navitems" class="btn-group">
+			</div>
+		</div>
+	</div>
+	<button class="btn btn-default" ng-click="" class="right">Back</button>
+	<button class="btn btn-default" ng-click="appendBootstrap('nav')" class="right">Create</button>
+</div>
+
+<div ng-show="currentNav == 'tabs'" ng-hide="currentNav != 'tabs'">
+	tabs
+</div>
+
+<div ng-show="currentNav == 'pills'" ng-hide="currentNav != 'pills'">
+	pills
+</div>

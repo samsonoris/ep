@@ -1,9 +1,9 @@
-
+<!--
 <h1>Admin</h1>
 <p>
   <a href="#/" ng-click="logout()">Logout</a>
 </p>
-
+-->
 
 <script type="text/ng-template"  id="tree_item_renderer.html">
 	<span class="select" ng-click="setActive(node)">{{node}}</span>
@@ -23,7 +23,8 @@
 	<div id="creator" ng-show="creator" ng-hide="!creator">
 		<button class="btn btn-default" ng-click="creator=false; pickElem=true">Select active element</button>
 		<button class="btn btn-default" ng-click="creator=false; editElem=true">Edit active element</button>
-		<button class="btn btn-default" ng-click="creator=false; gridMaker=true">New grid row</button>
+		<button class="btn btn-default" ng-click="creator=false; gridMaker=true">New grid element</button>
+		<button class="btn btn-default" ng-click="creator=false; bootstrapElem=true">New Bootstrap element</button>
 		<button class="btn btn-default" ng-click="append('article')">New article</button>
 	</div>
 
@@ -43,9 +44,11 @@
 	<div id="editElem" ng-show="editElem" ng-hide="!editElem">
 		<h5>Edit new element</h5>
 		<button ng-click="setProperties()">Apply</button>
+		<!--
 		<div ng-repeat="(key,value) in elemProps">
 			<label>{{key}}:</label><input type="text" class="prop" value="{{value}}" name="{{key}}">
 		</div>
+		-->
 	</div>
 
 	<div id="gridMaker" ng-show="gridMaker" ng-hide="!gridMaker">
@@ -62,7 +65,15 @@
 		<button ng-click="gridMaker=false; creator=true">Back</button>
 	</div>
 
-	<div id="editor" ng-show="true">
+	<div id="bootstrapElem" ng-show="bootstrapElem" ng-hide="!bootstrapElem">
+		<ul class="nav nav-tabs">
+			<li class="active"><a href="">Navigation</a></li>
+				<li><a href="">Panels</a></li>
+		</ul>
+		<div class="form-group text-left" ng-include="currentBootstrap" ng-controller="navbarController"></div>
+	</div>
+
+	<div id="editor" ng-show="RichText" ng-hide="!RichText">
 		<h5>Editor</h5>
 		<div class="btn-group">
 		  <button ng-click="doCommand('bold')" class="btn btn-default fa fa-bold"></button>
@@ -78,9 +89,9 @@
 		</div>
 		<div class="btn-group">
 		  <button class="btn btn-default fa fa-file-video-o"></button>
-		  <button class="btn btn-default fa fa-file-image-o"></button>
+		  <button ng-click="doCommand('insertImage')" class="btn btn-default fa fa-file-image-o"></button>
 		</div>
 	</div>
 </div>
 
-<div id="MainContent" class="container"></div>
+<div id="MainContent"></div>

@@ -3,13 +3,19 @@ EasyPress.controller('EditController', function($scope) {
 
 	$scope.$parent.title = "Ep-admin Edit";
 
-	$scope.activeElement = $('.container');
+	$scope.activeElement = $('#MainContent');
 	$scope.elements = {
 		"MainContent": {}
 	};
 	var activeBranch = $scope.elements["MainContent"];
 	$scope.elemProps = {};
-	articleCount = 1;
+	elementCount = {
+		//HTML
+		"article": 1,
+		"img": 1,
+		//Bootstrap	
+		"navbar": 1
+	};
 
 	$scope.$watch('activeElement',function(){
 		$scope.activeString = $scope.activeElement.attr("id");
@@ -17,11 +23,12 @@ EasyPress.controller('EditController', function($scope) {
 
 	$scope.setActive = function(id) {
 		$scope.activeElement = $('#' + id);
-		$("*").css({"outline":"none"}).attr('contenteditable','false');
-		$scope.activeElement.css({"outline":"green solid thin"}).attr('contenteditable','true').focus();
 		$scope.activeString = id;
 		activeBranch = $scope.elements["MainContent"];
+		$("#MainContent").find("*").css({"outline":"none"}).attr('contenteditable','inherit');
 		if (id != "MainContent") {
+			$scope.activeElement.css({"outline":"green solid thin"}).attr('contenteditable','true').focus();
+			document.execCommand('styleWithCss',false,true);
 			var map = [id];
 			var elem = $scope.activeElement.get(0).parentNode;
 			while (elem.id != "MainContent") {
@@ -56,9 +63,11 @@ EasyPress.controller('EditController', function($scope) {
 	$scope.gridMaker = false;
 	$scope.editElem = false;
 	$scope.editor = false;
+	$scope.currentBootstrap = "admin/templates/navbar.html";
+	$scope.curBSCtrl = "'navbarController'";
 
 	$scope.append = function(element) {
-		var elem = $("<" + element + " id='" + element + articleCount++ + "'></" + element + ">");
+		var elem = $("<" + element + " id='" + element + elementCount[element]++ + "'></" + element + ">");
 		elem.appendTo($scope.activeElement);
 		activeBranch[elem.get(0).id] = {};
 		activeBranch = activeBranch[elem.get(0).id];
@@ -69,7 +78,18 @@ EasyPress.controller('EditController', function($scope) {
 		$scope.editElem = true;
 	};
 
+	$scope.appendBootstrap = function(element){
+		if (element == 'nav') {
+			$('<nav role="navigation" class="navbar ' + $('input[name="nav-color"]:checked').val() + " " + $('input[name="nav-placement"]:checked').val() + '"></nav>').appendTo($scope.activeElement);
+		}
+		$scope.bootstrapElem = false;
+		$scope.creator = true;
+	};
+
 	$scope.doCommand = function(command,argument){
+		if (command == 'insertImage') {
+			argument = '../images/' + prompt('Submit the name of the image file:');
+		}
 		document.execCommand(command,false,argument);
 		$scope.activeElement.focus();
 	};
@@ -144,8 +164,6 @@ EasyPress.controller('EditController', function($scope) {
 	$(document).on('focus','.editable',function(){
 		console.log("On focus",$(this));
 		$scope.activeElement = $(this);
-		document.execCommand('styleWithCss',false,true);
 	});
 
-	console.log(activeBranch);
 });
