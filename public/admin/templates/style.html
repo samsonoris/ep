@@ -1,8 +1,81 @@
 
 <div ng-controller="StyleController">
 
-	<h5>Edit new element</h5>
-	<button ng-click="setProperties()">Apply</button>
+	<h5>Edit style (CSS properties)</h5>
+
+	<div>
+		<ul class="nav nav-tabs">
+			<li ng-click="currentStyle='position'" class="active"><a href="">Position</a></li>
+			<li ng-click="currentStyle='background'"><a href="">Background</a></li>
+			<li ng-click="currentStyle='text'"><a href="">Text</a></li>
+		</ul>
+	</div>
+
+	<div ng-show="currentStyle=='position'" ng-hide="currentStyle!='position'">
+		<br>
+		<div class="row">
+			<div class="col-xs-12 col-md-6 text-left">
+				<form class="form-horizontal">
+					<div class="form-group">
+						<label class="control-label col-xs-5">position: </label>
+						<div class="col-xs-7">
+							<select class="bootstrap-select btn form-control">
+								<option value="absolute">absolute</option>
+								<option value="fixed">fixed</option>
+								<option value="relative">relative</option>
+								<option value="static">static</option>
+								<option value="inherit">inherit</option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label col-xs-5">Top: </label>
+						<div class="col-xs-7">
+							<input class="form-control">
+						</div>
+						<label class="control-label col-xs-5">Bottom: </label>
+						<div class="col-xs-7">
+							<input class="form-control">
+						</div>
+						<label class="control-label col-xs-5">Left: </label>
+						<div class="col-xs-7">
+							<input class="form-control">
+						</div>
+						<label class="control-label col-xs-5">Right: </label>
+						<div class="col-xs-7">
+							<input class="form-control">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label col-xs-5">Overflow: </label>
+						<div class="col-xs-7">
+							<select class="bootstrap-select btn form-control">
+								<option value="auto">auto</option>
+								<option value="hidden">hidden</option>
+								<option value="scroll">scroll</option>
+								<option value="visible">visible</option>
+								<option value="inherit">inherit</option>
+							</select>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<div ng-show="currentStyle=='background'" ng-hide="currentStyle!='background'">
+		<div class="row">
+			background
+		</div>
+	</div>
+
+	<div ng-show="currentStyle=='text'" ng-hide="currentStyle!='text'">
+		text
+	</div>
+
+	<hr>
+	<button class="btn btn-default" ng-click="setProperties()">Apply</button>
+	<hr>
 
 	<div ng-repeat="(key,value) in elemProps">
 		<label>{{key}}:</label><input type="text" class="prop" value="{{value}}" name="{{key}}">

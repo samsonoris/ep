@@ -43,7 +43,7 @@ EasyPress.controller('NavController',['$scope',function($scope){
 			}
 			navbar.append($(list));
 		}
-		$scope.activeElement.append(navbar)
+		$scope.active.element.append(navbar)
 	};
 }]);
 

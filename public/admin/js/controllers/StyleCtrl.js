@@ -2,6 +2,8 @@
 
 EasyPress.controller("StyleController", ['$scope', function($scope) {
 
+	$scope.currentStyle = 'position';
+
 	$scope.elemProps = {};
 	elem = $scope.active.element.get(0);
 	$scope.elemProps.id = elem.id;
