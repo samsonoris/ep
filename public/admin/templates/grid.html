@@ -1,0 +1,26 @@
+
+<div ng-controller="GridController">
+
+	<h5>Grid Maker Menu</h5>
+
+	<button ng-click="addContainer('container')">Add container</button>
+	<button ng-click="addContainer('container-fluid')">Add fluid container</button><br>
+	<button ng-click="addContainer('row')">Add row</button>
+
+	<hr>
+
+	<label for="columns">Content columns:</label>
+	<input name="columns" type="text"><br>
+	<label for="col-sm">Columns per row sm:</label>
+	<input name="col-sm" type="text" /><br>
+	<label for="col-md">Columns per row md:</label>
+	<input name="col-md" type="text" /><br>
+	<label for="col-lg">Columns per row lg:</label>
+	<input name="col-lg" type="text" /><br>
+
+	<hr>
+
+	<button ng-click="makeRow()">Apply</button>
+	<button ng-click="setMenu('main_menu')">Back</button>
+
+</div>

@@ -1,5 +1,5 @@
 
-EasyPress.controller('navbarController',['$scope',function($scope){
+EasyPress.controller('NavController',['$scope',function($scope){
 
 	var navItems = 0;
 	var navCollapses = 1;
@@ -44,8 +44,6 @@ EasyPress.controller('navbarController',['$scope',function($scope){
 			navbar.append($(list));
 		}
 		$scope.activeElement.append(navbar)
-		//$scope.bootstrapElem = false;
-		//$scope.creator = true;
 	};
 }]);
 

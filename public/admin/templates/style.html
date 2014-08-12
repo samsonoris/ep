@@ -1,0 +1,11 @@
+
+<div ng-controller="StyleController">
+
+	<h5>Edit new element</h5>
+	<button ng-click="setProperties()">Apply</button>
+
+	<div ng-repeat="(key,value) in elemProps">
+		<label>{{key}}:</label><input type="text" class="prop" value="{{value}}" name="{{key}}">
+	</div>
+
+</div>

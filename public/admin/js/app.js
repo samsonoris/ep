@@ -49,8 +49,8 @@ var EasyPress = angular.module('EasyPress',['ngRoute'])
 
       // home page
       .when('/admin', {
-        templateUrl:'admin/partials/edit.html',
-        controller:'EditController',
+        templateUrl:'admin/partials/dragqueen.html',
+        controller:'DragQueenController',
         resolve: {
             loggedin: checkLoggedin
           }

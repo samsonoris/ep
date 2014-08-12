@@ -1,5 +1,7 @@
 
 EasyPress.controller("TreeController", ['$scope', function($scope) {
+
+	/*
     $scope.delete = function(data) {
         data.nodes = [];
     };
@@ -8,4 +10,6 @@ EasyPress.controller("TreeController", ['$scope', function($scope) {
         var newName = data.name + '-' + post;
         data.nodes.push({name: newName,nodes: []});
     };
+	*/
+
 }]);
