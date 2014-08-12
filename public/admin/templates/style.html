@@ -1,6 +1,15 @@
 
 <div ng-controller="StyleController">
 
+	<h5>Change Theme</h5>
+	<div class="dropdown">
+	  <button class="btn btn-default dropdown-toggle" type="button" id="theme-dropdown" data-toggle="dropdown"><i class="fa fa-cogs">&nbsp; Theme <span class="caret"></span></i>
+	  </button>
+	  <ul class="dropdown-menu" id="theme-dropdown-align-center" role="menu" aria-labelledby="theme-dropdown">
+	  	<li ng-repeat="(key,value) in themes" ng-click="setTheme(value)"><a href=""><i class="fa fa-cog"></i>&nbsp; {{key}}</a></li>
+	  </ul>
+	</div>
+
 	<h5>Edit style (CSS properties)</h5>
 
 	<div>
