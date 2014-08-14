@@ -8,6 +8,8 @@
 		"animate.css": "latest",
 		"angular": "latest",
 		"angular-route": "latest",
+		"angular-upload": "latest",
+		"angular-bootstrap-colorpicker": "latest",
 		"ng-sortable": "latest",
 		"ngStorage": "latest"
 	}

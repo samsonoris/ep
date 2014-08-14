@@ -7,19 +7,25 @@
 		<ul class="nav nav-tabs">
 			<li ng-click="currentStyle='position'" class="active"><a href="">Position</a></li>
 			<li ng-click="currentStyle='background'"><a href="">Background</a></li>
+			<li ng-click="currentStyle='border'"><a href="">Border</a></li>
 			<li ng-click="currentStyle='text'"><a href="">Text</a></li>
+			<li ng-click="currentStyle='font'"><a href="">Font</a></li>
 		</ul>
 	</div>
 
+	<!-- POSITION -->
+
 	<div ng-show="currentStyle=='position'" ng-hide="currentStyle!='position'">
-		<br>
 		<div class="row">
 			<div class="col-xs-12 col-md-6 text-left">
-				<form class="form-horizontal">
+				<form class="form-horizontal" name="positionForm">
+
+					<br>
+
 					<div class="form-group">
 						<label class="control-label col-xs-5">position: </label>
 						<div class="col-xs-7">
-							<select class="bootstrap-select btn form-control">
+							<select class="bootstrap-select btn form-control" ng-model="position" name="position">
 								<option value="absolute">absolute</option>
 								<option value="fixed">fixed</option>
 								<option value="relative">relative</option>
@@ -31,19 +37,38 @@
 					<div class="form-group">
 						<label class="control-label col-xs-5">Top: </label>
 						<div class="col-xs-7">
-							<input class="form-control">
+							<input class="form-control" ng-model="top" name="top">
 						</div>
 						<label class="control-label col-xs-5">Bottom: </label>
 						<div class="col-xs-7">
-							<input class="form-control">
+							<input class="form-control" ng-model="bottom" name="bottom">
 						</div>
 						<label class="control-label col-xs-5">Left: </label>
 						<div class="col-xs-7">
-							<input class="form-control">
+							<input class="form-control" ng-model="left" name="left">
 						</div>
 						<label class="control-label col-xs-5">Right: </label>
 						<div class="col-xs-7">
-							<input class="form-control">
+							<input class="form-control" ng-model="right" name="right">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label col-xs-5">float: </label>
+						<div class="col-xs-7">
+							<select class="bootstrap-select btn form-control" ng-model="float" name="float">
+								<option value="left">left</option>
+								<option value="right">right</option>
+								<option value="none">none</option>
+							</select>
+						</div>
+						<label class="control-label col-xs-5">clear: </label>
+						<div class="col-xs-7">
+							<select class="bootstrap-select btn form-control" ng-model="clear" name="clear">
+								<option value="left">left</option>
+								<option value="right">right</option>
+								<option value="both">both</option>
+								<option value="none">none</option>
+							</select>
 						</div>
 					</div>
 					<div class="form-group">
@@ -63,15 +88,495 @@
 		</div>
 	</div>
 
+	<!-- BACKGROUND -->
+
 	<div ng-show="currentStyle=='background'" ng-hide="currentStyle!='background'">
 		<div class="row">
-			background
+			<div class="col-xs-12 col-md-12 text-left">
+				<form class="form-horizontal" name="backgroundForm">
+					<div class="form-group">
+
+						<br>
+
+						<label class="control-label col-xs-5">Background: </label>
+						<div class="col-xs-7">
+							<input class="form-control" ng-model="background" name="background" value="elemProps.background">
+						</div>
+						<hr>
+						<label class="control-label col-xs-5">Attachment: </label>
+						<div class="col-xs-7">
+							<input class="form-control" ng-model="backgroundAttachment" name="backgroundAttachment"  value="elemProps.backgroundAttachment">
+						</div>
+						<label class="control-label col-xs-5">BlendMode: </label>
+						<div class="col-xs-7">
+							<input class="form-control" ng-model="backgroundBlendMode" name="backgroundBlendMode"  value="elemProps.backgroundBlendMode">
+						</div>
+						<label class="control-label col-xs-5">Clip: </label>
+						<div class="col-xs-7">
+							<input class="form-control" ng-model="backgroundClip" name="backgroundClip"  value="elemProps.backgroundClip">
+						</div>
+						<label class="control-label col-xs-5">Color: </label>
+						<div class="col-xs-7">
+							<input class="form-control" ng-model="backgroundColor" name="backgroundColor"  value="elemProps.backgroundColor">
+							<button colorpicker="" type="button" colorpicker-position="right" class="btn btn-success ng-pristine ng-valid clrpck" ng-model="backgroundColor" value="">Change color</button>
+						</div>
+						<label class="control-label col-xs-5">Image: </label>
+						<div class="col-xs-7">
+							<input class="form-control" ng-model="backgroundImage" name="backgroundImage" value="elemProps.backgroundImage">
+							<upload-button class="btn btn-success btn-upload" url="/image" on-success="uploadSuccess(response,'backgroundImage')" >Upload</upload-button>
+						</div>
+						<label class="control-label col-xs-5">Origin: </label>
+						<div class="col-xs-7">
+							<input class="form-control" ng-model="backgroundOrigin" name="backgroundOrigin" value="elemProps.backgroundOrigin">
+						</div>
+						<label class="control-label col-xs-5">Position: </label>
+						<div class="col-xs-7">
+							<input class="form-control" ng-model="backgroundPosition" name="backgroundPosition" value="elemProps.backgroundPosition">
+						</div>
+						<label class="control-label col-xs-5">PositionX: </label>
+						<div class="col-xs-7">
+							<input class="form-control" ng-model="backgroundPositionX" name="backgroundPositionX" value="elemProps.backgroundPositionX">
+						</div>
+						<label class="control-label col-xs-5">PositionY: </label>
+						<div class="col-xs-7">
+							<input class="form-control" ng-model="backgroundPositionY" name="backgroundPositionY" value="elemProps.backgroundPositionY">
+						</div>
+						<label class="control-label col-xs-5">Repeat: </label>
+						<div class="col-xs-7">
+							<input class="form-control" ng-model="backgroundRepeat" name="backgroundRepeat" value="elemProps.backgroundRepeat">
+						</div>
+						<label class="control-label col-xs-5">RepeatX: </label>
+						<div class="col-xs-7">
+							<input class="form-control" ng-model="backgroundRepeatX" name="backgroundRepeatX" value="elemProps.backgroundRepeatX">
+						</div>
+						<label class="control-label col-xs-5">RepeatY: </label>
+						<div class="col-xs-7">
+							<input class="form-control" ng-model="backgroundRepeatY" name="backgroundRepeatY" value="elemProps.backgroundRepeatY">
+						</div>
+						<label class="control-label col-xs-5">Size: </label>
+						<div class="col-xs-7">
+							<input class="form-control" ng-model="backgroundSize" name="backgroundSize" value="elemProps.backgroundSize">
+						</div>
+					</div>
+				</form>
+			</div>
 		</div>
 	</div>
 
-	<div ng-show="currentStyle=='text'" ng-hide="currentStyle!='text'">
-		text
+	<!-- BORDER -->
+
+	<div ng-show="currentStyle=='border'" ng-hide="currentStyle!='border'">
+		<div class="row">
+			<div class="col-xs-12 col-md-12 text-left">
+				<form class="form-horizontal" name="backgroundForm">
+
+					<br>
+
+					<!-- SHORT FORM -->
+
+					<div class="form-group">
+						<fieldset>
+							<legend>Border (all sides, short notation)</legend>
+							<label class="control-label col-xs-5">Border: </label>
+							<div class="col-xs-7">
+								<input class="form-control" ng-model="border" name="border" value="elemProps.border">
+							</div>
+						</fieldset>
+					</div>
+
+					<div class="form-group">
+						<fieldset>
+							<legend>Border (all sides)</legend>
+							<label class="control-label col-xs-5">Width: </label>
+							<div class="col-xs-7">
+								<input class="form-control" ng-model="borderWidth" name="borderWidth" value="elemProps.borderWidth">
+							</div>
+							<label class="control-label col-xs-5">Style: </label>
+							<div class="col-xs-7">
+								<input class="form-control" ng-model="borderStyle" name="borderStyle" value="elemProps.borderStyle">
+							</div>
+							<label class="control-label col-xs-5">Color: </label>
+							<div class="col-xs-7">
+								<input class="form-control" ng-model="borderColor" name="borderColor" value="elemProps.borderColor">
+							</div>
+						</fieldset>
+					</div>
+
+					<!-- SHORT PER DIRECTION -->
+
+					<div class="form-group">
+						<fieldset>
+							<legend>Border (separate sides, short notation)</legend>
+							<label class="control-label col-xs-5">Border Top: </label>
+							<div class="col-xs-7">
+								<input class="form-control" ng-model="borderTop" name="borderTop" value="elemProps.borderTop">
+							</div>
+							<label class="control-label col-xs-5">Border Right: </label>
+							<div class="col-xs-7">
+								<input class="form-control" ng-model="borderRight" name="borderRight" value="elemProps.borderRight">
+							</div>
+							<label class="control-label col-xs-5">Border Bottom: </label>
+							<div class="col-xs-7">
+								<input class="form-control" ng-model="borderBottom" name="borderBottom" value="elemProps.borderBottom">
+							</div>
+							<label class="control-label col-xs-5">Border Left: </label>
+							<div class="col-xs-7">
+								<input class="form-control" ng-model="borderLeft" name="borderLeft" value="elemProps.borderLeft">
+							</div>
+						</fieldset>
+					</div>
+
+					<!-- SEPARATE PER DIRECTION -->
+
+					<div class="form-group">
+						<fieldset>
+							<legend>Border Top</legend>
+							<label class="control-label col-xs-5">Width: </label>
+							<div class="col-xs-7">
+								<input class="form-control" ng-model="borderTopWidth" name="borderTopWidth" value="elemProps.borderTopWidth">
+							</div>
+							<label class="control-label col-xs-5">Style: </label>
+							<div class="col-xs-7">
+								<input class="form-control" ng-model="borderTopStyle" name="borderTopStyle" value="elemProps.borderTopStyle">
+							</div>
+							<label class="control-label col-xs-5">Color: </label>
+							<div class="col-xs-7">
+								<input class="form-control" ng-model="borderTopColor" name="borderTopColor" value="elemProps.borderTopColor">
+							</div>
+						</fieldset>
+					</div>
+					<div class="form-group">
+						<fieldset>
+							<legend>Border Right</legend>
+							<label class="control-label col-xs-5">Width: </label>
+							<div class="col-xs-7">
+								<input class="form-control" ng-model="borderRightWidth" name="borderRightWidth" value="elemProps.borderRightWidth">
+							</div>
+							<label class="control-label col-xs-5">Style: </label>
+							<div class="col-xs-7">
+								<input class="form-control" ng-model="borderRightStyle" name="borderRightStyle" value="elemProps.borderRightStyle">
+							</div>
+							<label class="control-label col-xs-5">Color: </label>
+							<div class="col-xs-7">
+								<input class="form-control" ng-model="borderRightColor" name="borderRightColor" value="elemProps.borderRightColor">
+							</div>
+						</fieldset>
+					</div>
+					<div class="form-group">
+						<fieldset>
+							<legend>Border Bottom</legend>
+							<label class="control-label col-xs-5">Width: </label>
+							<div class="col-xs-7">
+								<input class="form-control" ng-model="borderBottomWidth" name="borderBottomWidth" value="elemProps.borderBottomWidth">
+							</div>
+							<label class="control-label col-xs-5">Style: </label>
+							<div class="col-xs-7">
+								<input class="form-control" ng-model="borderBottomStyle" name="borderBottomStyle" value="elemProps.borderBottomStyle">
+							</div>
+							<label class="control-label col-xs-5">Color: </label>
+							<div class="col-xs-7">
+								<input class="form-control" ng-model="borderBottomColor" name="borderBottomColor" value="elemProps.borderBottomColor">
+							</div>
+						</fieldset>
+					</div>
+					<div class="form-group">
+						<fieldset>
+							<legend>Border Left</legend>
+							<label class="control-label col-xs-5">Width: </label>
+							<div class="col-xs-7">
+								<input class="form-control" ng-model="borderLeftWidth" name="borderLeftWidth" value="elemProps.borderLeftWidth">
+							</div>
+							<label class="control-label col-xs-5">Style: </label>
+							<div class="col-xs-7">
+								<input class="form-control" ng-model="borderLeftStyle" name="borderLeftStyle" value="elemProps.borderLeftStyle">
+							</div>
+							<label class="control-label col-xs-5">Color: </label>
+							<div class="col-xs-7">
+								<input class="form-control" ng-model="borderLeftColor" name="borderLeftColor" value="elemProps.borderLeftColor">
+							</div>
+						</fieldset>
+					</div>
+
+					<!-- COMMON PROPERTIES -->
+
+					<div class="form-group">
+						<fieldset>
+							<legend>Common properties</legend>
+							<label class="control-label col-xs-5">Radius: </label>
+							<div class="col-xs-7">
+								<input class="form-control" ng-model="borderRadius" name="borderRadius" value="elemProps.borderRadius">
+							</div>
+							<label class="control-label col-xs-5">Collapse: </label>
+							<div class="col-xs-7">
+								<input class="form-control" ng-model="borderCollapse" name="borderCollapse" value="elemProps.borderCollapse">
+							</div>
+							<label class="control-label col-xs-5">Spacing: </label>
+							<div class="col-xs-7">
+								<input class="form-control" ng-model="borderSpacing" name="borderSpacing" value="elemProps.borderSpacing">
+							</div>
+							<label class="control-label col-xs-5">Image: </label>
+							<div class="col-xs-7">
+								<input class="form-control" ng-model="borderImage" name="borderImage" value="elemProps.borderImage">
+							</div>
+						</fieldset>
+					</div>
+
+					<!-- RADIUS -->
+
+					<div class="form-group">
+						<fieldset>
+							<legend>Border Radius (separate corners)</legend>
+							<label class="control-label col-xs-5">Top Right Radius: </label>
+							<div class="col-xs-7">
+								<input class="form-control" ng-model="borderCollapse" name="borderCollapse" value="elemProps.borderCollapse">
+							</div>
+							<label class="control-label col-xs-5">Bottom Right Radius: </label>
+							<div class="col-xs-7">
+								<input class="form-control" ng-model="borderCollapse" name="borderCollapse" value="elemProps.borderCollapse">
+							</div>
+							<label class="control-label col-xs-5">Bottom Left Radius: </label>
+							<div class="col-xs-7">
+								<input class="form-control" ng-model="borderCollapse" name="borderCollapse" value="elemProps.borderCollapse">
+							</div>
+							<label class="control-label col-xs-5">Top Left Radius: </label>
+							<div class="col-xs-7">
+								<input class="form-control" ng-model="borderCollapse" name="borderCollapse" value="elemProps.borderCollapse">
+							</div>
+						</fieldset>
+					</div>
+
+					<!-- IMAGE -->
+
+					<div class="form-group">
+						<fieldset>
+							<legend>Border Image</legend>
+							<label class="control-label col-xs-5">Source: </label>
+							<div class="col-xs-7">
+								<input class="form-control" ng-model="borderImageSource" name="borderImageSource" value="elemProps.borderImageSource">
+								<upload-button class="btn btn-success btn-upload" url="/image" on-success="uploadSuccess(response,'borderImageSource')" >Upload</upload-button>
+							</div>
+							<label class="control-label col-xs-5">Width: </label>
+							<div class="col-xs-7">
+								<input class="form-control" ng-model="borderImageWidth" name="borderImageWidth" value="elemProps.borderImageWidth">
+							</div>
+							<label class="control-label col-xs-5">Outset: </label>
+							<div class="col-xs-7">
+								<input class="form-control" ng-model="borderImageOutset" name="borderImageOutset" value="elemProps.borderImageOutset">
+							</div>
+							<label class="control-label col-xs-5">Repeat: </label>
+							<div class="col-xs-7">
+								<input class="form-control" ng-model="borderImageRepeat" name="borderImageRepeat" value="elemProps.borderImageRepeat">
+							</div>
+							<label class="control-label col-xs-5">Slice: </label>
+							<div class="col-xs-7">
+								<input class="form-control" ng-model="borderImageSlice" name="borderImageSlice" value="elemProps.borderImageSlice">
+							</div>
+						</fieldset>
+					</div>
+				</form>
+			</div>	
+		</div>
 	</div>
+
+	<!-- TEXT -->
+
+	<div ng-show="currentStyle=='text'" ng-hide="currentStyle!='text'">
+		<div class="row">
+			<div class="col-xs-12 col-md-12 text-left">
+				<form class="form-horizontal" name="textForm">
+
+					<br>
+
+					<div class="form-group">
+						<fieldset>
+							<legend>General</legend>
+							<label class="control-label col-xs-5">Text Align</label>
+							<div class="col-xs-7">
+								<input type="text" class="text form-control" value="" name="">
+							</div>
+							<label class="control-label col-xs-5">Text Anchor</label>
+							<div class="col-xs-7">
+								<input type="text" class="text form-control" value="" name="">
+							</div>
+							<label class="control-label col-xs-5">Text Decoration</label>
+							<div class="col-xs-7">
+								<input type="text" class="text form-control" value="" name="">
+							</div>
+							<label class="control-label col-xs-5">Text Indent</label>
+							<div class="col-xs-7">
+								<input type="text" class="text form-control" value="" name="">
+							</div>
+							<label class="control-label col-xs-5">Text Overflow</label>
+							<div class="col-xs-7">
+								<input type="text" class="text form-control" value="" name="">
+							</div>
+							<label class="control-label col-xs-5">Text Rendering</label>
+							<div class="col-xs-7">
+								<input type="text" class="text form-control" value="" name="">
+							</div>
+							<label class="control-label col-xs-5">Text Shadow</label>
+							<div class="col-xs-7">
+								<input type="text" class="text form-control" value="" name="">
+							</div>
+							<label class="control-label col-xs-5">Text Transform</label>
+							<div class="col-xs-7">
+								<input type="text" class="text form-control" value="" name="">
+							</div>
+						</fieldset>
+					</div>
+					<div class="form-group">
+						<fieldset>
+							<legend>Text Underline</legend>
+							<label class="control-label col-xs-5">Mode</label>
+							<div class="col-xs-7">
+								<input type="text" class="text form-control" value="" name="">
+							</div>
+							<label class="control-label col-xs-5">Width</label>
+							<div class="col-xs-7">
+								<input type="text" class="text form-control" value="" name="">
+							</div>
+							<label class="control-label col-xs-5">Style</label>
+							<div class="col-xs-7">
+								<input type="text" class="text form-control" value="" name="">
+							</div>
+							<label class="control-label col-xs-5">Color</label>
+							<div class="col-xs-7">
+								<input type="text" class="text form-control" value="" name="">
+							</div>
+						</fieldset>
+					</div>
+					<div class="form-group">
+						<fieldset>
+							<legend>Text Line Through</legend>
+							<label class="control-label col-xs-5">Mode</label>
+							<div class="col-xs-7">
+								<input type="text" class="text form-control" value="" name="">
+							</div>
+							<label class="control-label col-xs-5">Width</label>
+							<div class="col-xs-7">
+								<input type="text" class="text form-control" value="" name="">
+							</div>
+							<label class="control-label col-xs-5">Style</label>
+							<div class="col-xs-7">
+								<input type="text" class="text form-control" value="" name="">
+							</div>
+							<label class="control-label col-xs-5">Color</label>
+							<div class="col-xs-7">
+								<input type="text" class="text form-control" value="" name="">
+							</div>
+						</fieldset>
+					</div>
+					<div class="form-group">
+						<fieldset>
+							<legend>Text Overline</legend>
+							<label class="control-label col-xs-5">Mode</label>
+							<div class="col-xs-7">
+								<input type="text" class="text form-control" value="" name="">
+							</div>
+							<label class="control-label col-xs-5">Width</label>
+							<div class="col-xs-7">
+								<input type="text" class="text form-control" value="" name="">
+							</div>
+							<label class="control-label col-xs-5">Style</label>
+							<div class="col-xs-7">
+								<input type="text" class="text form-control" value="" name="">
+							</div>
+							<label class="control-label col-xs-5">Color</label>
+							<div class="col-xs-7">
+								<input type="text" class="text form-control" value="" name="">
+							</div>
+						</fieldset>
+					</div>
+					<div class="form-group">
+						<fieldset>
+							<legend>Word properties</legend>
+							<label class="control-label col-xs-5">Word Break</label>
+							<div class="col-xs-7">
+								<input type="text" class="text form-control" value="" name="">
+							</div>
+							<label class="control-label col-xs-5">Word Spacing</label>
+							<div class="col-xs-7">
+								<input type="text" class="text form-control" value="" name="">
+							</div>
+							<label class="control-label col-xs-5">Word Wrap</label>
+							<div class="col-xs-7">
+								<input type="text" class="text form-control" value="" name="">
+							</div>
+							<label class="control-label col-xs-5">Writing Mode</label>
+							<div class="col-xs-7">
+								<input type="text" class="text form-control" value="" name="">
+							</div>
+						</fieldset>
+					</div>
+				</form>
+			</div>
+		</div>	
+	</div>
+
+	<div ng-show="currentStyle=='font'" ng-hide="currentStyle!='font'">
+		<div class="row">
+			<div class="col-xs-12 col-md-12 text-left">
+				<form class="form-horizontal" name="fontForm">
+
+					<br>
+
+					<div class="form-group">
+						<fieldset>
+							<legend>Short notation</legend>
+							<label class="control-label col-xs-5">Font</label>
+							<div class="col-xs-7">
+								<input type="text" class="text form-control" value="" name="">
+							</div>
+						</fieldset>
+					</div>
+					<div class="form-group">
+						<fieldset>
+							<legend>Separate notation</legend>
+							<label class="control-label col-xs-5">Font Style</label>
+							<div class="col-xs-7">
+								<input type="text" class="text form-control" value="" name="">
+							</div>
+							<label class="control-label col-xs-5">Font Variant</label>
+							<div class="col-xs-7">
+								<input type="text" class="text form-control" value="" name="">
+							</div>
+							<label class="control-label col-xs-5">Font Weight</label>
+							<div class="col-xs-7">
+								<input type="text" class="text form-control" value="" name="">
+							</div>
+							<label class="control-label col-xs-5">Font Size</label>
+							<div class="col-xs-7">
+								<input type="text" class="text form-control" value="" name="">
+							</div>
+							<label class="control-label col-xs-5">Font Family</label>
+							<div class="col-xs-7">
+								<input type="text" class="text form-control" value="" name="">
+							</div>
+						</fieldset>
+					</div>
+					<div class="form-group">
+						<fieldset>
+							<legend>Extras</legend>
+							<label class="control-label col-xs-5">Font Variant Ligatures</label>
+							<div class="col-xs-7">
+								<input type="text" class="text form-control" value="" name="">
+							</div>
+							<label class="control-label col-xs-5">Font Stretch</label>
+							<div class="col-xs-7">
+								<input type="text" class="text form-control" value="" name="">
+							</div>
+							<label class="control-label col-xs-5">Font Kerning</label>
+							<div class="col-xs-7">
+								<input type="text" class="text form-control" value="" name="">
+							</div>
+						</fieldset>
+					</div>
+				</form>
+			</div>
+		</div>	
+	</div>
+
+	<!-- THE END -->
 
 	<hr>
 	<button class="btn btn-default" ng-click="setProperties()">Apply</button>

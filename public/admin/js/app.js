@@ -1,5 +1,5 @@
 
-var EasyPress = angular.module('EasyPress',['ngRoute'])
+var EasyPress = angular.module('EasyPress',['ngRoute','colorpicker.module','lr.upload'])
   .config(['$routeProvider', '$locationProvider', '$httpProvider', function($routeProvider, $locationProvider, $httpProvider) {
   console.log("In appRoutes");
 
