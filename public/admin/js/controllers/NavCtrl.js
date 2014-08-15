@@ -44,10 +44,10 @@ EasyPress.controller('NavController',['$scope',function($scope){
 				if ( $('input[name="navbar-brand"]').is(':checked') ) {
 					header += '<a href="' + $('input[name="brand-url"]').val() + '" class="navbar-brand">' + $('input[name="brand-name"]').val() + '</a>';
 				}
-				header += '<div>';
+				header += '</div>';
 			}
 			list = '<ul class="nav navbar-nav">';
-			var navels = document.getElementById('navItems').children;
+			var navels = document.getElementById('navItems').children; //just getting length
 			for (var i=0; i < navels.length; i++) {
 				list += '<li><a href="' + document.getElementById('nav-url-' + i).value + '">' + document.getElementById('nav-text-' + i).value + '</a></li>'; 
 			}
@@ -57,7 +57,7 @@ EasyPress.controller('NavController',['$scope',function($scope){
 			}
 			navbar.innerHTML = header + list;
 		}
-		$scope.active.element.appendChild(navbar);
+		$scope.active.element.insertBefore(navbar,$scope.active.element.firstChild);
 		$scope.active.element = navbar;
 	};
 }]);
