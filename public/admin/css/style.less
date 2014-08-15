@@ -2,11 +2,14 @@
 @import "../lib/bootstrap/less/bootstrap.less";
 @import "../lib/angular-upload/src/directives/btnUpload.less";
 
-// Padding for fixed-navbar
-body {
-  padding-top: 60px;
-  padding-bottom: 40px;
+html, body, #MainContent {
+	height: 100vh;
 }
+
+body {
+	overflow:hidden;
+}
+	
 
 ul.tree {
 	list-style: none;
@@ -25,8 +28,6 @@ span.select:hover {
 #theme-dropdown-align-center{
   margin-left: 35%;
 }
-
-
 
 @iconSpritePath: "/images/bootstrap/glyphicons-halflings.png";
 @iconWhiteSpritePath:     "/images/bootstrap/glyphicons-halflings-white.png";

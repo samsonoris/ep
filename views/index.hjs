@@ -4,14 +4,17 @@
   	<meta charset="utf8">
   	<meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ title }}</title>
-    <link rel='stylesheet' type='text/css' href='/stylesheets/style.css' />
-    <link rel='stylesheet' type='text/css' href='/stylesheets/bootstrap-theme.min.css' />
-
-    <script src='http://code.jquery.com/jquery-latest.min.js' type='text/javascript'></script>
+    <link rel='stylesheet' type='text/css' href='/admin/css/bootstrap.min.css' />
+    <link rel='stylesheet' type='text/css' href='/css/style.css' />
+	<script>
+		hello = "hello, world!";
+		console.log(hello);
+	</script>
   </head>
   <body>
 
   	<div class="container">
+		<h1>My blog</h1>
   		<div class="row">
   			{{#content}}
   				<article>{{{txt}}}</article>

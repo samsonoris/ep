@@ -1,8 +1,8 @@
 
 <div ng-controller="BootstrapController">
 	<ul class="nav nav-tabs">
-		<li class="active" ng-click="setBootstrapMenu('nav')"><a href="">Navigation</a></li>
-		<li ng-click="setBootstrapMenu('panel')"><a href="">Panels</a></li>
+		<li ng-class="{active: bootTab=='nav'}" ng-click="setBootstrapMenu('nav')"><a href="">Navigation</a></li>
+		<li ng-class="{active: bootTab=='panel'}" ng-click="setBootstrapMenu('panel')"><a href="">Panels</a></li>
 	</ul>
 	<div class="form-group text-left" ng-include="currentBootstrap"></div>
 </div>
