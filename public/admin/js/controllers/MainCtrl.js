@@ -6,10 +6,6 @@ EasyPress.controller('MainController', ['$scope', '$http', function($scope, $htt
 	$scope.title;
 	console.log("IN MAIN CTRL!");
 
-  	$scope.setTheme = function(fileName){
-    	$scope.theTheme = "/admin/css/custom-theme/" + fileName;
-  	};
-	
 	$scope.setUpTarget = function() {
 		$scope.TARGET_DOCUMENT = document.getElementById('MainContent').contentDocument;
 		$scope.TARGET_HEAD = $scope.TARGET_DOCUMENT.getElementsByTagName('head')[0];
@@ -18,6 +14,11 @@ EasyPress.controller('MainController', ['$scope', '$http', function($scope, $htt
 		$scope.TARGET_STYLE.type = 'text/css';
 		$scope.TARGET_HEAD.appendChild($scope.TARGET_STYLE);
 	}
+
+  	$scope.setTheme = function(fileName){
+    	document.head.getElementsByClassName('theme')[0].href = "/admin/css/custom-theme/" + fileName;
+		$scope.TARGET_HEAD.getElementsByClassName('theme')[0].href = "/admin/css/custom-theme/" + fileName;
+  	};
 
 	$scope.removeElement = function(element) {
 		var parent = element.parentNode;
