@@ -19,11 +19,12 @@ EasyPress.controller('DragQueenController', function($scope) {
 
 	var menuItems = {
 		"main_menu": "admin/templates/main_menu.html",
-			 "tree": "admin/templates/tree.html",
-			"style": "admin/templates/style.html",
-			 "grid": "admin/templates/grid.html",
+		"tree": "admin/templates/tree.html",
+		"style": "admin/templates/style.html",
+		"grid": "admin/templates/grid.html",
 		"bootstrap": "admin/templates/bootstrap.html",
-			 "html": "admin/templates/html.html",
+		"html": "admin/templates/html.html",
+		"tags": "admin/templates/tags.html",
 	};
 
 	$scope.setMenu = function(menu){

@@ -31,26 +31,27 @@
     this.setStyle = Selectpicker.prototype.setStyle;
     this.selectAll = Selectpicker.prototype.selectAll;
     this.deselectAll = Selectpicker.prototype.deselectAll;
-    this.destroy = Selectpicker.prototype.destroy;
-    this.remove = Selectpicker.prototype.destroy;
+    this.destroy = Selectpicker.prototype.remove;
+    this.remove = Selectpicker.prototype.remove;
     this.show = Selectpicker.prototype.show;
     this.hide = Selectpicker.prototype.hide;
 
     this.init();
   };
 
-  Selectpicker.VERSION = '1.6.0';
+  Selectpicker.VERSION = '1.6.1';
 
   // part of this is duplicated in i18n/defaults-en_US.js. Make sure to update both.
   Selectpicker.DEFAULTS = {
-    style: 'btn-default',
-    size: 'auto',
-    title: null,
-    selectedTextFormat: 'values',
     noneSelectedText: 'Nothing selected',
     noneResultsText: 'No results match',
     countSelectedText: '{0} of {1} selected',
     maxOptionsText: ['Limit reached ({n} {var} max)', 'Group limit reached ({n} {var} max)', ['items', 'item']],
+    multipleSeparator: ', ',
+    style: 'btn-default',
+    size: 'auto',
+    title: null,
+    selectedTextFormat: 'values',
     width: false,
     container: false,
     hideDisabled: false,
@@ -61,7 +62,6 @@
     header: false,
     liveSearch: false,
     actionsBox: false,
-    multipleSeparator: ', ',
     iconBase: 'glyphicon',
     tickIcon: 'glyphicon-ok',
     maxOptions: false,
@@ -484,29 +484,6 @@
       });
     },
 
-    mobile: function () {
-      this.$element.addClass('mobile-device').appendTo(this.$newElement);
-      if (this.options.container) this.$menu.hide();
-    },
-
-    refresh: function () {
-      this.$lis = null;
-      this.reloadLi();
-      this.render();
-      this.setWidth();
-      this.setStyle();
-      this.checkDisabled();
-      this.liHeight();
-    },
-
-    update: function () {
-      this.reloadLi();
-      this.setWidth();
-      this.setStyle();
-      this.checkDisabled();
-      this.liHeight();
-    },
-
     setSelected: function (index, selected) {
       if (this.$lis == null) this.$lis = this.$menu.find('li');
       $(this.$lis[index]).toggleClass('selected', selected);
@@ -621,7 +598,7 @@
                   $option.prop('selected', true);
                   var optgroupID = $(this).data('optgroup');
 
-                  that.$menu.find('.selected').has('a[data-optgroup="'+optgroupID+'"]').removeClass('selected');
+                  that.$menu.find('.selected').has('a[data-optgroup="' + optgroupID + '"]').removeClass('selected');
 
                   that.setSelected(clickedIndex, true);
                 } else {
@@ -764,7 +741,6 @@
     },
 
     val: function (value) {
-
       if (value !== undefined) {
         this.$element.val(value);
         this.$element.change();
@@ -907,7 +883,6 @@
         }
 
       } else if (!$this.is('input')) {
-
         var keyIndex = [],
             count,
             prevKey;
@@ -953,7 +928,29 @@
         that.$menu.parent().removeClass('open');
         that.$button.focus();
       }
+    },
 
+    mobile: function () {
+      this.$element.addClass('mobile-device').appendTo(this.$newElement);
+      if (this.options.container) this.$menu.hide();
+    },
+
+    refresh: function () {
+      this.$lis = null;
+      this.reloadLi();
+      this.render();
+      this.setWidth();
+      this.setStyle();
+      this.checkDisabled();
+      this.liHeight();
+    },
+
+    update: function () {
+      this.reloadLi();
+      this.setWidth();
+      this.setStyle();
+      this.checkDisabled();
+      this.liHeight();
     },
 
     hide: function () {
@@ -964,24 +961,31 @@
       this.$newElement.show();
     },
 
-    destroy: function () {
+    remove: function () {
       this.$newElement.remove();
       this.$element.remove();
     }
   };
 
   $.fn.selectpicker = function (option, event) {
-    //get the args of the outer function..
+    // get the args of the outer function..
     var args = arguments;
+    // The arguments of the function are explicitely re-defined from the argument list, because the shift causes them
+    // to get lost
+    //noinspection JSDuplicatedDeclaration
+    var option = args[0],
+        event = args[1];
+    [].shift.apply(args);
     var value;
     var chain = this.each(function () {
-      if ($(this).is('select')) {
-        var $this = $(this),
-            data = $this.data('selectpicker'),
+      var $this = $(this);
+      if ($this.is('select')) {
+        var data = $this.data('selectpicker'),
             options = typeof option == 'object' && option;
 
         if (!data) {
-          $this.data('selectpicker', (data = new Selectpicker(this, $.extend({}, Selectpicker.DEFAULTS, $.fn.selectpicker.defaults || {}, $this.data(), options), event)));
+          var config = $.extend(Selectpicker.DEFAULTS, $.fn.selectpicker.defaults || {}, $this.data(), options);
+          $this.data('selectpicker', (data = new Selectpicker(this, config, event)));
         } else if (options) {
           for (var i in options) {
             if (options.hasOwnProperty(i)) {
@@ -991,14 +995,10 @@
         }
 
         if (typeof option == 'string') {
-          //Copy the value of option, as once we shift the arguments
-          //it also shifts the value of option.
-          var property = option;
-          if (data[property] instanceof Function) {
-            [].shift.apply(args);
-            value = data[property].apply(data, args);
+          if (data[option] instanceof Function) {
+            value = data[option].apply(data, args);
           } else {
-            value = data.options[property];
+            value = data.options[option];
           }
         }
       }
