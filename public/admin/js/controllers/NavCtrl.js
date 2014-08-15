@@ -19,7 +19,7 @@ EasyPress.controller('NavController',['$scope',function($scope){
 		console.log("in append Bootstrap...");
 		if (element == 'nav') {
 			console.log("condition...");
-			var navbar = $('<nav role="navigation" class="navbar ' + $('input[name="nav-color"]:checked').val() + " " + $('input[name="nav-placement"]:checked').val() + '"></nav>');
+			var navbar = $('<div role="navigation" class="navbar ' + $('input[name="nav-color"]:checked').val() + " " + $('input[name="nav-placement"]:checked').val() + '"></div>');
 			if ( $('input[name="navbar-header"]').is(':checked') ) {
 				var header = '<div class="navbar-header">'
 				if ( $('input[name="navbar-collapse"]').is(':checked') ) {

@@ -2,9 +2,9 @@
 
 	<div>
 		<ul class="nav nav-tabs">
-			<li ng-click="currentNav='navbar'" class="active"><a href="">Navbar</a></li>
-			<li ng-click="currentNav='tabs'"><a href="">Tabs</a></li>
-			<li ng-click="currentNav='pills'"><a href="">Pills</a></li>
+			<li ng-class="{active: currentNav=='navbar'}" ng-click="currentNav='navbar'"><a href="">Navbar</a></li>
+			<li ng-class="{active: currentNav=='tabs'}" ng-click="currentNav='tabs'"><a href="">Tabs</a></li>
+			<li ng-class="{active: currentNav=='pills'}" ng-click="currentNav='pills'"><a href="">Pills</a></li>
 		</ul>
 	</div>
 

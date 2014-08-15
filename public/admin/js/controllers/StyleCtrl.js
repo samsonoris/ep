@@ -11,12 +11,14 @@ EasyPress.controller("StyleController", ['$scope','upload', function($scope) {
 	};
 
 	$scope.elemProps = {};
-	elem = $scope.active.element.get(0);
+	elem = $scope.active.element;
 	$scope.elemProps.id = elem.id;
 	$scope.elemProps.class = elem.className;
+	var css = window.getComputedStyle(elem);
+
 	for (var i in elem.style) {
 		if (typeof elem.style[i] != "function" && !i.match(/^webkit/)) {
-			$scope.elemProps[i] = typeof elem.style[i] == "number" ? elem.style[i].toString() : elem.style[i];
+			$scope[i] = css.getPropertyValue(i);
 		}
 	}
 
@@ -26,14 +28,25 @@ EasyPress.controller("StyleController", ['$scope','upload', function($scope) {
 		angular.forEach($scope.positionForm, function(value, key) {
 			if (key[0] == '$') return;
 			if (!value.$pristine) {
-				$scope.active.element.css(key,value.$modelValue);
+				console.log("Setting: ", key, " to ", value.$modelValue);
+				$scope.active.element.style[key] = value.$modelValue;
 			}
 		});
 
 		angular.forEach($scope.backgroundForm, function(value, key) {
+			console.log("In backgroundForm\nkey = ",key,"\nvalue = ", value.$modelValue,"\npristine? ",value.$pristine);
 			if (key[0] == '$') return;
 			if (!value.$pristine) {
-				$scope.active.element.css(key,value.$modelValue);
+				console.log("Setting: ", key, " to ", value.$modelValue);
+				$scope.active.element.style[key] = value.$modelValue;
+			}
+		});
+
+		angular.forEach($scope.dimensionForm, function(value, key) {
+			if (key[0] == '$') return;
+			if (!value.$pristine) {
+				console.log("Setting: ", key, " to ", value.$modelValue);
+				$scope.active.element.style[key] = value.$modelValue;
 			}
 		});
 

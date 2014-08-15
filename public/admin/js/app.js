@@ -1,5 +1,5 @@
 
-var EasyPress = angular.module('EasyPress',['ngRoute','colorpicker.module','lr.upload'])
+var EasyPress = angular.module('EasyPress',['ngRoute','colorpicker.module','lr.upload','ui.bootstrap'])
   .config(['$routeProvider', '$locationProvider', '$httpProvider', function($routeProvider, $locationProvider, $httpProvider) {
   console.log("In appRoutes");
 
@@ -73,6 +73,30 @@ var EasyPress = angular.module('EasyPress',['ngRoute','colorpicker.module','lr.u
         $rootScope.message = 'Logged out.';
         $http.post('/logout');
       };
-    });
+    })
 
+	.directive('livePage', function(){
+		return {
+			restrict: 'A',
+			link: function(scope,elem,attrs){
+				elem.load(scope.initSite);
+			}
+		};
+	})
 
+	.filter('excludeElements', function() {
+		return function(nodelist) {
+			var toExclude = ["BR","#text"];
+			var nodeArray = [].slice.call(nodelist);
+			
+			for (var i = 0; i < nodeArray.length; i++) {
+				if (toExclude.indexOf(nodeArray[i].nodeName) != -1) {
+					console.log("Splicing: ", nodeArray[i].nodeName);
+					nodeArray.splice(i,1);
+					i--; //One element less
+				}
+			}
+			console.log(nodeArray);
+			return nodeArray;
+		};
+	}); 

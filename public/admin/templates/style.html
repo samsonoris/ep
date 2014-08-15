@@ -12,28 +12,27 @@
 
 	<h5>Edit style (CSS properties)</h5>
 
-	<div>
-		<ul class="nav nav-tabs">
-			<li ng-click="currentStyle='position'" class="active"><a href="">Position</a></li>
-			<li ng-click="currentStyle='background'"><a href="">Background</a></li>
-			<li ng-click="currentStyle='border'"><a href="">Border</a></li>
-			<li ng-click="currentStyle='text'"><a href="">Text</a></li>
-			<li ng-click="currentStyle='font'"><a href="">Font</a></li>
-		</ul>
-	</div>
+	<div class="row">
+		<div class="col-lg-3 left-tabs">
+			<ul class="nav nav-tabs nav-stacked">
+				<li ng-click="currentStyle='position'" ng-class="{active: currentStyle=='position'}"><a href="">Position</a></li>
+				<li ng-click="currentStyle='margin'" ng-class="{active: currentStyle=='margin'}"><a href="">Margin</a></li>
+				<li ng-click="currentStyle='dimension'" ng-class="{active: currentStyle=='dimension'}"><a href="">Dimension</a></li>
+				<li ng-click="currentStyle='display'" ng-class="{active: currentStyle=='display'}"><a href="">Display</a></li>
+				<li ng-click="currentStyle='background'" ng-class="{active: currentStyle=='background'}"><a href="">Background</a></li>
+				<li ng-click="currentStyle='border'" ng-class="{active: currentStyle=='border'}"><a href="">Border</a></li>
+				<li ng-click="currentStyle='text'" ng-class="{active: currentStyle=='text'}"><a href="">Text</a></li>
+				<li ng-click="currentStyle='font'" ng-class="{active: currentStyle=='font'}"><a href="">Font</a></li>
+			</ul>
+		</div>
 
-	<!-- POSITION -->
-
-	<div ng-show="currentStyle=='position'" ng-hide="currentStyle!='position'">
-		<div class="row">
-			<div class="col-xs-12 col-md-6 text-left">
+		<!-- POSITION -->
+		<div class="col-lg-9">
+			<div ng-show="currentStyle=='position'" ng-hide="currentStyle!='position'">
 				<form class="form-horizontal" name="positionForm">
-
-					<br>
-
 					<div class="form-group">
-						<label class="control-label col-xs-5">position: </label>
-						<div class="col-xs-7">
+						<label class="control-label col-lg-4">Position: </label>
+						<div class="col-lg-8">
 							<select class="bootstrap-select btn form-control" ng-model="position" name="position">
 								<option value="absolute">absolute</option>
 								<option value="fixed">fixed</option>
@@ -44,34 +43,34 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="control-label col-xs-5">Top: </label>
-						<div class="col-xs-7">
+						<label class="control-label col-lg-4">Top: </label>
+						<div class="col-lg-8">
 							<input class="form-control" ng-model="top" name="top">
 						</div>
-						<label class="control-label col-xs-5">Bottom: </label>
-						<div class="col-xs-7">
+						<label class="control-label col-lg-4">Bottom: </label>
+						<div class="col-lg-8">
 							<input class="form-control" ng-model="bottom" name="bottom">
 						</div>
-						<label class="control-label col-xs-5">Left: </label>
-						<div class="col-xs-7">
+						<label class="control-label col-lg-4">Left: </label>
+						<div class="col-lg-8">
 							<input class="form-control" ng-model="left" name="left">
 						</div>
-						<label class="control-label col-xs-5">Right: </label>
-						<div class="col-xs-7">
+						<label class="control-label col-lg-4">Right: </label>
+						<div class="col-lg-8">
 							<input class="form-control" ng-model="right" name="right">
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="control-label col-xs-5">float: </label>
-						<div class="col-xs-7">
+						<label class="control-label col-lg-4">Float: </label>
+						<div class="col-lg-8">
 							<select class="bootstrap-select btn form-control" ng-model="float" name="float">
 								<option value="left">left</option>
 								<option value="right">right</option>
 								<option value="none">none</option>
 							</select>
 						</div>
-						<label class="control-label col-xs-5">clear: </label>
-						<div class="col-xs-7">
+						<label class="control-label col-lg-4">Clear: </label>
+						<div class="col-lg-8">
 							<select class="bootstrap-select btn form-control" ng-model="clear" name="clear">
 								<option value="left">left</option>
 								<option value="right">right</option>
@@ -81,8 +80,8 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="control-label col-xs-5">Overflow: </label>
-						<div class="col-xs-7">
+						<label class="control-label col-lg-4">Overflow: </label>
+						<div class="col-lg-8">
 							<select class="bootstrap-select btn form-control">
 								<option value="auto">auto</option>
 								<option value="hidden">hidden</option>
@@ -94,92 +93,171 @@
 					</div>
 				</form>
 			</div>
-		</div>
-	</div>
 
-	<!-- BACKGROUND -->
-
-	<div ng-show="currentStyle=='background'" ng-hide="currentStyle!='background'">
-		<div class="row">
-			<div class="col-xs-12 col-md-12 text-left">
-				<form class="form-horizontal" name="backgroundForm">
+			<div ng-show="currentStyle=='margin'" ng-hide="currentStyle!='margin'">
+				<form class="form-horizontal" name="marginForm">
 					<div class="form-group">
-
-						<br>
-
-						<label class="control-label col-xs-5">Background: </label>
-						<div class="col-xs-7">
-							<input class="form-control" ng-model="background" name="background" value="elemProps.background">
+						<label class="control-label col-lg-4">Margin: </label>
+						<div class="col-lg-8">
+							<input class="form-control" ng-model="margin" name="margin">
 						</div>
-						<hr>
-						<label class="control-label col-xs-5">Attachment: </label>
-						<div class="col-xs-7">
-							<input class="form-control" ng-model="backgroundAttachment" name="backgroundAttachment"  value="elemProps.backgroundAttachment">
+						<label class="control-label col-lg-4">Margin Top: </label>
+						<div class="col-lg-8">
+							<input class="form-control" ng-model="marginTop" name="marginTop">
 						</div>
-						<label class="control-label col-xs-5">BlendMode: </label>
-						<div class="col-xs-7">
-							<input class="form-control" ng-model="backgroundBlendMode" name="backgroundBlendMode"  value="elemProps.backgroundBlendMode">
+						<label class="control-label col-lg-4">Margin Right: </label>
+						<div class="col-lg-8">
+							<input class="form-control" ng-model="marginRight" name="marginRight">
 						</div>
-						<label class="control-label col-xs-5">Clip: </label>
-						<div class="col-xs-7">
-							<input class="form-control" ng-model="backgroundClip" name="backgroundClip"  value="elemProps.backgroundClip">
+						<label class="control-label col-lg-4">Margin Bottom: </label>
+						<div class="col-lg-8">
+							<input class="form-control" ng-model="marginBottom" name="marginBottom">
 						</div>
-						<label class="control-label col-xs-5">Color: </label>
-						<div class="col-xs-7">
-							<input class="form-control" ng-model="backgroundColor" name="backgroundColor"  value="elemProps.backgroundColor">
-							<button colorpicker="" type="button" colorpicker-position="right" class="btn btn-success ng-pristine ng-valid clrpck" ng-model="backgroundColor" value="">Change color</button>
-						</div>
-						<label class="control-label col-xs-5">Image: </label>
-						<div class="col-xs-7">
-							<input class="form-control" ng-model="backgroundImage" name="backgroundImage" value="elemProps.backgroundImage">
-							<upload-button class="btn btn-success btn-upload" url="/image" on-success="uploadSuccess(response,'backgroundImage')" >Upload</upload-button>
-						</div>
-						<label class="control-label col-xs-5">Origin: </label>
-						<div class="col-xs-7">
-							<input class="form-control" ng-model="backgroundOrigin" name="backgroundOrigin" value="elemProps.backgroundOrigin">
-						</div>
-						<label class="control-label col-xs-5">Position: </label>
-						<div class="col-xs-7">
-							<input class="form-control" ng-model="backgroundPosition" name="backgroundPosition" value="elemProps.backgroundPosition">
-						</div>
-						<label class="control-label col-xs-5">PositionX: </label>
-						<div class="col-xs-7">
-							<input class="form-control" ng-model="backgroundPositionX" name="backgroundPositionX" value="elemProps.backgroundPositionX">
-						</div>
-						<label class="control-label col-xs-5">PositionY: </label>
-						<div class="col-xs-7">
-							<input class="form-control" ng-model="backgroundPositionY" name="backgroundPositionY" value="elemProps.backgroundPositionY">
-						</div>
-						<label class="control-label col-xs-5">Repeat: </label>
-						<div class="col-xs-7">
-							<input class="form-control" ng-model="backgroundRepeat" name="backgroundRepeat" value="elemProps.backgroundRepeat">
-						</div>
-						<label class="control-label col-xs-5">RepeatX: </label>
-						<div class="col-xs-7">
-							<input class="form-control" ng-model="backgroundRepeatX" name="backgroundRepeatX" value="elemProps.backgroundRepeatX">
-						</div>
-						<label class="control-label col-xs-5">RepeatY: </label>
-						<div class="col-xs-7">
-							<input class="form-control" ng-model="backgroundRepeatY" name="backgroundRepeatY" value="elemProps.backgroundRepeatY">
-						</div>
-						<label class="control-label col-xs-5">Size: </label>
-						<div class="col-xs-7">
-							<input class="form-control" ng-model="backgroundSize" name="backgroundSize" value="elemProps.backgroundSize">
+						<label class="control-label col-lg-4">Margin Left: </label>
+						<div class="col-lg-8">
+							<input class="form-control" ng-model="marginLeft" name="marginLeft">
 						</div>
 					</div>
 				</form>
 			</div>
-		</div>
-	</div>
 
-	<!-- BORDER -->
+			<div ng-show="currentStyle=='dimension'" ng-hide="currentStyle!='dimension'">
+				<form class="form-horizontal" name="dimensionForm">
+					<div class="form-group">
+						<label class="control-label col-lg-4">Width: </label>
+						<div class="col-lg-8">
+							<input class="form-control" ng-model="width" name="width">
+						</div>
+						<label class="control-label col-lg-4">Height: </label>
+						<div class="col-lg-8">
+							<input class="form-control" ng-model="height" name="height">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label col-lg-4">Padding: </label>
+						<div class="col-lg-8">
+							<input class="form-control" ng-model="padding" name="padding">
+						</div>
+						<label class="control-label col-lg-4">Padding Top: </label>
+						<div class="col-lg-8">
+							<input class="form-control" ng-model="paddingTop" name="paddingTop">
+						</div>
+						<label class="control-label col-lg-4">Padding Right: </label>
+						<div class="col-lg-8">
+							<input class="form-control" ng-model="paddingRight" name="paddingRight">
+						</div>
+						<label class="control-label col-lg-4">Padding Bottom: </label>
+						<div class="col-lg-8">
+							<input class="form-control" ng-model="paddingBottom" name="paddingBottom">
+						</div>
+						<label class="control-label col-lg-4">Padding Left: </label>
+						<div class="col-lg-8">
+							<input class="form-control" ng-model="paddingLeft" name="paddingLeft">
+						</div>
+					</div>
+				</form>
+			</div>
 
-	<div ng-show="currentStyle=='border'" ng-hide="currentStyle!='border'">
-		<div class="row">
-			<div class="col-xs-12 col-md-12 text-left">
+			<div ng-show="currentStyle=='display'" ng-hide="currentStyle!='display'">
+				<form class="form-horizontal" name="displayForm">
+					<div class="form-group">
+						<label class="control-label col-lg-4">Display: </label>
+						<div class="col-lg-8">
+							<select class="bootstrap-select btn form-control" ng-model="display" name="display">
+								<option value="block">block</option>
+								<option value="inline">inline</option>
+								<option value="inline-block">inline-block</option>
+								<option value="none">none</option>
+							</select>
+						</div>
+						<label class="control-label col-lg-4">Visibility: </label>
+						<div class="col-lg-8">
+							<select class="bootstrap-select btn form-control" ng-model="visibility" name="visibility">
+								<option value="visible">visible</option>
+								<option value="hidden">hidden</option>
+								<option value="none">none</option>
+							</select>
+						</div>
+						<label class="control-label col-lg-4">Z-index: </label>
+						<div class="col-lg-8">
+							<input class="form-control" ng-model="zIndex" name="zIndex">
+						</div>
+					</div>
+				</form>
+			</div>
+
+			<!-- BACKGROUND -->
+
+			<div ng-show="currentStyle=='background'" ng-hide="currentStyle!='background'">
 				<form class="form-horizontal" name="backgroundForm">
+					<div class="form-group">
+						<label class="control-label col-xs-5">Background: </label>
+						<div class="col-xs-7">
+							<input class="form-control" ng-model="background" name="background">
+						</div>
+						<hr>
+						<label class="control-label col-xs-5">Attachment: </label>
+						<div class="col-xs-7">
+							<input class="form-control" ng-model="backgroundAttachment" name="backgroundAttachment">
+						</div>
+						<label class="control-label col-xs-5">BlendMode: </label>
+						<div class="col-xs-7">
+							<input class="form-control" ng-model="backgroundBlendMode" name="backgroundBlendMode">
+						</div>
+						<label class="control-label col-xs-5">Clip: </label>
+						<div class="col-xs-7">
+							<input class="form-control" ng-model="backgroundClip" name="backgroundClip">
+						</div>
+						<label class="control-label col-xs-5">Color: </label>
+						<div class="col-xs-7">
+							<input class="form-control" ng-model="backgroundColor" name="backgroundColor">
+							<button colorpicker="" type="button" colorpicker-position="right" class="btn btn-success ng-pristine ng-valid clrpck" ng-model="backgroundColor">Change color</button>
+						</div>
+						<label class="control-label col-xs-5">Image: </label>
+						<div class="col-xs-7">
+							<input class="form-control" ng-model="backgroundImage" name="backgroundImage">
+							<upload-button class="btn btn-success btn-upload" url="/image" on-success="uploadSuccess(response,'backgroundImage')" >Upload</upload-button>
+						</div>
+						<label class="control-label col-xs-5">Origin: </label>
+						<div class="col-xs-7">
+							<input class="form-control" ng-model="backgroundOrigin" name="backgroundOrigin">
+						</div>
+						<label class="control-label col-xs-5">Position: </label>
+						<div class="col-xs-7">
+							<input class="form-control" ng-model="backgroundPosition" name="backgroundPosition">
+						</div>
+						<label class="control-label col-xs-5">PositionX: </label>
+						<div class="col-xs-7">
+							<input class="form-control" ng-model="backgroundPositionX" name="backgroundPositionX">
+						</div>
+						<label class="control-label col-xs-5">PositionY: </label>
+						<div class="col-xs-7">
+							<input class="form-control" ng-model="backgroundPositionY" name="backgroundPositionY">
+						</div>
+						<label class="control-label col-xs-5">Repeat: </label>
+						<div class="col-xs-7">
+							<input class="form-control" ng-model="backgroundRepeat" name="backgroundRepeat">
+						</div>
+						<label class="control-label col-xs-5">RepeatX: </label>
+						<div class="col-xs-7">
+							<input class="form-control" ng-model="backgroundRepeatX" name="backgroundRepeatX">
+						</div>
+						<label class="control-label col-xs-5">RepeatY: </label>
+						<div class="col-xs-7">
+							<input class="form-control" ng-model="backgroundRepeatY" name="backgroundRepeatY">
+						</div>
+						<label class="control-label col-xs-5">Size: </label>
+						<div class="col-xs-7">
+							<input class="form-control" ng-model="backgroundSize" name="backgroundSize">
+						</div>
+					</div>
+				</form>
+			</div>
 
-					<br>
+			<!-- BORDER -->
+
+			<div ng-show="currentStyle=='border'" ng-hide="currentStyle!='border'">
+				<form class="form-horizontal" name="borderForm">
 
 					<!-- SHORT FORM -->
 
@@ -188,7 +266,7 @@
 							<legend>Border (all sides, short notation)</legend>
 							<label class="control-label col-xs-5">Border: </label>
 							<div class="col-xs-7">
-								<input class="form-control" ng-model="border" name="border" value="elemProps.border">
+								<input class="form-control" ng-model="border" name="border">
 							</div>
 						</fieldset>
 					</div>
@@ -198,15 +276,15 @@
 							<legend>Border (all sides)</legend>
 							<label class="control-label col-xs-5">Width: </label>
 							<div class="col-xs-7">
-								<input class="form-control" ng-model="borderWidth" name="borderWidth" value="elemProps.borderWidth">
+								<input class="form-control" ng-model="borderWidth" name="borderWidth">
 							</div>
 							<label class="control-label col-xs-5">Style: </label>
 							<div class="col-xs-7">
-								<input class="form-control" ng-model="borderStyle" name="borderStyle" value="elemProps.borderStyle">
+								<input class="form-control" ng-model="borderStyle" name="borderStyle">
 							</div>
 							<label class="control-label col-xs-5">Color: </label>
 							<div class="col-xs-7">
-								<input class="form-control" ng-model="borderColor" name="borderColor" value="elemProps.borderColor">
+								<input class="form-control" ng-model="borderColor" name="borderColor">
 							</div>
 						</fieldset>
 					</div>
@@ -218,19 +296,19 @@
 							<legend>Border (separate sides, short notation)</legend>
 							<label class="control-label col-xs-5">Border Top: </label>
 							<div class="col-xs-7">
-								<input class="form-control" ng-model="borderTop" name="borderTop" value="elemProps.borderTop">
+								<input class="form-control" ng-model="borderTop" name="borderTop">
 							</div>
 							<label class="control-label col-xs-5">Border Right: </label>
 							<div class="col-xs-7">
-								<input class="form-control" ng-model="borderRight" name="borderRight" value="elemProps.borderRight">
+								<input class="form-control" ng-model="borderRight" name="borderRight">
 							</div>
 							<label class="control-label col-xs-5">Border Bottom: </label>
 							<div class="col-xs-7">
-								<input class="form-control" ng-model="borderBottom" name="borderBottom" value="elemProps.borderBottom">
+								<input class="form-control" ng-model="borderBottom" name="borderBottom">
 							</div>
 							<label class="control-label col-xs-5">Border Left: </label>
 							<div class="col-xs-7">
-								<input class="form-control" ng-model="borderLeft" name="borderLeft" value="elemProps.borderLeft">
+								<input class="form-control" ng-model="borderLeft" name="borderLeft">
 							</div>
 						</fieldset>
 					</div>
@@ -242,15 +320,15 @@
 							<legend>Border Top</legend>
 							<label class="control-label col-xs-5">Width: </label>
 							<div class="col-xs-7">
-								<input class="form-control" ng-model="borderTopWidth" name="borderTopWidth" value="elemProps.borderTopWidth">
+								<input class="form-control" ng-model="borderTopWidth" name="borderTopWidth">
 							</div>
 							<label class="control-label col-xs-5">Style: </label>
 							<div class="col-xs-7">
-								<input class="form-control" ng-model="borderTopStyle" name="borderTopStyle" value="elemProps.borderTopStyle">
+								<input class="form-control" ng-model="borderTopStyle" name="borderTopStyle">
 							</div>
 							<label class="control-label col-xs-5">Color: </label>
 							<div class="col-xs-7">
-								<input class="form-control" ng-model="borderTopColor" name="borderTopColor" value="elemProps.borderTopColor">
+								<input class="form-control" ng-model="borderTopColor" name="borderTopColor">
 							</div>
 						</fieldset>
 					</div>
@@ -259,15 +337,15 @@
 							<legend>Border Right</legend>
 							<label class="control-label col-xs-5">Width: </label>
 							<div class="col-xs-7">
-								<input class="form-control" ng-model="borderRightWidth" name="borderRightWidth" value="elemProps.borderRightWidth">
+								<input class="form-control" ng-model="borderRightWidth" name="borderRightWidth">
 							</div>
 							<label class="control-label col-xs-5">Style: </label>
 							<div class="col-xs-7">
-								<input class="form-control" ng-model="borderRightStyle" name="borderRightStyle" value="elemProps.borderRightStyle">
+								<input class="form-control" ng-model="borderRightStyle" name="borderRightStyle">
 							</div>
 							<label class="control-label col-xs-5">Color: </label>
 							<div class="col-xs-7">
-								<input class="form-control" ng-model="borderRightColor" name="borderRightColor" value="elemProps.borderRightColor">
+								<input class="form-control" ng-model="borderRightColor" name="borderRightColor">
 							</div>
 						</fieldset>
 					</div>
@@ -276,15 +354,15 @@
 							<legend>Border Bottom</legend>
 							<label class="control-label col-xs-5">Width: </label>
 							<div class="col-xs-7">
-								<input class="form-control" ng-model="borderBottomWidth" name="borderBottomWidth" value="elemProps.borderBottomWidth">
+								<input class="form-control" ng-model="borderBottomWidth" name="borderBottomWidth">
 							</div>
 							<label class="control-label col-xs-5">Style: </label>
 							<div class="col-xs-7">
-								<input class="form-control" ng-model="borderBottomStyle" name="borderBottomStyle" value="elemProps.borderBottomStyle">
+								<input class="form-control" ng-model="borderBottomStyle" name="borderBottomStyle">
 							</div>
 							<label class="control-label col-xs-5">Color: </label>
 							<div class="col-xs-7">
-								<input class="form-control" ng-model="borderBottomColor" name="borderBottomColor" value="elemProps.borderBottomColor">
+								<input class="form-control" ng-model="borderBottomColor" name="borderBottomColor">
 							</div>
 						</fieldset>
 					</div>
@@ -293,15 +371,15 @@
 							<legend>Border Left</legend>
 							<label class="control-label col-xs-5">Width: </label>
 							<div class="col-xs-7">
-								<input class="form-control" ng-model="borderLeftWidth" name="borderLeftWidth" value="elemProps.borderLeftWidth">
+								<input class="form-control" ng-model="borderLeftWidth" name="borderLeftWidth">
 							</div>
 							<label class="control-label col-xs-5">Style: </label>
 							<div class="col-xs-7">
-								<input class="form-control" ng-model="borderLeftStyle" name="borderLeftStyle" value="elemProps.borderLeftStyle">
+								<input class="form-control" ng-model="borderLeftStyle" name="borderLeftStyle">
 							</div>
 							<label class="control-label col-xs-5">Color: </label>
 							<div class="col-xs-7">
-								<input class="form-control" ng-model="borderLeftColor" name="borderLeftColor" value="elemProps.borderLeftColor">
+								<input class="form-control" ng-model="borderLeftColor" name="borderLeftColor">
 							</div>
 						</fieldset>
 					</div>
@@ -313,19 +391,19 @@
 							<legend>Common properties</legend>
 							<label class="control-label col-xs-5">Radius: </label>
 							<div class="col-xs-7">
-								<input class="form-control" ng-model="borderRadius" name="borderRadius" value="elemProps.borderRadius">
+								<input class="form-control" ng-model="borderRadius" name="borderRadius">
 							</div>
 							<label class="control-label col-xs-5">Collapse: </label>
 							<div class="col-xs-7">
-								<input class="form-control" ng-model="borderCollapse" name="borderCollapse" value="elemProps.borderCollapse">
+								<input class="form-control" ng-model="borderCollapse" name="borderCollapse">
 							</div>
 							<label class="control-label col-xs-5">Spacing: </label>
 							<div class="col-xs-7">
-								<input class="form-control" ng-model="borderSpacing" name="borderSpacing" value="elemProps.borderSpacing">
+								<input class="form-control" ng-model="borderSpacing" name="borderSpacing">
 							</div>
 							<label class="control-label col-xs-5">Image: </label>
 							<div class="col-xs-7">
-								<input class="form-control" ng-model="borderImage" name="borderImage" value="elemProps.borderImage">
+								<input class="form-control" ng-model="borderImage" name="borderImage">
 							</div>
 						</fieldset>
 					</div>
@@ -337,19 +415,19 @@
 							<legend>Border Radius (separate corners)</legend>
 							<label class="control-label col-xs-5">Top Right Radius: </label>
 							<div class="col-xs-7">
-								<input class="form-control" ng-model="borderCollapse" name="borderCollapse" value="elemProps.borderCollapse">
+								<input class="form-control" ng-model="borderCollapse" name="borderCollapse">
 							</div>
 							<label class="control-label col-xs-5">Bottom Right Radius: </label>
 							<div class="col-xs-7">
-								<input class="form-control" ng-model="borderCollapse" name="borderCollapse" value="elemProps.borderCollapse">
+								<input class="form-control" ng-model="borderCollapse" name="borderCollapse">
 							</div>
 							<label class="control-label col-xs-5">Bottom Left Radius: </label>
 							<div class="col-xs-7">
-								<input class="form-control" ng-model="borderCollapse" name="borderCollapse" value="elemProps.borderCollapse">
+								<input class="form-control" ng-model="borderCollapse" name="borderCollapse">
 							</div>
 							<label class="control-label col-xs-5">Top Left Radius: </label>
 							<div class="col-xs-7">
-								<input class="form-control" ng-model="borderCollapse" name="borderCollapse" value="elemProps.borderCollapse">
+								<input class="form-control" ng-model="borderCollapse" name="borderCollapse">
 							</div>
 						</fieldset>
 					</div>
@@ -361,41 +439,34 @@
 							<legend>Border Image</legend>
 							<label class="control-label col-xs-5">Source: </label>
 							<div class="col-xs-7">
-								<input class="form-control" ng-model="borderImageSource" name="borderImageSource" value="elemProps.borderImageSource">
+								<input class="form-control" ng-model="borderImageSource" name="borderImageSource">
 								<upload-button class="btn btn-success btn-upload" url="/image" on-success="uploadSuccess(response,'borderImageSource')" >Upload</upload-button>
 							</div>
 							<label class="control-label col-xs-5">Width: </label>
 							<div class="col-xs-7">
-								<input class="form-control" ng-model="borderImageWidth" name="borderImageWidth" value="elemProps.borderImageWidth">
+								<input class="form-control" ng-model="borderImageWidth" name="borderImageWidth">
 							</div>
 							<label class="control-label col-xs-5">Outset: </label>
 							<div class="col-xs-7">
-								<input class="form-control" ng-model="borderImageOutset" name="borderImageOutset" value="elemProps.borderImageOutset">
+								<input class="form-control" ng-model="borderImageOutset" name="borderImageOutset">
 							</div>
 							<label class="control-label col-xs-5">Repeat: </label>
 							<div class="col-xs-7">
-								<input class="form-control" ng-model="borderImageRepeat" name="borderImageRepeat" value="elemProps.borderImageRepeat">
+								<input class="form-control" ng-model="borderImageRepeat" name="borderImageRepeat">
 							</div>
 							<label class="control-label col-xs-5">Slice: </label>
 							<div class="col-xs-7">
-								<input class="form-control" ng-model="borderImageSlice" name="borderImageSlice" value="elemProps.borderImageSlice">
+								<input class="form-control" ng-model="borderImageSlice" name="borderImageSlice">
 							</div>
 						</fieldset>
 					</div>
 				</form>
-			</div>	
-		</div>
-	</div>
+			</div>
 
-	<!-- TEXT -->
+			<!-- TEXT -->
 
-	<div ng-show="currentStyle=='text'" ng-hide="currentStyle!='text'">
-		<div class="row">
-			<div class="col-xs-12 col-md-12 text-left">
+			<div ng-show="currentStyle=='text'" ng-hide="currentStyle!='text'">
 				<form class="form-horizontal" name="textForm">
-
-					<br>
-
 					<div class="form-group">
 						<fieldset>
 							<legend>General</legend>
@@ -519,16 +590,9 @@
 					</div>
 				</form>
 			</div>
-		</div>	
-	</div>
 
-	<div ng-show="currentStyle=='font'" ng-hide="currentStyle!='font'">
-		<div class="row">
-			<div class="col-xs-12 col-md-12 text-left">
+			<div ng-show="currentStyle=='font'" ng-hide="currentStyle!='font'">
 				<form class="form-horizontal" name="fontForm">
-
-					<br>
-
 					<div class="form-group">
 						<fieldset>
 							<legend>Short notation</legend>
@@ -582,17 +646,18 @@
 					</div>
 				</form>
 			</div>
-		</div>	
+
+			<!-- THE END -->
+
+			<hr>
+			<button class="btn btn-default" ng-click="setProperties()">Apply</button>
+			<hr>
+
+			<!--
+			<div ng-repeat="(key,value) in elemProps">
+				<label>{{key}}:</label><input type="text" class="prop" value="{{value}}" name="{{key}}">
+			</div>
+			-->
+		</div>
 	</div>
-
-	<!-- THE END -->
-
-	<hr>
-	<button class="btn btn-default" ng-click="setProperties()">Apply</button>
-	<hr>
-
-	<div ng-repeat="(key,value) in elemProps">
-		<label>{{key}}:</label><input type="text" class="prop" value="{{value}}" name="{{key}}">
-	</div>
-
 </div>

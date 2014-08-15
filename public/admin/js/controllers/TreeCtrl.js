@@ -10,6 +10,11 @@ EasyPress.controller("TreeController", ['$scope', function($scope) {
         var newName = data.name + '-' + post;
         data.nodes.push({name: newName,nodes: []});
     };
+	$scope.excludeElements = function(node) {
+		console.log("In exclude. Node = ",node.nodeName);
+		return  node.nodeName != "BR";
+	};
 	*/
+
 
 }]);

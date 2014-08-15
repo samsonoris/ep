@@ -7,6 +7,7 @@ EasyPress.controller('BootstrapController', ['$scope', function($scope) {
 	};
 
 	$scope.setBootstrapMenu = function(menu) {
+		$scope.bootTab = menu;
 		$scope.currentBootstrap = bootstrapItems[menu];
 	};
 	$scope.setBootstrapMenu('nav');

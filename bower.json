@@ -9,6 +9,7 @@
 		"angular": "latest",
 		"angular-route": "latest",
 		"angular-upload": "latest",
+		"angular-bootstrap": "latest",
 		"angular-bootstrap-colorpicker": "latest",
 		"ng-sortable": "latest",
 		"ngStorage": "latest"
