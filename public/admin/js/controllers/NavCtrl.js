@@ -5,7 +5,7 @@ EasyPress.controller('NavController',['$scope',function($scope){
 	var navCollapses = 1;
 	$scope.currentNav = 'navbar';
 	$scope.addNavItem = function(){
-		$('#navitems').append(
+		$('#navItems').append(
 			'<div class="btn-group">' +
 			'<label>Text:<input id="nav-text-' + navItems + '" type="text"></label>' +
 			'<label>Url:<input id="nav-url-' + navItems + '" type="text"></label>' +
@@ -18,11 +18,26 @@ EasyPress.controller('NavController',['$scope',function($scope){
 	$scope.appendBootstrap = function(element){
 		console.log("in append Bootstrap...");
 		if (element == 'nav') {
-			console.log("condition...");
-			var navbar = $('<div role="navigation" class="navbar ' + $('input[name="nav-color"]:checked').val() + " " + $('input[name="nav-placement"]:checked').val() + '"></div>');
-			if ( $('input[name="navbar-header"]').is(':checked') ) {
+			console.log("condition...nav");
+			var navbar = document.createElement('div');
+			navbar.className = "navbar";
+			var colorClass = document.getElementsByName('nav-color');
+			for (var i = 0; i < 2; i++) {
+				if (colorClass[i].checked) {
+					navbar.className += " " + colorClass[i].value;
+					break;
+				}
+			}
+			var placement = document.getElementsByName('nav-placement');
+			for (var i = 0; i < 3; i++) {
+				if (placement[i].checked) {
+					navbar.className += " " + placement[i].value;
+					break;
+				}
+			}
+			if (document.getElementsByName('navbar-header')[0].checked) {
 				var header = '<div class="navbar-header">'
-				if ( $('input[name="navbar-collapse"]').is(':checked') ) {
+				if (document.getElementsByName('navbar-collapse')[0].checked) {
 					header += '<button type="button" data-target="#navbarCollapse-' + navCollapses + '" data-toggle="collapse" class="navbar-toggle">' +
 						'<span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>';
 				}
@@ -30,20 +45,20 @@ EasyPress.controller('NavController',['$scope',function($scope){
 					header += '<a href="' + $('input[name="brand-url"]').val() + '" class="navbar-brand">' + $('input[name="brand-name"]').val() + '</a>';
 				}
 				header += '<div>';
-				navbar.append($(header));
 			}
 			list = '<ul class="nav navbar-nav">';
-			var navels = $('#navitems').children();
+			var navels = document.getElementById('navItems').children;
 			for (var i=0; i < navels.length; i++) {
-				list += '<li><a href="' + $('#nav-url-' + i).val() + '">' + $('#nav-text-' + i).val() + '</a></li>'; 
+				list += '<li><a href="' + document.getElementById('nav-url-' + i).value + '">' + document.getElementById('nav-text-' + i).value + '</a></li>'; 
 			}
 			list += '</ul>';
-			if ( $('input[name="navbar-collapse"]').is(':checked') ) {
+			if (document.getElementsByName('navbar-collapse')[0].checked) {
 				list = '<div id="navbarCollapse-' + navCollapses + '" class="collapse navbar-collapse">' + list + '</div>';
 			}
-			navbar.append($(list));
+			navbar.innerHTML = header + list;
 		}
-		$scope.active.element.append(navbar)
+		$scope.active.element.appendChild(navbar);
+		$scope.active.element = navbar;
 	};
 }]);
 
