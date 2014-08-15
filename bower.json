@@ -12,6 +12,7 @@
 		"angular-bootstrap": "latest",
 		"angular-bootstrap-colorpicker": "latest",
 		"ng-sortable": "latest",
+		"bootstrap-tagsinput": "latest",
 		"ngStorage": "latest"
 	}
 }
