@@ -20,6 +20,7 @@ EasyPress.controller('NavController',['$scope',function($scope){
 		if (element == 'nav') {
 			console.log("condition...nav");
 			var navbar = document.createElement('div');
+			var header;
 			navbar.className = "navbar";
 			var colorClass = document.getElementsByName('nav-color');
 			for (var i = 0; i < 2; i++) {
@@ -36,7 +37,7 @@ EasyPress.controller('NavController',['$scope',function($scope){
 				}
 			}
 			if (document.getElementsByName('navbar-header')[0].checked) {
-				var header = '<div class="navbar-header">'
+				header = '<div class="navbar-header">'
 				if (document.getElementsByName('navbar-collapse')[0].checked) {
 					header += '<button type="button" data-target="#navbarCollapse-' + navCollapses + '" data-toggle="collapse" class="navbar-toggle">' +
 						'<span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>';
@@ -46,7 +47,7 @@ EasyPress.controller('NavController',['$scope',function($scope){
 				}
 				header += '</div>';
 			}
-			list = '<ul class="nav navbar-nav">';
+			var list = '<ul class="nav navbar-nav">';
 			var navels = document.getElementById('navItems').children; //just getting length
 			for (var i=0; i < navels.length; i++) {
 				list += '<li><a href="' + document.getElementById('nav-url-' + i).value + '">' + document.getElementById('nav-text-' + i).value + '</a></li>'; 
@@ -56,9 +57,17 @@ EasyPress.controller('NavController',['$scope',function($scope){
 				list = '<div id="navbarCollapse-' + navCollapses + '" class="collapse navbar-collapse">' + list + '</div>';
 			}
 			navbar.innerHTML = header + list;
+			$scope.active.element.insertBefore(navbar,$scope.active.element.firstChild);
+			$scope.active.element = navbar;
 		}
-		$scope.active.element.insertBefore(navbar,$scope.active.element.firstChild);
-		$scope.active.element = navbar;
+
+		else if (element == 'tabs') {
+
+		}
+
+		else if (element == 'pills') {
+
+		}
 	};
 }]);
 
