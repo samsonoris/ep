@@ -1,0 +1,68 @@
+
+<div ng-controller="ArchiveController" class="container">
+  <h2>Archive</h2>
+   <div class="row">
+      <div class="col-lg-4 left-tabs">
+        <ul class="nav nav-tabs nav-stacked">
+          <li ng-click="currentArchive='time-maschine'" ng-class="{active: currentArchive=='time-maschine'}"><a href=""><h4>Time Maschine</h4></a></li>
+          <li ng-click="currentArchive='images'" ng-class="{active: currentArchive=='images'}"><a href=""><h4>Images</h4></a></li>
+          <li ng-click="currentArchive='video'" ng-class="{active: currentArchive=='video'}"><a href=""><h4>Videos</h4></a></li>
+          <li ng-click="currentArchive='custom-snapshots'" ng-class="{active: currentArchive=='custom-snapshots'}"><a href=""><h4>Custom Snapshots</h4></a></li>
+          <li ng-click="currentArchive='blog-archive'" ng-class="{active: currentArchive=='blog-archive'}"><a href=""><h4>Blog Archive</h4></a></li>
+        </ul>
+    </div>
+
+  <!-- Time Maschine -->
+
+  <br>
+  <br>
+  <div class="col-lg-7">
+    <div ng-show="currentArchive=='time-maschine'" ng-hide="currentArchive!='time-maschine'">
+      <form class="form-horizontal" name="positionForm">
+        <div class="form-group">
+          <label class="control-label col-lg-4">Choose Timestamp: </label>
+          <div class="col-lg-8">
+            <select class="bootstrap-select btn form-control" ng-model="position" name="position">
+              <option value="{{timestamp1}}">{{timestamp1}}</option>
+              <option value="{{timestamp2}}">{{timestamp2}}</option>
+              <option value="{{timestamp3}}">{{timestamp3}}</option>
+              <option value="{{timestamp4}}">{{timestamp4}}</option>
+              <option value="{{timestamp5}}">{{timestamp5}}</option>
+            </select>
+          </div>
+        </div>
+      </form>
+    </div>
+
+  <!-- Images -->
+
+    <div ng-show="currentArchive=='images'" ng-hide="currentArchive!='images'">
+      <form class="form-horizontal" name="positionForm">
+        <div class="form-group">
+          <div style="height: 305px">
+            <carousel interval="myInterval">
+              <slide ng-repeat="slide in slides" active="slide.active">
+                <img ng-src="{{slide.image}}" style="margin:auto;">
+                <div class="carousel-caption">
+                  <h4>Slide {{$index}}</h4>
+                  <p>{{slide.text}}</p>
+                </div>
+              </slide>
+            </carousel>
+          </div>
+           <div class="row">
+            <div class="col-md-6">
+              <button type="button" class="btn btn-success fa fa-folder-open" ng-click="browse"> Browse</button>
+            </div>
+        </div>
+      </form>
+    </div>
+  </div>
+<!-- THE END -->
+
+    <hr>
+    <button class="btn btn-default" ng-click="setProperties()">Apply</button>
+    <hr>
+
+  </div>
+</div>

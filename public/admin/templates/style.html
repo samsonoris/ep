@@ -13,21 +13,23 @@
 	<h5>Edit style (CSS properties)</h5>
 
 	<div class="row">
-		<div class="col-lg-3 left-tabs">
+		<div class="col-lg-4 left-tabs">
 			<ul class="nav nav-tabs nav-stacked">
-				<li ng-click="currentStyle='position'" ng-class="{active: currentStyle=='position'}"><a href="">Position</a></li>
-				<li ng-click="currentStyle='margin'" ng-class="{active: currentStyle=='margin'}"><a href="">Margin</a></li>
-				<li ng-click="currentStyle='dimension'" ng-class="{active: currentStyle=='dimension'}"><a href="">Dimension</a></li>
-				<li ng-click="currentStyle='display'" ng-class="{active: currentStyle=='display'}"><a href="">Display</a></li>
-				<li ng-click="currentStyle='background'" ng-class="{active: currentStyle=='background'}"><a href="">Background</a></li>
-				<li ng-click="currentStyle='border'" ng-class="{active: currentStyle=='border'}"><a href="">Border</a></li>
-				<li ng-click="currentStyle='text'" ng-class="{active: currentStyle=='text'}"><a href="">Text</a></li>
-				<li ng-click="currentStyle='font'" ng-class="{active: currentStyle=='font'}"><a href="">Font</a></li>
+				<li ng-click="currentStyle='position'" ng-class="{active: currentStyle=='position'}"><a href=""><h4>Position</h4></a></li>
+				<li ng-click="currentStyle='margin'" ng-class="{active: currentStyle=='margin'}"><a href=""><h4>Margin</h4></a></li>
+				<li ng-click="currentStyle='dimension'" ng-class="{active: currentStyle=='dimension'}"><a href=""><h4>Dimension</h4></a></li>
+				<li ng-click="currentStyle='display'" ng-class="{active: currentStyle=='display'}"><a href=""><h4>Display</h4></a></li>
+				<li ng-click="currentStyle='background'" ng-class="{active: currentStyle=='background'}"><a href=""><h4>Background</h4></a></li>
+				<li ng-click="currentStyle='border'" ng-class="{active: currentStyle=='border'}"><a href=""><h4>Border</h4></a></li>
+				<li ng-click="currentStyle='text'" ng-class="{active: currentStyle=='text'}"><a href=""><h4>Text</h4></a></li>
+				<li ng-click="currentStyle='font'" ng-class="{active: currentStyle=='font'}"><a href=""><h4>Font</h4></a></li>
 			</ul>
 		</div>
 
 		<!-- POSITION -->
-		<div class="col-lg-9">
+		<br>
+		<br>
+		<div class="col-lg-7">
 			<div ng-show="currentStyle=='position'" ng-hide="currentStyle!='position'">
 				<form class="form-horizontal" name="positionForm">
 					<div class="form-group">
