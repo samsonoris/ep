@@ -37,6 +37,13 @@ EasyPress.controller('DragQueenController', function($scope) {
 				$scope.$apply();
 			}
 		});
+		addEvent($scope.TARGET_DOCUMENT, 'mouseout', function(e) {
+			e = e ? e : window.event;
+			var from = e.relatedTarget || e.toElement;
+			if (!from || from.nodeName == "HTML" && $scope.candidate) {
+				$scope.candidate.style.outline = "";
+			}
+		});
 	};
 
 	$scope.setActive = function(element) {
@@ -77,11 +84,9 @@ EasyPress.controller('DragQueenController', function($scope) {
 	var offX;
 	var offY;
 
-	function addListeners(){
-		document.getElementById('DragQueen').addEventListener('mouseenter', mouseEnter, false);
-		document.getElementById('DragQueen').addEventListener('mousedown', mouseDown, false);
-		window.addEventListener('mouseup', mouseUp, false);
-	}
+	addEvent(document.getElementById('DragQueen'),'mouseenter', mouseEnter);
+	addEvent(document.getElementById('DragQueen'),'mousedown', mouseDown);
+	addEvent(window,'mouseup', mouseUp);
 
 	function mouseEnter(e) {
 		// When mouse enter DragQueen the hover-highlighted element should restore to normal
@@ -97,7 +102,8 @@ EasyPress.controller('DragQueenController', function($scope) {
 		var div = document.getElementById('DragQueen');
 		offY = e.clientY-parseInt(div.offsetTop, 10);
 		offX = e.clientX-parseInt(div.offsetLeft, 10);
-		window.addEventListener('mousemove', divMove, true);
+		addEvent(window,'mousemove',divMove, true);
+		addEvent(document,'mouseout',divRelease);
 	}
 
 	function mouseUp(){
@@ -106,7 +112,6 @@ EasyPress.controller('DragQueenController', function($scope) {
 		window.removeEventListener('mousemove', divMove, true);
 	}
 
-
 	function divMove(e){
 		var div = document.getElementById('DragQueen');
 		div.style.position = 'absolute';
@@ -114,14 +119,19 @@ EasyPress.controller('DragQueenController', function($scope) {
 		div.style.left = (e.clientX-offX) + 'px';
 	}
 
-	addListeners();
+	function divRelease(e){
+        e = e ? e : window.event;
+        var from = e.relatedTarget || e.toElement;
+        if (!from || from.nodeName == "HTML") {
+			window.removeEventListener('mousemove', divMove, true);
+		}
+	}
 
-	function addEvent(node, ename, handler)
-	// Used to add listeners to iframe in $scope.initSite()
+	function addEvent(node, ename, handler, capture)
 	{
 		if(typeof document.addEventListener != 'undefined')
 		{
-			node.addEventListener(ename, handler, false);
+			node.addEventListener(ename, handler, capture);
 		}
 		else if(typeof document.attachEvent != 'undefined')
 		{
