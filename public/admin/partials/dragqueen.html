@@ -1,13 +1,16 @@
 
-<iframe live-page
-   		id="MainContent" 
-	    src='/' 
-	    seamless="seamless" 
-		width="100%"
-		frameborder="0"
-		allowtransparency="true"
-		scrolling="no">
-</iframe>
+<div style="z-index: 0"> <!-- iframe event shield -->
+
+	<iframe live-page
+			id="MainContent" 
+			src='/' 
+			width="100%"
+			frameborder="0"
+			allowtransparency="true"
+			scrolling="no">
+	</iframe>
+
+</div>
 
 <div id="DragQueen" class="jumbotron">
 	<label>Active Element: {{ active.string }}</label>

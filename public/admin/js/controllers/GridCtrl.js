@@ -29,18 +29,12 @@ EasyPress.controller('GridController', ['$scope', function($scope) {
 		row += '</div>';
 		row = $(row);
 
-		$scope.active.element.append(row);
-		$scope.active.branch['row-' + nextRow] = {};
-		$scope.active.branch = $scope.active.branch['row-' + nextRow];
+		$scope.active.element.appendChild(row);
 
 		var newElements = $('#row-' + nextRow + ' > div:not(".clearfix")');
 
-		for (var i = 0; i < newElements.length; i++) {
-			$scope.active.branch[newElements[i].id] = {};
-		}
 
-		$scope.active.element = $('#' + newElements[0].id);
-		$scope.active.branch = $scope.active.branch[newElements[0].id];
+		$scope.active.element = newElements[0];
 
 		nextRow++;
 		$scope.setMenu("main_menu");
@@ -49,9 +43,7 @@ EasyPress.controller('GridController', ['$scope', function($scope) {
 	var nextContainer = 1;
 	$scope.addContainer = function(className) {
 		var container = $('<div id="' + className + '-' + (className == 'row' ? nextRow : nextContainer) + '" class="' + className + '"></div>');
-		$scope.active.element.append(container);
-		$scope.active.branch[className + '-' + (className == 'row' ? nextRow : nextContainer)] = {};
-		$scope.active.branch = $scope.active.branch[className + '-' + (className == 'row' ? nextRow++ : nextContainer++)];
+		$scope.active.element.appendChild(container);
 		$scope.active.element = container;
 	};
 				

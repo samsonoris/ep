@@ -18,7 +18,7 @@ EasyPress.controller('DragQueenController', function($scope) {
 		});
 		$scope.$apply();
 
-		addEvent($scope.TARGET_DOCUMENT, 'mouseover', function(e) {
+		addEvent($scope.TARGET_DOCUMENT, 'mouseover', function (e) {
 			if ($scope.highlightHover) {
 				var target = e.target ? e.target : e.srcElement;
 				if ($scope.candidate != null) {
@@ -30,16 +30,13 @@ EasyPress.controller('DragQueenController', function($scope) {
 				}
 			}
 		});
-
-		addEvent($scope.TARGET_DOCUMENT, 'click', function(e) {
+		addEvent($scope.TARGET_DOCUMENT, 'click', function (e) {
 			if ($scope.clickSelect) {
 				var target = e.target ? e.target : e.srcElement;
-				console.log("In click handler, target: ". target);
 				$scope.setActive(target);
 				$scope.$apply();
 			}
 		});
-			
 	};
 
 	$scope.setActive = function(element) {
@@ -54,7 +51,6 @@ EasyPress.controller('DragQueenController', function($scope) {
 		$scope.active.element.style.outline = "green solid thin";
 
 		if (element !== $scope.TARGET_BODY) {
-			console.log("Activating editor..");
 			$scope.active.element.contentEditable = "true";
 			$scope.active.element.focus();
 			document.execCommand('styleWithCss',false,true);
@@ -82,19 +78,28 @@ EasyPress.controller('DragQueenController', function($scope) {
 	var offY;
 
 	function addListeners(){
+		document.getElementById('DragQueen').addEventListener('mouseenter', mouseEnter, false);
 		document.getElementById('DragQueen').addEventListener('mousedown', mouseDown, false);
 		window.addEventListener('mouseup', mouseUp, false);
 	}
 
 	function mouseUp(){
+		document.getElementById('MainContent').style.zIndex = 0;
 		window.removeEventListener('mousemove', divMove, true);
 	}
 
 	function mouseDown(e){
+		document.getElementById('MainContent').style.zIndex = -1000;
 		var div = document.getElementById('DragQueen');
-		offY = e.clientY-parseInt(div.offsetTop);
-		offX = e.clientX-parseInt(div.offsetLeft);
+		offY = e.clientY-parseInt(div.offsetTop, 10);
+		offX = e.clientX-parseInt(div.offsetLeft, 10);
 		window.addEventListener('mousemove', divMove, true);
+	}
+
+	function mouseEnter(e) {
+		if ($scope.candidate) {
+			$scope.candidate.style.outline = "";
+		}
 	}
 
 	function divMove(e){
@@ -117,4 +122,5 @@ EasyPress.controller('DragQueenController', function($scope) {
 			node.attachEvent('on' + ename, handler);
 		}
 	}
+
 });
