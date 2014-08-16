@@ -42,7 +42,9 @@ EasyPress.controller('GridController', ['$scope', function($scope) {
 
 	var nextContainer = 1;
 	$scope.addContainer = function(className) {
-		var container = $('<div id="' + className + '-' + (className == 'row' ? nextRow : nextContainer) + '" class="' + className + '"></div>');
+		var container = document.createElement('div');
+		container.id = className + '-' + (className == 'row' ? nextRow : nextContainer); 
+		container.className = className;
 		$scope.active.element.appendChild(container);
 		$scope.active.element = container;
 	};

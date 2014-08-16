@@ -15,7 +15,8 @@ html, body {
 	user-select: none;
 	overflow:hidden;
 }
-	
+
+// TreeView elements	
 
 ul.tree {
 	list-style: none;
@@ -24,12 +25,42 @@ ul.tree {
 }
 
 .tree li {
+	margin-top: 5px;
 	margin-left: 20px;
 }
 
+span.select {
+	margin-right: 15px;
+	line-height: @font-size-large;
+}
+
 span.select:hover {
+	font-size: @font-size-large;
+	text-decoration: underline;
 	background: #FFF;
 }
+
+span.treeControls {
+	position: absolute;
+	right: 0;
+	margin-right: 15px;
+}
+
+.treeControls i {
+	padding: 3px 5px 3px 3px;
+}
+
+.treeControls i:hover {
+	border: 1px solid gray;
+	border-radius: 3px;
+	background: #FFF;
+}
+
+.treeControls i:active {
+	background: red;
+}
+
+// EditView elements
 
 #theme-dropdown-align-center{
   margin-left: 35%;

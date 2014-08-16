@@ -48,9 +48,9 @@ EasyPress.controller('DragQueenController', function($scope) {
 			limbs[i].style.outline = ""; 
 			limbs[i].contentEditable = "inherit";
 		}
-		$scope.active.element.style.outline = "green solid thin";
 
-		if (element !== $scope.TARGET_BODY) {
+		if (element !== $scope.TARGET_BODY && element.nodeName != "HTML") {
+			$scope.active.element.style.outline = "green solid thin";
 			$scope.active.element.contentEditable = "true";
 			$scope.active.element.focus();
 			document.execCommand('styleWithCss',false,true);
@@ -83,24 +83,29 @@ EasyPress.controller('DragQueenController', function($scope) {
 		window.addEventListener('mouseup', mouseUp, false);
 	}
 
-	function mouseUp(){
-		document.getElementById('MainContent').style.zIndex = 0;
-		window.removeEventListener('mousemove', divMove, true);
+	function mouseEnter(e) {
+		// When mouse enter DragQueen the hover-highlighted element should restore to normal
+		if ($scope.candidate) {
+			$scope.candidate.style.outline = "";
+		}
 	}
 
 	function mouseDown(e){
+		// Hide all mouseevents from iframe by sinking it below shieldin div 
 		document.getElementById('MainContent').style.zIndex = -1000;
+
 		var div = document.getElementById('DragQueen');
 		offY = e.clientY-parseInt(div.offsetTop, 10);
 		offX = e.clientX-parseInt(div.offsetLeft, 10);
 		window.addEventListener('mousemove', divMove, true);
 	}
 
-	function mouseEnter(e) {
-		if ($scope.candidate) {
-			$scope.candidate.style.outline = "";
-		}
+	function mouseUp(){
+		// Return iframe to surface to begin receiving mousevents again
+		document.getElementById('MainContent').style.zIndex = 0;
+		window.removeEventListener('mousemove', divMove, true);
 	}
+
 
 	function divMove(e){
 		var div = document.getElementById('DragQueen');
@@ -112,6 +117,7 @@ EasyPress.controller('DragQueenController', function($scope) {
 	addListeners();
 
 	function addEvent(node, ename, handler)
+	// Used to add listeners to iframe in $scope.initSite()
 	{
 		if(typeof document.addEventListener != 'undefined')
 		{
