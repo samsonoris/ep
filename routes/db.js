@@ -58,7 +58,37 @@ function saveToBase(pageData){
 	});
 }
 
+function createBlog(name){
+	var client = new pg.Client(connect);
+	client.connect(function(err) {
+		if(err) {
+			return console.error('could not connect to postgres', err);
+		}
+		client.query('CREATE TABLE "' + name + '" (blog_id serial primary key, author text, blog xml)', function(err, result) {
+			if(err) return console.error('error creating blog', err);
+			console.log("Success!!");
+			client.end();
+		});
+	});
+}
+
+function createBlogPost(postData){
+	var client = new pg.Client(connect);
+	client.connect(function(err) {
+		if(err) {
+			return console.error('could not connect to postgres', err);
+		}
+		client.query('INSERT INTO "' + postData.name + '" (author,blog) VALUES ($1,$2)',[postData.author,postData.blog], function(err, result) {
+			if(err) return console.error('error posting to blog', err);
+			console.log("Success!!");
+			client.end();
+		});
+	});
+}
+
 module.exports = {
   	getIndexContent: getIndexContent,
-	saveToBase: saveToBase
+	saveToBase: saveToBase,
+	createBlog: createBlog,
+	createBlogPost: createBlogPost
 };

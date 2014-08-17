@@ -1,5 +1,5 @@
 
-EasyPress.controller('MenuController', ['$scope', function($scope){
+EasyPress.controller('MenuController', ['$scope','$compile', function($scope,$compile){
 
 	var elementCount = {
 		//HTML
@@ -17,6 +17,25 @@ EasyPress.controller('MenuController', ['$scope', function($scope){
 		$scope.setActive(elem);
 		//$scope.setMenu('style');
 	};
+
+	$scope.createBlog = function(s,d,h){
+		var blog = document.createElement('blog');
+		blog.setAttribute('social',s ? true : false);
+		blog.setAttribute('dateFormat','"' + d + '"'); 
+		blog.setAttribute('heading', '"' + h + '"');
+		$scope.active.element.appendChild(blog);
+		$compile(blog)($scope);
+		$scope.setMenu('main_menu');
+	}
+
+	$scope.createBlogModule = function(blog){
+		var bc = document.createElement('blog-container');
+		console.log("blog: ",blog);
+		bc.setAttribute('name',blog.name);
+		bc.setAttribute('blog-url',blog.url);
+		$scope.active.element.appendChild(bc);
+		$compile(bc)($scope);
+	}
 
 	$scope.doCommand = function(command,argument){
 		if (command == 'insertImage') {

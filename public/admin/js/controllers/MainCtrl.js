@@ -67,7 +67,7 @@ EasyPress.controller('MainController', ['$scope', '$http', '$location', function
 			data: {
 				title: newTitle,
 				theme: newTitle,
-				style: '<style>' + newStyle + '</style>'
+				style: '<style type="text/css" class="user-style-sheet">' + newStyle + '</style>'
 			},
 			headers: {
 				'Content-Type': 'application/json'

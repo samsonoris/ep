@@ -1,5 +1,5 @@
 
-var EasyPress = angular.module('EasyPress',['ngRoute','colorpicker.module','lr.upload','ui.bootstrap'])
+var EasyPress = angular.module('EasyPress',['ngRoute','colorpicker.module','lr.upload','ui.bootstrap','blogger'])
   .config(['$routeProvider', '$locationProvider', '$httpProvider', function($routeProvider, $locationProvider, $httpProvider) {
   console.log("In appRoutes");
 
@@ -96,7 +96,7 @@ var EasyPress = angular.module('EasyPress',['ngRoute','colorpicker.module','lr.u
 					i--; //One element less
 				}
 			}
-			console.log(nodeArray);
 			return nodeArray;
 		};
 	}); 
+

@@ -74,6 +74,8 @@ app.use(express.static(__dirname + '/public'));
 app.use('/image', upload);
 app.use('/', routes);
 app.use('/save', routes);
+app.use('/make-blog-db',routes);
+app.use('/make-blog-post',routes);
 
 // route to test if the user is logged in or not
 app.get('/loggedin', function(req, res) {

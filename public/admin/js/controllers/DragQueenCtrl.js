@@ -74,6 +74,7 @@ EasyPress.controller('DragQueenController', function($scope) {
 		"html": "admin/templates/html.html",
 		"tags": "admin/templates/tags.html",
 		"archive": "admin/templates/archive.html",
+		"blog": "admin/templates/createBlog.html"
 	};
 
 	$scope.setMenu = function(menu){

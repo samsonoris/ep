@@ -478,6 +478,10 @@
 					<div class="form-group">
 						<fieldset>
 							<legend>General</legend>
+							<label class="control-label col-xs-5">Color</label>
+							<div class="col-xs-7">
+								<input type="text" class="text form-control" ng-model="color" ng-keypress="$event.keyCode == 13 && applyStyle(selector,'color',color)">
+							</div>
 							<label class="control-label col-xs-5">Text Align</label>
 							<div class="col-xs-7">
 								<input type="text" class="text form-control" ng-keypress="$event.keyCode == 13 && applyStyle()"  value="" >

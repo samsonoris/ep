@@ -27,8 +27,19 @@ router.get('/', function(req, res) {
 });
 
 router.post('/save', function(req, res) {
+	console.log("Saving style...");
 	db.saveToBase(req.body);
 	db.getIndexContent(setContent);
+});
+
+router.post('/make-blog-db', function(req, res) {
+	console.log("Making table...");
+	db.createBlog(req.body.name);
+});
+
+router.post('/make-blog-post', function(req, res) {
+	console.log("Making blog post...");
+	db.createBlogPost(req.body);
 });
 
 module.exports = router;
