@@ -2,8 +2,8 @@
 <div style="z-index: 0"> <!-- iframe event shield -->
 
 	<iframe live-page
-			id="MainContent" 
-			src='/' 
+			id="MainContent"
+			src='/'
 			width="100%"
 			frameborder="0"
 			allowtransparency="true"
@@ -13,7 +13,9 @@
 </div>
 
 <div id="DragQueen" class="jumbotron">
-	<label>Active Element: {{ active.string }}</label>
+	<span class="label label-info">Active Element <span class="badge">{{ active.string }}</span></span>
+	<p></p>
 	<div ng-include="activeMenu" ng-controller="MenuController"></div>
+	<button class="btn btn-danger fa fa-sign-out" ng-click="logout()"> Logout</button>
 </div>
 

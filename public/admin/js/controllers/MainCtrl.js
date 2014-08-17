@@ -1,7 +1,7 @@
 
 // angular.module('MainCtrl', [])
 
-EasyPress.controller('MainController', ['$scope', '$http', function($scope, $http) {
+EasyPress.controller('MainController', ['$scope', '$http', '$location', function($scope, $http, $location) {
 
 	$scope.title;
 	var workSheet;
@@ -20,13 +20,12 @@ EasyPress.controller('MainController', ['$scope', '$http', function($scope, $htt
 		workSheet = $scope.TARGET_STYLE.sheet || $scope.TARGET_STYLE.styleSheet;
 	}
 
-  	$scope.setTheme = function(fileName){
-    	document.head.getElementsByClassName('theme')[0].href = "/admin/css/custom-theme/" + fileName;
+	$scope.setTheme = function(fileName){
+		document.head.getElementsByClassName('theme')[0].href = "/admin/css/custom-theme/" + fileName;
 		$scope.TARGET_HEAD.getElementsByClassName('theme')[0].href = "/admin/css/custom-theme/" + fileName;
 		//TODO set variable to store new theme when saving to db
   	};
 	
-
 	// Methods to manipulate DOM
 	$scope.insertBefore = function(newNode,referenceNode){
 		referenceNode.parentNode.insertBefore(newNode,referenceNode);
@@ -114,5 +113,10 @@ EasyPress.controller('MainController', ['$scope', '$http', function($scope, $htt
 		$scope.saveRevision();
 	}
 
-
+	//Logout function
+   $scope.logout = function(){
+		$http.post('/logout').success(
+			function(){$location.path('/login');
+		});
+   };
 }]);

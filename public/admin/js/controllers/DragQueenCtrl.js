@@ -5,7 +5,7 @@ EasyPress.controller('DragQueenController', function($scope) {
 	$scope.highlightHover = true;
 	$scope.clickSelect = true;
 	$scope.candidate;
-	
+
 	$scope.initSite = function() {
 
 		$scope.setUpTarget();
@@ -25,7 +25,7 @@ EasyPress.controller('DragQueenController', function($scope) {
 					$scope.candidate.style.outline = "";
 				}
 				$scope.candidate = target;
-				if (["HTML","BODY"].indexOf($scope.candidate.nodeName) == -1) { 
+				if (["HTML","BODY"].indexOf($scope.candidate.nodeName) == -1) {
 					$scope.candidate.style.outline = "1px solid red";
 				}
 			}
@@ -52,7 +52,7 @@ EasyPress.controller('DragQueenController', function($scope) {
 
 		var limbs = $scope.TARGET_BODY.getElementsByTagName("*");
 		for (var i = 0; i < limbs.length; i++) {
-			limbs[i].style.outline = ""; 
+			limbs[i].style.outline = "";
 			limbs[i].contentEditable = "inherit";
 		}
 
@@ -73,6 +73,7 @@ EasyPress.controller('DragQueenController', function($scope) {
 		"bootstrap": "admin/templates/bootstrap.html",
 		"html": "admin/templates/html.html",
 		"tags": "admin/templates/tags.html",
+		"archive": "admin/templates/archive.html",
 	};
 
 	$scope.setMenu = function(menu){
@@ -96,7 +97,7 @@ EasyPress.controller('DragQueenController', function($scope) {
 	}
 
 	function mouseDown(e){
-		// Hide all mouseevents from iframe by sinking it below shieldin div 
+		// Hide all mouseevents from iframe by sinking it below shieldin div
 		document.getElementById('MainContent').style.zIndex = -1000;
 
 		var div = document.getElementById('DragQueen');
