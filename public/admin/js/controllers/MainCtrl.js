@@ -1,7 +1,7 @@
 
 // angular.module('MainCtrl', [])
 
-EasyPress.controller('MainController', ['$scope', '$http', function($scope, $http) {
+EasyPress.controller('MainController', ['$scope', '$http', '$location', function($scope, $http, $location) {
 
 	$scope.title;
 	console.log("IN MAIN CTRL!");
@@ -13,17 +13,22 @@ EasyPress.controller('MainController', ['$scope', '$http', function($scope, $htt
 		$scope.TARGET_STYLE = document.createElement('style');
 		$scope.TARGET_STYLE.type = 'text/css';
 		$scope.TARGET_HEAD.appendChild($scope.TARGET_STYLE);
-	}
+	};
 
-  	$scope.setTheme = function(fileName){
-    	document.head.getElementsByClassName('theme')[0].href = "/admin/css/custom-theme/" + fileName;
+	$scope.setTheme = function(fileName){
+		document.head.getElementsByClassName('theme')[0].href = "/admin/css/custom-theme/" + fileName;
 		$scope.TARGET_HEAD.getElementsByClassName('theme')[0].href = "/admin/css/custom-theme/" + fileName;
-  	};
+	};
 
 	$scope.removeElement = function(element) {
 		var parent = element.parentNode;
 		parent.removeChild(element);
 	};
 
-
+	//Logout function
+   $scope.logout = function(){
+		$http.post('/logout').success(
+			function(){$location.path('/login');
+		});
+   };
 }]);
