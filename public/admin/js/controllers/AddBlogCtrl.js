@@ -3,11 +3,8 @@ EasyPress.controller('AddBlogController',['$scope','$compile',function($scope,$c
 
 	$scope.authors = [];
 
-	$scope.createBlog = function(s,d,h){
-		var blog = document.createElement('blog');
-		blog.setAttribute('social',s ? true : false);
-		blog.setAttribute('dateFormat','"' + d + '"'); 
-		blog.setAttribute('heading', '"' + h + '"');
+	$scope.createBlogPost = function(s,d,h){
+		var blog = document.createElement('blog-post');
 		$scope.active.element.appendChild(blog);
 		$compile(blog)($scope);
 		$scope.setMenu('main_menu');
@@ -15,14 +12,15 @@ EasyPress.controller('AddBlogController',['$scope','$compile',function($scope,$c
 
 	$scope.createBlogModule = function(blog){
 		var bc = document.createElement('blog-container');
+		bc.setAttribute('blog-url','/blog/');
+		bc.setAttribute('name',$scope.blog.name);
+		bc.setAttribute('authors',$scope.authors);
+		bc.setAttribute('social',$scope.blog.social || false);
+		bc.setAttribute('date-format',$scope.blog.dateFormat);
+		bc.setAttribute('show-title',$scope.blog.showTitle || false);
+		bc.setAttribute('ng-controller','BlogController');
 		$scope.active.element.appendChild(bc);
 		$compile(bc)($scope);
 	}
-
-	$scope.getValues = function(){
-		$scope.blog.url = '/blog';
-		$scope.blog.authors = $scope.authors;
-		return $scope.blog;
-	};
 
 }]);

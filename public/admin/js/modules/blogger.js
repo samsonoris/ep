@@ -27,34 +27,39 @@ angular.module('blogger.directives')
 				}).error(function(data){
 
 				});*/
-				console.log("in link, blog : ", scope.getValues());
 			},
 			template: '<div ng-repeat="blog in blogs" ng-controller="BlogController">{{blog}}</div>'
 		}
 	}])
 
-	.directive('blog-post',function(){
+	.directive('blogPost',['$http',function($http){
 		console.log("In blog post directive");
 		return {
 			restrict: 'AE',
-			controller: 'BlogController',
-			scope: {
-
-			},
 			link: function(scope,elem,attrs){
-				console.log("in link function,scope:",scope,"elem:",elem,"attrs:",attrs);
+				scope.user = {name: "Marita"};
+				scope.authors = elem[0].parentNode.getAttribute('authors');
+				scope.name = elem[0].parentNode.getAttribute('name');
+				scope.social = elem[0].parentNode.getAttribute('social');
+				scope.showTitle = elem[0].parentNode.getAttribute('show-title') || false;
+				scope.dateFormat = elem[0].parentNode.getAttribute('date-format') || false;
+				console.log("social: ",scope.social,"title: ",scope.showTitle,"scope.user: ",scope.user);
 			},
-			template: '<div class="blogHead"><span ng-if="author">Author</span><span class="blogDate">Date</span></div><div ng-if="social">Social Media Links</div><article>Blog text</article>'
+			template: '<div class="blog-author" ng-if="authors.indexOf(user.name) != -1"><button class="btn btn-success" ng-click="saveBlog">Save</button><button class="btn btn-success" ng-click="publishBlog">Publish</button></div><div class="blogHead"><span ng-if="showTitle">Title is here</span><span class="blogDate">Date</span></div><div ng-if="social">Social Media Links</div><article>Blog text</article>'
 		}
-	});
+	}]);
 
 angular.module('blogger.controllers',[]);
 angular.module('blogger.controllers')
 	.controller('BlogController', ['$scope','$element','$http',function($scope,$element,$http){
-		/*
-		$scope.social = $element[0].getAttribute('social');
-		$scope.authors = $element[0].getAttribute('authors');
 
+		$scope.authors = $element[0].getAttribute('authors');
+		$scope.url = $element[0].getAttribute('blog-url');
+		$scope.name = $element[0].getAttribute('name');
+		$scope.social = $element[0].getAttribute('social');
+		$scope.dateFormat = $element[0].getAttribute('dateFormat');
+		$scope.showTitle = $element[0].getAttribute('showTitle');
+/*
 		$http.get('/blog/' + $element.getAttribute('name'))
 			.success(function(data){
 				$scope.blogs = data;
@@ -63,16 +68,15 @@ angular.module('blogger.controllers')
 				$scope.blogs = ["Error: Contact site administrator"];
 			});
 
-
-		/*
+*/
 		console.log(
-			"Authors: ", $element[0].getAttribute('authors'),
-			"blogUrl: ", $element[0].getAttribute('blog-url'),
-			"name: ", $element[0].getAttribute('name'),
-			"social: ", $element[0].getAttribute('social'),
-			"dateFormat: ", $element[0].getAttribute('dateFormat'),
-			"showTitle: ", $element[0].getAttribute('showTitle')
-		);*/
+			"\nAuthors: ", $element[0].getAttribute('authors'),
+			"\nblogUrl: ", $element[0].getAttribute('blog-url'),
+			"\nname: ", $element[0].getAttribute('name'),
+			"\nsocial: ", $element[0].getAttribute('social'),
+			"\ndateFormat: ", $element[0].getAttribute('dateFormat'),
+			"\nshowTitle: ", $element[0].getAttribute('showTitle')
+		);
 	}]);
 
 /*
