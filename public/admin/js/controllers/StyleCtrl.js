@@ -10,10 +10,6 @@ EasyPress.controller("StyleController", ['$scope','upload', function($scope) {
 		$scope[field] = response.data.file;
 	};
 
-	$scope.getev = function(){
-		console.log("change");
-	};
-
 	var elem = $scope.active.element;
 	$scope.selector = elem.id ? "#" + elem.id : ( elem.className ? "." + elem.className : elem.nodeName.toLowerCase() );
 
@@ -25,44 +21,7 @@ EasyPress.controller("StyleController", ['$scope','upload', function($scope) {
 		}
 	}
 
-	$scope.setProperties = function(elem) {
-		//console.log("Setting properties...", $scope.active.element, $scope.backgroundColor);
-		
-		var rules = "";
 
-		angular.forEach($scope.positionForm, function(value, key) {
-			if (key[0] == '$') return;
-			if (!value.$pristine) {
-				rules += key + ":" + value.$modelValue + ";";
-			}
-		});
-
-		angular.forEach($scope.backgroundForm, function(value, key) {
-			if (key[0] == '$') return;
-			if (!value.$pristine) {
-				$scope.applyStyle(selector,key,value.$modelValue);
-				return;
-			}
-		});
-
-		angular.forEach($scope.dimensionForm, function(value, key) {
-			if (key[0] == '$') return;
-			if (!value.$pristine) {
-				rules += key + ":" + value.$modelValue + ";";
-			}
-		});
-
-		angular.forEach($scope.borderForm, function(value, key) {
-			if (key[0] == '$') return;
-			if (!value.$pristine) {
-				rules += key + ":" + value.$modelValue + ";";
-			}
-		});
-
-		//$scope.applyStyle(selector,rules);
-		$scope.setMenu("main_menu");
-
-	};
 
 	$scope.themes = {
 		'Amelia (Default)': 'amelia.css',
