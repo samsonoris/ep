@@ -29,11 +29,11 @@
 		<!-- POSITION -->
 		<div class="col-lg-9">
 			<div ng-show="currentStyle=='position'" ng-hide="currentStyle!='position'">
-				<form class="form-horizontal" name="positionForm">
+				<form class="form-horizontal" >
 					<div class="form-group">
 						<label class="control-label col-lg-4">Position: </label>
 						<div class="col-lg-8">
-							<select class="bootstrap-select btn form-control" ng-model="position" name="position">
+							<select class="bootstrap-select btn form-control" ng-change="applyStyle(selector,'position',position)" ng-model="position">
 								<option value="absolute">absolute</option>
 								<option value="fixed">fixed</option>
 								<option value="relative">relative</option>
@@ -45,25 +45,25 @@
 					<div class="form-group">
 						<label class="control-label col-lg-4">Top: </label>
 						<div class="col-lg-8">
-							<input class="form-control" ng-model="top" name="top">
+							<input class="form-control" ng-model="top" ng-keypress="$event.keyCode == 13 && applyStyle()" >
 						</div>
 						<label class="control-label col-lg-4">Bottom: </label>
 						<div class="col-lg-8">
-							<input class="form-control" ng-model="bottom" name="bottom">
+							<input class="form-control" ng-model="bottom" ng-keypress="$event.keyCode == 13 && applyStyle()" >
 						</div>
 						<label class="control-label col-lg-4">Left: </label>
 						<div class="col-lg-8">
-							<input class="form-control" ng-model="left" name="left">
+							<input class="form-control" ng-model="left" ng-keypress="$event.keyCode == 13 && applyStyle()">
 						</div>
 						<label class="control-label col-lg-4">Right: </label>
 						<div class="col-lg-8">
-							<input class="form-control" ng-model="right" name="right">
+							<input class="form-control" ng-model="right" ng-keypress="$event.keyCode == 13 && applyStyle()">
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="control-label col-lg-4">Float: </label>
 						<div class="col-lg-8">
-							<select class="bootstrap-select btn form-control" ng-model="float" name="float">
+							<select class="bootstrap-select btn form-control" ng-model="float" ng-change="applyStyle(selector,'float',float)">
 								<option value="left">left</option>
 								<option value="right">right</option>
 								<option value="none">none</option>
@@ -71,7 +71,7 @@
 						</div>
 						<label class="control-label col-lg-4">Clear: </label>
 						<div class="col-lg-8">
-							<select class="bootstrap-select btn form-control" ng-model="clear" name="clear">
+							<select class="bootstrap-select btn form-control" ng-model="clear" ng-change="applyStyle(selector,'clear',clear)">
 								<option value="left">left</option>
 								<option value="right">right</option>
 								<option value="both">both</option>
@@ -82,7 +82,7 @@
 					<div class="form-group">
 						<label class="control-label col-lg-4">Overflow: </label>
 						<div class="col-lg-8">
-							<select class="bootstrap-select btn form-control">
+							<select class="bootstrap-select btn form-control" ng-model="overflow" ng-change="applyStyle(selector,'overflow',overflow)">
 								<option value="auto">auto</option>
 								<option value="hidden">hidden</option>
 								<option value="scroll">scroll</option>
@@ -95,75 +95,75 @@
 			</div>
 
 			<div ng-show="currentStyle=='margin'" ng-hide="currentStyle!='margin'">
-				<form class="form-horizontal" name="marginForm">
+				<form class="form-horizontal" >
 					<div class="form-group">
 						<label class="control-label col-lg-4">Margin: </label>
 						<div class="col-lg-8">
-							<input class="form-control" ng-model="margin" name="margin">
+							<input class="form-control" ng-model="margin" ng-keypress="$event.keyCode == 13 && applyStyle()">
 						</div>
 						<label class="control-label col-lg-4">Margin Top: </label>
 						<div class="col-lg-8">
-							<input class="form-control" ng-model="marginTop" name="marginTop">
+							<input class="form-control" ng-model="marginTop" ng-keypress="$event.keyCode == 13 && applyStyle()">
 						</div>
 						<label class="control-label col-lg-4">Margin Right: </label>
 						<div class="col-lg-8">
-							<input class="form-control" ng-model="marginRight" name="marginRight">
+							<input class="form-control" ng-model="marginRight" ng-keypress="$event.keyCode == 13 && applyStyle()">
 						</div>
 						<label class="control-label col-lg-4">Margin Bottom: </label>
 						<div class="col-lg-8">
-							<input class="form-control" ng-model="marginBottom" name="marginBottom">
+							<input class="form-control" ng-model="marginBottom" ng-keypress="$event.keyCode == 13 && applyStyle()">
 						</div>
 						<label class="control-label col-lg-4">Margin Left: </label>
 						<div class="col-lg-8">
-							<input class="form-control" ng-model="marginLeft" name="marginLeft">
+							<input class="form-control" ng-model="marginLeft" ng-keypress="$event.keyCode == 13 && applyStyle()">
 						</div>
 					</div>
 				</form>
 			</div>
 
 			<div ng-show="currentStyle=='dimension'" ng-hide="currentStyle!='dimension'">
-				<form class="form-horizontal" name="dimensionForm">
+				<form class="form-horizontal" >
 					<div class="form-group">
 						<label class="control-label col-lg-4">Width: </label>
 						<div class="col-lg-8">
-							<input class="form-control" ng-model="width" name="width">
+							<input class="form-control" ng-model="width" ng-keypress="$event.keyCode == 13 && applyStyle()">
 						</div>
 						<label class="control-label col-lg-4">Height: </label>
 						<div class="col-lg-8">
-							<input class="form-control" ng-model="height" name="height">
+							<input class="form-control" ng-model="height" ng-keypress="$event.keyCode == 13 && applyStyle()">
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="control-label col-lg-4">Padding: </label>
 						<div class="col-lg-8">
-							<input class="form-control" ng-model="padding" name="padding">
+							<input class="form-control" ng-model="padding" ng-keypress="$event.keyCode == 13 && applyStyle()">
 						</div>
 						<label class="control-label col-lg-4">Padding Top: </label>
 						<div class="col-lg-8">
-							<input class="form-control" ng-model="paddingTop" name="paddingTop">
+							<input class="form-control" ng-model="paddingTop" ng-keypress="$event.keyCode == 13 && applyStyle()">
 						</div>
 						<label class="control-label col-lg-4">Padding Right: </label>
 						<div class="col-lg-8">
-							<input class="form-control" ng-model="paddingRight" name="paddingRight">
+							<input class="form-control" ng-model="paddingRight" ng-keypress="$event.keyCode == 13 && applyStyle()">
 						</div>
 						<label class="control-label col-lg-4">Padding Bottom: </label>
 						<div class="col-lg-8">
-							<input class="form-control" ng-model="paddingBottom" name="paddingBottom">
+							<input class="form-control" ng-model="paddingBottom" ng-keypress="$event.keyCode == 13 && applyStyle()">
 						</div>
 						<label class="control-label col-lg-4">Padding Left: </label>
 						<div class="col-lg-8">
-							<input class="form-control" ng-model="paddingLeft" name="paddingLeft">
+							<input class="form-control" ng-model="paddingLeft" ng-keypress="$event.keyCode == 13 && applyStyle()">
 						</div>
 					</div>
 				</form>
 			</div>
 
 			<div ng-show="currentStyle=='display'" ng-hide="currentStyle!='display'">
-				<form class="form-horizontal" name="displayForm">
+				<form class="form-horizontal" >
 					<div class="form-group">
 						<label class="control-label col-lg-4">Display: </label>
 						<div class="col-lg-8">
-							<select class="bootstrap-select btn form-control" ng-model="display" name="display">
+							<select class="bootstrap-select btn form-control" ng-model="display" ng-change="applyStyle(selector,'display',display)">
 								<option value="block">block</option>
 								<option value="inline">inline</option>
 								<option value="inline-block">inline-block</option>
@@ -172,7 +172,7 @@
 						</div>
 						<label class="control-label col-lg-4">Visibility: </label>
 						<div class="col-lg-8">
-							<select class="bootstrap-select btn form-control" ng-model="visibility" name="visibility">
+							<select class="bootstrap-select btn form-control" ng-model="visibility" ng-change="applyStyle(selector,'visibility',visibility)">
 								<option value="visible">visible</option>
 								<option value="hidden">hidden</option>
 								<option value="none">none</option>
@@ -180,7 +180,7 @@
 						</div>
 						<label class="control-label col-lg-4">Z-index: </label>
 						<div class="col-lg-8">
-							<input class="form-control" ng-model="zIndex" name="zIndex">
+							<input class="form-control" ng-model="zIndex" ng-keypress="$event.keyCode == 13 && applyStyle()">
 						</div>
 					</div>
 				</form>
@@ -189,66 +189,72 @@
 			<!-- BACKGROUND -->
 
 			<div ng-show="currentStyle=='background'" ng-hide="currentStyle!='background'">
-				<form class="form-horizontal" name="backgroundForm">
+				<form class="form-horizontal" >
 					<div class="form-group">
 						<label class="control-label col-xs-5">Background: </label>
 						<div class="col-xs-7">
-							<input class="form-control" ng-model="background" name="background">
+							<input class="form-control" ng-model="background" ng-keypress="$event.keyCode == 13 && applyStyle()">
 						</div>
 						<hr>
 						<label class="control-label col-xs-5">Attachment: </label>
 						<div class="col-xs-7">
-							<input class="form-control" ng-model="backgroundAttachment" name="backgroundAttachment">
+							<input class="form-control" ng-model="backgroundAttachment" ng-keypress="$event.keyCode == 13 && applyStyle()">
 						</div>
 						<label class="control-label col-xs-5">BlendMode: </label>
 						<div class="col-xs-7">
-							<input class="form-control" ng-model="backgroundBlendMode" name="backgroundBlendMode">
+							<input class="form-control" ng-model="backgroundBlendMode" ng-keypress="$event.keyCode == 13 && applyStyle()">
 						</div>
 						<label class="control-label col-xs-5">Clip: </label>
 						<div class="col-xs-7">
-							<input class="form-control" ng-model="backgroundClip" name="backgroundClip">
+							<input class="form-control" ng-model="backgroundClip" ng-keypress="$event.keyCode == 13 && applyStyle()">
 						</div>
 						<label class="control-label col-xs-5">Color: </label>
 						<div class="col-xs-7">
-							<input class="form-control" ng-model="backgroundColor" name="backgroundColor">
+
+							<input class="form-control" 
+								   ng-model="backgroundColor" 
+								    
+								   ng-keypress="($event.keyCode == 13) && applyStyle(selector,'background-color',backgroundColor)" 
+								   ng-pattern="/^#([0-9a-fA-F][0-9a-fA-F][0-9a-fA-F])([0-9a-fA-F][0-9a-fA-F][0-9a-fA-F])?$/">
+							
 							<button colorpicker="" type="button" colorpicker-position="right" class="btn btn-success ng-pristine ng-valid clrpck" ng-model="backgroundColor">Change color</button>
 						</div>
 						<label class="control-label col-xs-5">Image: </label>
 						<div class="col-xs-7">
-							<input class="form-control" ng-model="backgroundImage" name="backgroundImage">
+							<input class="form-control" ng-model="backgroundImage" ng-keypress="$event.keyCode == 13 && applyStyle()">
 							<upload-button class="btn btn-success btn-upload" url="/image" on-success="uploadSuccess(response,'backgroundImage')" >Upload</upload-button>
 						</div>
 						<label class="control-label col-xs-5">Origin: </label>
 						<div class="col-xs-7">
-							<input class="form-control" ng-model="backgroundOrigin" name="backgroundOrigin">
+							<input class="form-control" ng-model="backgroundOrigin" ng-keypress="$event.keyCode == 13 && applyStyle()">
 						</div>
 						<label class="control-label col-xs-5">Position: </label>
 						<div class="col-xs-7">
-							<input class="form-control" ng-model="backgroundPosition" name="backgroundPosition">
+							<input class="form-control" ng-model="backgroundPosition" ng-keypress="$event.keyCode == 13 && applyStyle()">
 						</div>
 						<label class="control-label col-xs-5">PositionX: </label>
 						<div class="col-xs-7">
-							<input class="form-control" ng-model="backgroundPositionX" name="backgroundPositionX">
+							<input class="form-control" ng-model="backgroundPositionX" ng-keypress="$event.keyCode == 13 && applyStyle()">
 						</div>
 						<label class="control-label col-xs-5">PositionY: </label>
 						<div class="col-xs-7">
-							<input class="form-control" ng-model="backgroundPositionY" name="backgroundPositionY">
+							<input class="form-control" ng-model="backgroundPositionY" ng-keypress="$event.keyCode == 13 && applyStyle()">
 						</div>
 						<label class="control-label col-xs-5">Repeat: </label>
 						<div class="col-xs-7">
-							<input class="form-control" ng-model="backgroundRepeat" name="backgroundRepeat">
+							<input class="form-control" ng-model="backgroundRepeat" ng-keypress="$event.keyCode == 13 && applyStyle()">
 						</div>
 						<label class="control-label col-xs-5">RepeatX: </label>
 						<div class="col-xs-7">
-							<input class="form-control" ng-model="backgroundRepeatX" name="backgroundRepeatX">
+							<input class="form-control" ng-model="backgroundRepeatX" ng-keypress="$event.keyCode == 13 && applyStyle()">
 						</div>
 						<label class="control-label col-xs-5">RepeatY: </label>
 						<div class="col-xs-7">
-							<input class="form-control" ng-model="backgroundRepeatY" name="backgroundRepeatY">
+							<input class="form-control" ng-model="backgroundRepeatY" ng-keypress="$event.keyCode == 13 && applyStyle()">
 						</div>
 						<label class="control-label col-xs-5">Size: </label>
 						<div class="col-xs-7">
-							<input class="form-control" ng-model="backgroundSize" name="backgroundSize">
+							<input class="form-control" ng-model="backgroundSize" ng-keypress="$event.keyCode == 13 && applyStyle()">
 						</div>
 					</div>
 				</form>
@@ -257,7 +263,7 @@
 			<!-- BORDER -->
 
 			<div ng-show="currentStyle=='border'" ng-hide="currentStyle!='border'">
-				<form class="form-horizontal" name="borderForm">
+				<form class="form-horizontal" >
 
 					<!-- SHORT FORM -->
 
@@ -266,7 +272,7 @@
 							<legend>Border (all sides, short notation)</legend>
 							<label class="control-label col-xs-5">Border: </label>
 							<div class="col-xs-7">
-								<input class="form-control" ng-model="border" name="border">
+								<input class="form-control" ng-model="border" ng-keypress="$event.keyCode == 13 && applyStyle()">
 							</div>
 						</fieldset>
 					</div>
@@ -276,15 +282,15 @@
 							<legend>Border (all sides)</legend>
 							<label class="control-label col-xs-5">Width: </label>
 							<div class="col-xs-7">
-								<input class="form-control" ng-model="borderWidth" name="borderWidth">
+								<input class="form-control" ng-model="borderWidth" ng-keypress="$event.keyCode == 13 && applyStyle()">
 							</div>
 							<label class="control-label col-xs-5">Style: </label>
 							<div class="col-xs-7">
-								<input class="form-control" ng-model="borderStyle" name="borderStyle">
+								<input class="form-control" ng-model="borderStyle" ng-keypress="$event.keyCode == 13 && applyStyle()">
 							</div>
 							<label class="control-label col-xs-5">Color: </label>
 							<div class="col-xs-7">
-								<input class="form-control" ng-model="borderColor" name="borderColor">
+								<input class="form-control" ng-model="borderColor" ng-keypress="$event.keyCode == 13 && applyStyle()">
 							</div>
 						</fieldset>
 					</div>
@@ -296,19 +302,19 @@
 							<legend>Border (separate sides, short notation)</legend>
 							<label class="control-label col-xs-5">Border Top: </label>
 							<div class="col-xs-7">
-								<input class="form-control" ng-model="borderTop" name="borderTop">
+								<input class="form-control" ng-model="borderTop" ng-keypress="$event.keyCode == 13 && applyStyle()">
 							</div>
 							<label class="control-label col-xs-5">Border Right: </label>
 							<div class="col-xs-7">
-								<input class="form-control" ng-model="borderRight" name="borderRight">
+								<input class="form-control" ng-model="borderRight" ng-keypress="$event.keyCode == 13 && applyStyle()">
 							</div>
 							<label class="control-label col-xs-5">Border Bottom: </label>
 							<div class="col-xs-7">
-								<input class="form-control" ng-model="borderBottom" name="borderBottom">
+								<input class="form-control" ng-model="borderBottom" ng-keypress="$event.keyCode == 13 && applyStyle()">
 							</div>
 							<label class="control-label col-xs-5">Border Left: </label>
 							<div class="col-xs-7">
-								<input class="form-control" ng-model="borderLeft" name="borderLeft">
+								<input class="form-control" ng-model="borderLeft" ng-keypress="$event.keyCode == 13 && applyStyle()">
 							</div>
 						</fieldset>
 					</div>
@@ -320,15 +326,15 @@
 							<legend>Border Top</legend>
 							<label class="control-label col-xs-5">Width: </label>
 							<div class="col-xs-7">
-								<input class="form-control" ng-model="borderTopWidth" name="borderTopWidth">
+								<input class="form-control" ng-model="borderTopWidth" ng-keypress="$event.keyCode == 13 && applyStyle()">
 							</div>
 							<label class="control-label col-xs-5">Style: </label>
 							<div class="col-xs-7">
-								<input class="form-control" ng-model="borderTopStyle" name="borderTopStyle">
+								<input class="form-control" ng-model="borderTopStyle" ng-keypress="$event.keyCode == 13 && applyStyle()">
 							</div>
 							<label class="control-label col-xs-5">Color: </label>
 							<div class="col-xs-7">
-								<input class="form-control" ng-model="borderTopColor" name="borderTopColor">
+								<input class="form-control" ng-model="borderTopColor" ng-keypress="$event.keyCode == 13 && applyStyle()">
 							</div>
 						</fieldset>
 					</div>
@@ -337,15 +343,15 @@
 							<legend>Border Right</legend>
 							<label class="control-label col-xs-5">Width: </label>
 							<div class="col-xs-7">
-								<input class="form-control" ng-model="borderRightWidth" name="borderRightWidth">
+								<input class="form-control" ng-model="borderRightWidth" ng-keypress="$event.keyCode == 13 && applyStyle()">
 							</div>
 							<label class="control-label col-xs-5">Style: </label>
 							<div class="col-xs-7">
-								<input class="form-control" ng-model="borderRightStyle" name="borderRightStyle">
+								<input class="form-control" ng-model="borderRightStyle" ng-keypress="$event.keyCode == 13 && applyStyle()">
 							</div>
 							<label class="control-label col-xs-5">Color: </label>
 							<div class="col-xs-7">
-								<input class="form-control" ng-model="borderRightColor" name="borderRightColor">
+								<input class="form-control" ng-model="borderRightColor" ng-keypress="$event.keyCode == 13 && applyStyle()">
 							</div>
 						</fieldset>
 					</div>
@@ -354,15 +360,15 @@
 							<legend>Border Bottom</legend>
 							<label class="control-label col-xs-5">Width: </label>
 							<div class="col-xs-7">
-								<input class="form-control" ng-model="borderBottomWidth" name="borderBottomWidth">
+								<input class="form-control" ng-model="borderBottomWidth" ng-keypress="$event.keyCode == 13 && applyStyle()">
 							</div>
 							<label class="control-label col-xs-5">Style: </label>
 							<div class="col-xs-7">
-								<input class="form-control" ng-model="borderBottomStyle" name="borderBottomStyle">
+								<input class="form-control" ng-model="borderBottomStyle" ng-keypress="$event.keyCode == 13 && applyStyle()">
 							</div>
 							<label class="control-label col-xs-5">Color: </label>
 							<div class="col-xs-7">
-								<input class="form-control" ng-model="borderBottomColor" name="borderBottomColor">
+								<input class="form-control" ng-model="borderBottomColor" ng-keypress="$event.keyCode == 13 && applyStyle()">
 							</div>
 						</fieldset>
 					</div>
@@ -371,15 +377,15 @@
 							<legend>Border Left</legend>
 							<label class="control-label col-xs-5">Width: </label>
 							<div class="col-xs-7">
-								<input class="form-control" ng-model="borderLeftWidth" name="borderLeftWidth">
+								<input class="form-control" ng-model="borderLeftWidth" ng-keypress="$event.keyCode == 13 && applyStyle()">
 							</div>
 							<label class="control-label col-xs-5">Style: </label>
 							<div class="col-xs-7">
-								<input class="form-control" ng-model="borderLeftStyle" name="borderLeftStyle">
+								<input class="form-control" ng-model="borderLeftStyle" ng-keypress="$event.keyCode == 13 && applyStyle()">
 							</div>
 							<label class="control-label col-xs-5">Color: </label>
 							<div class="col-xs-7">
-								<input class="form-control" ng-model="borderLeftColor" name="borderLeftColor">
+								<input class="form-control" ng-model="borderLeftColor" ng-keypress="$event.keyCode == 13 && applyStyle()">
 							</div>
 						</fieldset>
 					</div>
@@ -391,19 +397,19 @@
 							<legend>Common properties</legend>
 							<label class="control-label col-xs-5">Radius: </label>
 							<div class="col-xs-7">
-								<input class="form-control" ng-model="borderRadius" name="borderRadius">
+								<input class="form-control" ng-model="borderRadius" ng-keypress="$event.keyCode == 13 && applyStyle()">
 							</div>
 							<label class="control-label col-xs-5">Collapse: </label>
 							<div class="col-xs-7">
-								<input class="form-control" ng-model="borderCollapse" name="borderCollapse">
+								<input class="form-control" ng-model="borderCollapse" ng-keypress="$event.keyCode == 13 && applyStyle()">
 							</div>
 							<label class="control-label col-xs-5">Spacing: </label>
 							<div class="col-xs-7">
-								<input class="form-control" ng-model="borderSpacing" name="borderSpacing">
+								<input class="form-control" ng-model="borderSpacing" ng-keypress="$event.keyCode == 13 && applyStyle()">
 							</div>
 							<label class="control-label col-xs-5">Image: </label>
 							<div class="col-xs-7">
-								<input class="form-control" ng-model="borderImage" name="borderImage">
+								<input class="form-control" ng-model="borderImage" ng-keypress="$event.keyCode == 13 && applyStyle()">
 							</div>
 						</fieldset>
 					</div>
@@ -415,19 +421,19 @@
 							<legend>Border Radius (separate corners)</legend>
 							<label class="control-label col-xs-5">Top Right Radius: </label>
 							<div class="col-xs-7">
-								<input class="form-control" ng-model="borderCollapse" name="borderCollapse">
+								<input class="form-control" ng-model="borderCollapse" ng-keypress="$event.keyCode == 13 && applyStyle()">
 							</div>
 							<label class="control-label col-xs-5">Bottom Right Radius: </label>
 							<div class="col-xs-7">
-								<input class="form-control" ng-model="borderCollapse" name="borderCollapse">
+								<input class="form-control" ng-model="borderCollapse" ng-keypress="$event.keyCode == 13 && applyStyle()">
 							</div>
 							<label class="control-label col-xs-5">Bottom Left Radius: </label>
 							<div class="col-xs-7">
-								<input class="form-control" ng-model="borderCollapse" name="borderCollapse">
+								<input class="form-control" ng-model="borderCollapse" ng-keypress="$event.keyCode == 13 && applyStyle()">
 							</div>
 							<label class="control-label col-xs-5">Top Left Radius: </label>
 							<div class="col-xs-7">
-								<input class="form-control" ng-model="borderCollapse" name="borderCollapse">
+								<input class="form-control" ng-model="borderCollapse" ng-keypress="$event.keyCode == 13 && applyStyle()">
 							</div>
 						</fieldset>
 					</div>
@@ -439,24 +445,24 @@
 							<legend>Border Image</legend>
 							<label class="control-label col-xs-5">Source: </label>
 							<div class="col-xs-7">
-								<input class="form-control" ng-model="borderImageSource" name="borderImageSource">
+								<input class="form-control" ng-model="borderImageSource" ng-keypress="$event.keyCode == 13 && applyStyle()">
 								<upload-button class="btn btn-success btn-upload" url="/image" on-success="uploadSuccess(response,'borderImageSource')" >Upload</upload-button>
 							</div>
 							<label class="control-label col-xs-5">Width: </label>
 							<div class="col-xs-7">
-								<input class="form-control" ng-model="borderImageWidth" name="borderImageWidth">
+								<input class="form-control" ng-model="borderImageWidth" ng-keypress="$event.keyCode == 13 && applyStyle()">
 							</div>
 							<label class="control-label col-xs-5">Outset: </label>
 							<div class="col-xs-7">
-								<input class="form-control" ng-model="borderImageOutset" name="borderImageOutset">
+								<input class="form-control" ng-model="borderImageOutset" ng-keypress="$event.keyCode == 13 && applyStyle()">
 							</div>
 							<label class="control-label col-xs-5">Repeat: </label>
 							<div class="col-xs-7">
-								<input class="form-control" ng-model="borderImageRepeat" name="borderImageRepeat">
+								<input class="form-control" ng-model="borderImageRepeat" ng-keypress="$event.keyCode == 13 && applyStyle()">
 							</div>
 							<label class="control-label col-xs-5">Slice: </label>
 							<div class="col-xs-7">
-								<input class="form-control" ng-model="borderImageSlice" name="borderImageSlice">
+								<input class="form-control" ng-model="borderImageSlice" ng-keypress="$event.keyCode == 13 && applyStyle()">
 							</div>
 						</fieldset>
 					</div>
@@ -466,41 +472,41 @@
 			<!-- TEXT -->
 
 			<div ng-show="currentStyle=='text'" ng-hide="currentStyle!='text'">
-				<form class="form-horizontal" name="textForm">
+				<form class="form-horizontal" >
 					<div class="form-group">
 						<fieldset>
 							<legend>General</legend>
 							<label class="control-label col-xs-5">Text Align</label>
 							<div class="col-xs-7">
-								<input type="text" class="text form-control" value="" name="">
+								<input type="text" class="text form-control" ng-keypress="$event.keyCode == 13 && applyStyle()"  value="" >
 							</div>
 							<label class="control-label col-xs-5">Text Anchor</label>
 							<div class="col-xs-7">
-								<input type="text" class="text form-control" value="" name="">
+								<input type="text" class="text form-control" value="" >
 							</div>
 							<label class="control-label col-xs-5">Text Decoration</label>
 							<div class="col-xs-7">
-								<input type="text" class="text form-control" value="" name="">
+								<input type="text" class="text form-control" value="" >
 							</div>
 							<label class="control-label col-xs-5">Text Indent</label>
 							<div class="col-xs-7">
-								<input type="text" class="text form-control" value="" name="">
+								<input type="text" class="text form-control" ng-keypress="$event.keyCode == 13 && applyStyle()"  value="" >
 							</div>
 							<label class="control-label col-xs-5">Text Overflow</label>
 							<div class="col-xs-7">
-								<input type="text" class="text form-control" value="" name="">
+								<input type="text" class="text form-control" value="" >
 							</div>
 							<label class="control-label col-xs-5">Text Rendering</label>
 							<div class="col-xs-7">
-								<input type="text" class="text form-control" value="" name="">
+								<input type="text" class="text form-control" value="" >
 							</div>
 							<label class="control-label col-xs-5">Text Shadow</label>
 							<div class="col-xs-7">
-								<input type="text" class="text form-control" value="" name="">
+								<input type="text" class="text form-control" value="" >
 							</div>
 							<label class="control-label col-xs-5">Text Transform</label>
 							<div class="col-xs-7">
-								<input type="text" class="text form-control" value="" name="">
+								<input type="text" class="text form-control" value="" >
 							</div>
 						</fieldset>
 					</div>
@@ -509,19 +515,19 @@
 							<legend>Text Underline</legend>
 							<label class="control-label col-xs-5">Mode</label>
 							<div class="col-xs-7">
-								<input type="text" class="text form-control" value="" name="">
+								<input type="text" class="text form-control" value="" >
 							</div>
 							<label class="control-label col-xs-5">Width</label>
 							<div class="col-xs-7">
-								<input type="text" class="text form-control" value="" name="">
+								<input type="text" class="text form-control" value="" >
 							</div>
 							<label class="control-label col-xs-5">Style</label>
 							<div class="col-xs-7">
-								<input type="text" class="text form-control" value="" name="">
+								<input type="text" class="text form-control" value="" >
 							</div>
 							<label class="control-label col-xs-5">Color</label>
 							<div class="col-xs-7">
-								<input type="text" class="text form-control" value="" name="">
+								<input type="text" class="text form-control" value="" >
 							</div>
 						</fieldset>
 					</div>
@@ -530,19 +536,19 @@
 							<legend>Text Line Through</legend>
 							<label class="control-label col-xs-5">Mode</label>
 							<div class="col-xs-7">
-								<input type="text" class="text form-control" value="" name="">
+								<input type="text" class="text form-control" value="" >
 							</div>
 							<label class="control-label col-xs-5">Width</label>
 							<div class="col-xs-7">
-								<input type="text" class="text form-control" value="" name="">
+								<input type="text" class="text form-control" value="" >
 							</div>
 							<label class="control-label col-xs-5">Style</label>
 							<div class="col-xs-7">
-								<input type="text" class="text form-control" value="" name="">
+								<input type="text" class="text form-control" value="" >
 							</div>
 							<label class="control-label col-xs-5">Color</label>
 							<div class="col-xs-7">
-								<input type="text" class="text form-control" value="" name="">
+								<input type="text" class="text form-control" value="" >
 							</div>
 						</fieldset>
 					</div>
@@ -551,19 +557,19 @@
 							<legend>Text Overline</legend>
 							<label class="control-label col-xs-5">Mode</label>
 							<div class="col-xs-7">
-								<input type="text" class="text form-control" value="" name="">
+								<input type="text" class="text form-control" value="" >
 							</div>
 							<label class="control-label col-xs-5">Width</label>
 							<div class="col-xs-7">
-								<input type="text" class="text form-control" value="" name="">
+								<input type="text" class="text form-control" value="" >
 							</div>
 							<label class="control-label col-xs-5">Style</label>
 							<div class="col-xs-7">
-								<input type="text" class="text form-control" value="" name="">
+								<input type="text" class="text form-control" value="" >
 							</div>
 							<label class="control-label col-xs-5">Color</label>
 							<div class="col-xs-7">
-								<input type="text" class="text form-control" value="" name="">
+								<input type="text" class="text form-control" value="" >
 							</div>
 						</fieldset>
 					</div>
@@ -572,19 +578,19 @@
 							<legend>Word properties</legend>
 							<label class="control-label col-xs-5">Word Break</label>
 							<div class="col-xs-7">
-								<input type="text" class="text form-control" value="" name="">
+								<input type="text" class="text form-control" value="" >
 							</div>
 							<label class="control-label col-xs-5">Word Spacing</label>
 							<div class="col-xs-7">
-								<input type="text" class="text form-control" value="" name="">
+								<input type="text" class="text form-control" value="" >
 							</div>
 							<label class="control-label col-xs-5">Word Wrap</label>
 							<div class="col-xs-7">
-								<input type="text" class="text form-control" value="" name="">
+								<input type="text" class="text form-control" value="" >
 							</div>
 							<label class="control-label col-xs-5">Writing Mode</label>
 							<div class="col-xs-7">
-								<input type="text" class="text form-control" value="" name="">
+								<input type="text" class="text form-control" value="" >
 							</div>
 						</fieldset>
 					</div>
@@ -592,13 +598,13 @@
 			</div>
 
 			<div ng-show="currentStyle=='font'" ng-hide="currentStyle!='font'">
-				<form class="form-horizontal" name="fontForm">
+				<form class="form-horizontal" >
 					<div class="form-group">
 						<fieldset>
 							<legend>Short notation</legend>
 							<label class="control-label col-xs-5">Font</label>
 							<div class="col-xs-7">
-								<input type="text" class="text form-control" value="" name="">
+								<input type="text" class="text form-control" ng-keypress="$event.keyCode == 13 && applyStyle()"  value="" >
 							</div>
 						</fieldset>
 					</div>
@@ -607,23 +613,23 @@
 							<legend>Separate notation</legend>
 							<label class="control-label col-xs-5">Font Style</label>
 							<div class="col-xs-7">
-								<input type="text" class="text form-control" value="" name="">
+								<input type="text" class="text form-control" ng-keypress="$event.keyCode == 13 && applyStyle()"  value="" >
 							</div>
 							<label class="control-label col-xs-5">Font Variant</label>
 							<div class="col-xs-7">
-								<input type="text" class="text form-control" value="" name="">
+								<input type="text" class="text form-control" value="" >
 							</div>
 							<label class="control-label col-xs-5">Font Weight</label>
 							<div class="col-xs-7">
-								<input type="text" class="text form-control" value="" name="">
+								<input type="text" ng-model="fontWeight" ng-keypress="$event.keyCode == 13 && applyStyle(selector,'font-weight',fontWeight)" class="text form-control" >
 							</div>
 							<label class="control-label col-xs-5">Font Size</label>
 							<div class="col-xs-7">
-								<input type="text" class="text form-control" value="" name="">
+								<input type="text" class="text form-control" ng-keypress="$event.keyCode == 13 && applyStyle()"  value="" >
 							</div>
 							<label class="control-label col-xs-5">Font Family</label>
 							<div class="col-xs-7">
-								<input type="text" class="text form-control" value="" name="">
+								<input type="text" class="text form-control" ng-keypress="$event.keyCode == 13 && applyStyle()"  value="" >
 							</div>
 						</fieldset>
 					</div>
@@ -632,15 +638,15 @@
 							<legend>Extras</legend>
 							<label class="control-label col-xs-5">Font Variant Ligatures</label>
 							<div class="col-xs-7">
-								<input type="text" class="text form-control" value="" name="">
+								<input type="text" class="text form-control" value="" >
 							</div>
 							<label class="control-label col-xs-5">Font Stretch</label>
 							<div class="col-xs-7">
-								<input type="text" class="text form-control" value="" name="">
+								<input type="text" class="text form-control" value="" >
 							</div>
 							<label class="control-label col-xs-5">Font Kerning</label>
 							<div class="col-xs-7">
-								<input type="text" class="text form-control" value="" name="">
+								<input type="text" class="text form-control" value="" >
 							</div>
 						</fieldset>
 					</div>
@@ -650,12 +656,13 @@
 			<!-- THE END -->
 
 			<hr>
-			<button class="btn btn-default" ng-click="setProperties()">Apply</button>
+			<button class="btn btn-default" ng-click="setProperties(active.element)">Apply</button>
+			<button class="btn btn-default" ng-click="collectStyle()">Save</button>
 			<hr>
 
 			<!--
 			<div ng-repeat="(key,value) in elemProps">
-				<label>{{key}}:</label><input type="text" class="prop" value="{{value}}" name="{{key}}">
+				<label>{{key}}:</label><input type="text" class="prop" value="{{value}}" >
 			</div>
 			-->
 		</div>

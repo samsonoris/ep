@@ -73,6 +73,7 @@ app.use(express.static(__dirname + '/public'));
 
 app.use('/image', upload);
 app.use('/', routes);
+app.use('/save', routes);
 
 // route to test if the user is logged in or not
 app.get('/loggedin', function(req, res) {
@@ -91,7 +92,7 @@ app.post('/logout', function(req, res){
   res.send(200);
 });
 
-
+  
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -160,5 +161,6 @@ function upload(req, res) {
 		res.json({"error":"Upload error"});
 	});
 };
+
 
 module.exports = app;

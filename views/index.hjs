@@ -5,8 +5,8 @@
   	<meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ title }}</title>
     <link rel='stylesheet' type='text/css' href='/admin/css/bootstrap.min.css' />
-    <link rel='stylesheet' type='text/css' href='/css/style.css' />
-	<link class="theme" rel='stylesheet' type='text/css' href='' />
+	<link class="theme" rel='stylesheet' type='text/css' href='{{theme}}' />
+	{{{style}}}
 	<script>
 		hello = "hello, world!";
 		console.log(hello);
@@ -15,7 +15,7 @@
   <body>
 
   	<div class="container">
-		<h1>My blog</h1>
+		<h1>My super blog</h1>
   		<div class="row">
   			{{#content}}
   				<article>{{{txt}}}</article>
@@ -23,5 +23,5 @@
   		</div>
 	</div>
 
-
+  </body>
 </html>
