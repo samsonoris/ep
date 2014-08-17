@@ -1,23 +1,32 @@
-
 <div class="center-block" ng-controller="AddBlogController">
-	<h5>Create Blog Module</h5>
-	<form>
-		<label>Blog Name</label>
-		<input type="text" ng-model="blog.name" name="name"><br>
-		<label>Accepted Authors: {{authors.join(', ')}}</label><br>
-		<select type="text" ng-model="author" ng-change="authors.push(author)" name="authors">
-			<option value="Pelle">Pelle</option>
-			<option value="Marita">Marita</option>
-		</select><br>
-		<label>Social Media Links</label>
-		<input type="checkbox" ng-model="blog.social" name="social"><br>
-		<label>Date Format</label>
-		<input type="text" ng-model="blog.dateFormat" name="dateFormat"><br>
-		<label>Show Title in Header</label>
-		<input type="checkbox" ng-model="blog.showTitle" name="showTitle"><br>
+	<h3>Create Blog Site</h3>
+	<div>
+		<div class="input-group input-group-md">
+  		<span class="input-group-addon">Blog Name</span>
+  			<input type="text" class="form-control" ng-model="blog.name" name="name" required>
+  				<label>&nbsp; &nbsp;Show Title in Header &nbsp;</label>
+					<input type="checkbox" ng-model="blog.showTitle" name="showTitle">
+		</div>
+		<div class="input-group input-group-md">
+  		<span class="input-group-addon">Date Format</span>
+  			<input type="text" class="form-control" ng-model="blog.dateFormat" name="dateFormat">
+  				<label>Social Media Links &nbsp;</label>
+					<input type="checkbox" ng-model="blog.social" name="social"><br>
+		</div>
+
+		<label>Authors</label>
+      <select class="form-control" id="select" ng-model="author" ng-change="authors.push(author)" name="authors">
+        <option value="Pelle">Pelle</option>
+        <option value="Marita">Marita</option>
+        <option value="Samuel">Samuel</option>
+        <option value="Fredrik">Fredrik</option>
+      </select>
+    </div>
+
+    {{authors.join(', ')}}
+
+	</div>
+</div>
+
 		<button class="btn btn-success" ng-click="createBlogModule(blog)">Create Module</button>
 		<button class="btn btn-success" ng-click="createBlogPost(social,dateFormat,heading)">Create Post</button>
-	</form>
-</div>
-<!--
--->

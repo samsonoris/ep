@@ -13,7 +13,7 @@ EasyPress.controller('ArchiveController', ['$scope', function($scope) {
     var newWidth = 600 + slides.length;
     slides.push({
       image: '/images/' + "1.png",
-      text: ['More','Extra','Lots of','Surplus'][slides.length % 4]
+      //text: ['More','Extra','Lots of','Surplus'][slides.length % 4]
     });
   };
   for (var j=0; j<4; j++) {
