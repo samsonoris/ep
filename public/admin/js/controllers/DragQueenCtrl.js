@@ -1,7 +1,7 @@
 
 EasyPress.controller('DragQueenController', function($scope) {
 
-	$scope.$parent.title = "Ep-admin Edit";
+	$scope.$parent.title = "Queen";
 	$scope.highlightHover = true;
 	$scope.clickSelect = true;
 	$scope.candidate;
