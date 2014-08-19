@@ -1,5 +1,90 @@
+module.exports = {
+	login: login,
+	register: register,
+	account: account,
+  	getIndexContent: getIndexContent,
+	saveToBase: saveToBase,
+	createBlog: createBlog,
+	createBlogPost: createBlogPost,
+	readBlog: readBlog
+};
+
 var pg = require('pg');
 var connect = "postgres://epadmin:hello@localhost/ep";
+
+/* LOGIN */
+
+function login(username,password,done){
+
+	var client = new pg.Client(connect);
+	client.connect(function(err) {
+		if(err) {
+			return console.error('could not connect to postgres', err);
+		}
+		client.query("SELECT user_id,firstname,lastname,email,username,credentials,alias FROM account WHERE username='" + username + "' AND password='" + password + "'",function(err, result){
+			if(err) {
+				return console.error('error checking login:', err);
+			}
+			if (result.rows.length) {
+				console.log("From db: ",result.rows[0]);
+				return done(null, result.rows[0]);
+			}
+			client.end();
+			return done(null, false, { message: 'Incorrect username.' });
+		});	
+	});
+}
+
+function register(req, res){
+
+	var u = req.bosy.userData;
+
+	var client = new pg.Client(connect);
+	client.connect(function(err) {
+		if(err) {
+			return console.error('could not connect to postgres', err);
+		}
+		client.query('INSERT INTO account(firstname,lastname,email,username,password,credentials,alias) VALUES($1,$2,$3,$4,$5,$6,$7)',
+			[u.firstname,u.lastname,u.email,u.username,u.password,u.credentials,u.alias], function (err, result){
+
+			if(err) {
+				return console.error('error registering account:', err);
+			}
+			// return user data
+			console.log("success registering new user");
+			client.end()
+		});
+	});
+}
+
+function account(req, res){
+
+	var u = req.body.userData;
+	var id = u.user_id;
+	delete u.user_id;
+	var sql = "UPDATE account ";
+
+	for (var i in u) {
+		sql += "SET " + i + "='" + u[i] + "' ";
+	}
+	sql += "WHERE user_id='" + id + "'";
+
+	client.connect(function(err) {
+		if(err) {
+			return console.error('could not connect to postgres', err);
+		}
+		client.query(sql, function(err, result){
+			if(err) {
+				return console.error('error changing account:', err);
+			}
+			// return user data
+			console.log("success changing account");
+			client.end()
+		});
+	});
+}
+
+/* GET PAGE CONTENT */
 
 function getIndexContent(callback) {
 
@@ -26,7 +111,7 @@ function getIndexContent(callback) {
 				data.style = result.rows[0].rules;
 				console.log(result.rows);
 
-				client.query('SELECT content FROM test ORDER BY rev_date DESC LIMIT 1', function(err, result) {
+				client.query('SELECT content FROM body ORDER BY rev_date DESC LIMIT 1', function(err, result) {
 					if(err) {
 						return console.error('error running query', err);
 					}
@@ -39,11 +124,10 @@ function getIndexContent(callback) {
 				});
 			});
 		});
-/*
-*/
-
 	});
 }
+
+/* SAVE PAGE CONTENT */
 
 function saveToBase(pageData){
 	pg.connect(connect, function(err, client, done) {
@@ -75,6 +159,8 @@ function saveToBase(pageData){
 
 	});
 }
+
+/* BLOG FUNCTIONS */ 
 
 function createBlog(name){
 	var client = new pg.Client(connect);
@@ -120,10 +206,3 @@ function readBlog(req, res){
 	});
 }
 
-module.exports = {
-  	getIndexContent: getIndexContent,
-	saveToBase: saveToBase,
-	createBlog: createBlog,
-	createBlogPost: createBlogPost,
-	readBlog: readBlog
-};

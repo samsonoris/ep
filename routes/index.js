@@ -6,18 +6,14 @@ var path = require('path');
 var fs = require('fs');
 var db = require('./db');
 
+/* PASSPORT */
 
-// Define the strategy to be used by PassportJS
 passport.use(new LocalStrategy(
   function(username, password, done) {
-    if (username === "admin" && password === "admin") // stupid example
-      return done(null, {name: "admin"});
-
-    return done(null, false, { message: 'Incorrect username.' });
+	db.login(username,password,done);
   }
 ));
 
-// Serialized and deserialized methods when got from session
 passport.serializeUser(function(user, done) {
     done(null, user);
 });
@@ -25,8 +21,7 @@ passport.serializeUser(function(user, done) {
 passport.deserializeUser(function(user, done) {
     done(null, user);
 });
-
-// Define a middleware function to be used for every secured routes
+	
 var auth = function(req, res, next){
   if (!req.isAuthenticated())
     res.send(401);
@@ -34,7 +29,7 @@ var auth = function(req, res, next){
     next();
 };
 
-/* LOGIN */
+/* LOGIN AND REGISTER */
 
 router.get('/loggedin', function(req, res) {
   res.send(req.isAuthenticated() ? req.user : '0');
@@ -50,7 +45,15 @@ router.post('/logout', function(req, res){
   res.send(200);
 });
 
-/* GET home page. */
+router.post('/register', function(req, res){
+	db.register(req, res);
+});
+
+router.post('/account', function(req, res){
+	db.register(req, res);
+});
+
+/* GET PAGE CONTENT */
 
 var pageData = {}; 
 var setContent = function(data){
@@ -79,7 +82,7 @@ router.get('/', function(req, res) {
 var imagePath = path.join(__dirname, "../public/images/");
 router.post('/image', upload);
 
-/* Save modifications to page */
+/* SAVE MODIFICATIONS */
 
 router.post('/save', function(req, res) {
 	console.log("Saving style...");
@@ -87,7 +90,7 @@ router.post('/save', function(req, res) {
 	db.getIndexContent(setContent);
 });
 
-/* BLOG interface */
+/* BLOG INTERFACE */
 
 router.get('/blog/:name', function(req, res) {
 	console.log("Blog name: ",req.params.name);
