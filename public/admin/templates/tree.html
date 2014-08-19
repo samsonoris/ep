@@ -1,14 +1,10 @@
 
 <script type="text/ng-template"  id="tree_item_renderer.html">
-	<span class="select" ng-mouseover="node.style.outline='1px solid red'" ng-mouseleave="node.style.outline=''" ng-click="node.style.outline=''; setActive(node)">{{node.id || node.nodeName.toLowerCase()}}</span>
+	<span class="select" ng-mouseover="node.style.outline='1px solid red'" ng-mouseleave="node.style.outline=''" ng-click="node.style.outline=''; setActive(node)">{{node.id || node.className.match(opaque)[0] || node.nodeName.toLowerCase()}}</span>
 	<span class="treeControls">
 		<i class="fa fa-trash-o" ng-click="removeElement(node)"></i>
 	</span>
-<!--
-    <button ng-click="add(data)">Add node</button>
-    <button ng-click="delete(data)" ng-show="data.nodes.length > 0">Delete nodes</button>
--->
-	<ul class="tree" ng-controller="TreeController">
+	<ul class="tree" ng-controller="TreeController" ng-if="!node.className.match(opaque)">
 		<li ng-repeat="node in node.children | excludeElements" ng-include="'tree_item_renderer.html'"></li>
     </ul>
 </script>

@@ -8,7 +8,7 @@ var setContent = function(data){
 	pageData.theme = data.theme;
 	pageData.style = data.style;
 	//pageData.script = data.script;
-	//pageData.content = data.content;
+	pageData.content = data.content;
 	console.log(pageData);
 };
 
@@ -20,10 +20,15 @@ router.get('/', function(req, res) {
 	res.render('index', { 
 		title: pageData.title, 
 		theme: pageData.theme, 
-		style: pageData.style
+		style: pageData.style,
 		//script: pageData.script,
-		//content: pageData.content 
+		content: pageData.content 
 	});
+});
+
+router.get('/blog/:name', function(req, res) {
+	console.log("Blog name: ",req.params.name);
+	db.readBlog(req, res);
 });
 
 router.post('/save', function(req, res) {

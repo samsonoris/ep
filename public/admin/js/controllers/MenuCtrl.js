@@ -1,5 +1,5 @@
 
-EasyPress.controller('MenuController', ['$scope','$compile', function($scope,$compile){
+EasyPress.controller('MenuController', ['$scope','$compile','BloggerService', function($scope,$compile,BloggerService){
 
 	var elementCount = {
 		//HTML
@@ -9,6 +9,24 @@ EasyPress.controller('MenuController', ['$scope','$compile', function($scope,$co
 		"navbar": 1
 	};
 
+	$scope.authors = [];
+	$scope.createBlogModule = function(module){
+		module.authors = $scope.authors;
+		var bm = BloggerService.createModule(module,'C');
+		console.log(bm);
+		$scope.active.element.appendChild(bm);
+		$compile(bm)(angular.element($scope.active.element).scope());
+		$scope.setActive(bm);
+	}
+
+	$scope.createBlogPost = function(){
+		//Empty blog
+		var blog = {
+			title: "Title",
+			blog: ""
+		};
+		BloggerService.createPost($scope.active.element,blog);
+	};
 
 	$scope.append = function(element) {
 		var elem = document.createElement(element);
@@ -18,24 +36,6 @@ EasyPress.controller('MenuController', ['$scope','$compile', function($scope,$co
 		//$scope.setMenu('style');
 	};
 
-	$scope.createBlog = function(s,d,h){
-		var blog = document.createElement('blog');
-		blog.setAttribute('social',s ? true : false);
-		blog.setAttribute('dateFormat','"' + d + '"'); 
-		blog.setAttribute('heading', '"' + h + '"');
-		$scope.active.element.appendChild(blog);
-		$compile(blog)($scope);
-		$scope.setMenu('main_menu');
-	}
-
-	$scope.createBlogModule = function(blog){
-		var bc = document.createElement('blog-container');
-		console.log("blog: ",blog);
-		bc.setAttribute('name',blog.name);
-		bc.setAttribute('blog-url',blog.url);
-		$scope.active.element.appendChild(bc);
-		$compile(bc)($scope);
-	}
 
 	$scope.doCommand = function(command,argument){
 		if (command == 'insertImage') {

@@ -1,0 +1,12 @@
+<script type="text/ng-template"  id="blog_post.html">
+	<div ng-repeat="blog in blogs">
+		<div class="blog-header">
+			<span ng-if="title" ng-bind="blog.title"></span>
+			<span class="date" ng-bind="blog.date"></span>
+		</div>
+		<div ng-if="social">Social Media Links</div>
+		<article ng-bind="blog.blog">
+		
+		</article>
+	</div>
+</script>

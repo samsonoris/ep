@@ -5,6 +5,7 @@ EasyPress.controller('DragQueenController', function($scope) {
 	$scope.highlightHover = true;
 	$scope.clickSelect = true;
 	$scope.candidate;
+	var editables = ["P","ARTICLE","BLOG-POST","SPAN","H1","H2","H3","H4","H5","H6"];
 
 	$scope.initSite = function() {
 
@@ -58,11 +59,16 @@ EasyPress.controller('DragQueenController', function($scope) {
 
 		if (element !== $scope.TARGET_BODY && element.nodeName != "HTML") {
 			$scope.active.element.style.outline = "green solid thin";
-			$scope.active.element.contentEditable = "true";
-			$scope.active.element.focus();
-			document.execCommand('styleWithCss',false,true);
 		}
-		$scope.setMenu("main_menu");
+		if (editables.indexOf(element.nodeName) != -1) {
+			element.contentEditable = "true";
+			element.focus();
+			document.execCommand('styleWithCss',false,true);
+			$scope.setMenu("rich_text");
+		}
+		else {
+			$scope.setMenu('main_menu');
+		}
 	};
 
 	var menuItems = {
@@ -74,7 +80,8 @@ EasyPress.controller('DragQueenController', function($scope) {
 		"html": "admin/templates/html.html",
 		"tags": "admin/templates/tags.html",
 		"archive": "admin/templates/archive.html",
-		"blog": "admin/templates/createBlog.html"
+		"blog": "admin/templates/createBlog.html",
+		"rich_text": "admin/templates/richtext.html"
 	};
 
 	$scope.setMenu = function(menu){

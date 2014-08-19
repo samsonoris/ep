@@ -1,94 +1,74 @@
 'use strict';
+var blogs;
 
 angular.module('blogger', [
 	'blogger.directives',
-	'blogger.controllers'
+	'blogger.controllers',
+	'blogger.services'
 ]);
 
 angular.module('blogger.directives',[]);
 angular.module('blogger.directives')
-	.directive('blogContainer', ['$http', function($http){
-		console.log("In container directive");
-
+	.directive('blogModule', function($compile){
 		return {
-			restrict: 'AE',
-			controller: 'BlogController',
+			restrict: 'AEC',
+			scope: true,
 			link: function(scope,elem,attrs){
-				/*
-				$http({
-					url: '/make-blog-db',
-					method: 'POST',
-					data: { name: attrs.name },
-					headers: {
-						'Content-Type': 'application/json'
-					}
-				}).success(function(data){
-
-				}).error(function(data){
-
-				});*/
+				scope.name = attrs.name
+				scope.authors = attrs.authors
+				scope.title = attrs.title
+				scope.date = attrs.date
+				scope.social = attrs.social
+				scope.$apply();
 			},
-			template: '<div ng-repeat="blog in blogs" ng-controller="BlogController">{{blog}}</div>'
+			template: '<blog-post ng-repeat="blog in blogs"></blog-post>'
 		}
-	}])
+	})
 
-	.directive('blogPost',['$http',function($http){
-		console.log("In blog post directive");
+	.directive('blogPost', function(){
 		return {
-			restrict: 'AE',
-			link: function(scope,elem,attrs){
-				scope.user = {name: "Marita"};
-				scope.authors = elem[0].parentNode.getAttribute('authors');
-				scope.name = elem[0].parentNode.getAttribute('name');
-				scope.social = elem[0].parentNode.getAttribute('social');
-				scope.showTitle = elem[0].parentNode.getAttribute('show-title') || false;
-				scope.dateFormat = elem[0].parentNode.getAttribute('date-format') || false;
-				console.log("social: ",scope.social,"title: ",scope.showTitle,"scope.user: ",scope.user);
-			},
-			template: '<div class="blog-author" ng-if="authors.indexOf(user.name) != -1"><button class="btn btn-success" ng-click="saveBlog">Save</button><button class="btn btn-success" ng-click="publishBlog">Publish</button></div><div class="blogHead"><span ng-if="showTitle">Title is here</span><span class="blogDate">Date</span></div><div ng-if="social">Social Media Links</div><article>Blog text</article>'
+			restrict: 'AEC',
+			scope: true,
+			template: '<div class="blog-header">' + 
+						'<span class="author" ng-bind="blog.author"></span>' + 
+						'<span class="date" ng-bind="blog.date"></span><div>' + 
+						'<span class="title" ng-if="title" ng-bind="blog.title"></span>' + 
+						'<div class="social-links" ng-if="social">Social Media Links</div>' +
+						'<article class="blog-content" ng-bind="blog.blog"></article></div>'
 		}
-	}]);
+	});
 
 angular.module('blogger.controllers',[]);
 angular.module('blogger.controllers')
-	.controller('BlogController', ['$scope','$element','$http',function($scope,$element,$http){
-
-		$scope.authors = $element[0].getAttribute('authors');
-		$scope.url = $element[0].getAttribute('blog-url');
-		$scope.name = $element[0].getAttribute('name');
-		$scope.social = $element[0].getAttribute('social');
-		$scope.dateFormat = $element[0].getAttribute('dateFormat');
-		$scope.showTitle = $element[0].getAttribute('showTitle');
-/*
-		$http.get('/blog/' + $element.getAttribute('name'))
-			.success(function(data){
-				$scope.blogs = data;
-			})
-			.error(function(data){
-				$scope.blogs = ["Error: Contact site administrator"];
-			});
-
-*/
-		console.log(
-			"\nAuthors: ", $element[0].getAttribute('authors'),
-			"\nblogUrl: ", $element[0].getAttribute('blog-url'),
-			"\nname: ", $element[0].getAttribute('name'),
-			"\nsocial: ", $element[0].getAttribute('social'),
-			"\ndateFormat: ", $element[0].getAttribute('dateFormat'),
-			"\nshowTitle: ", $element[0].getAttribute('showTitle')
-		);
+	.controller('BlogController', ['$scope','$element','BloggerService',function($scope,$element,BloggerService){
+		$scope.blogs = BloggerService.loadBlogs($scope.name,$scope.url) || [];	
 	}]);
 
-/*
-			scope: {
-				"authors": "=",
-				"url": "=url",
-				"name": "=name",
-				"social": "=",
-				"dateFormat": "=",
-				"showTitle": "="
+angular.module('blogger.services',[]);
+angular.module('blogger.services')
+	.factory('BloggerService',function($http){
+		return {
+			createModule: function(attributes,type){
+				var module = document.createElement('div');
+				module.className = "blog-module"
+				for (var i in attributes) {
+					module.setAttribute(i,attributes[i]);
+				}
+				module.setAttribute('ng-controller','BlogController');
+				return module;
 			},
-			link: function(scope,elem,attrs){
-				console.log("in container link function,scope:",scope,"elem:",elem,"attrs:",attrs);
+			createPost: function(module,blog){
+				var scope = angular.element(module).scope();
+				scope.blogs.push(blog);
+				scope.$apply();
 			},
-*/
+			loadBlogs: function(name,url){
+				url = url || '/blog/';
+				$http.get(url + name).success(function(data){
+					return data;
+				}).error(function(data){
+
+				});
+			}			
+		};
+	});

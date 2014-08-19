@@ -86,17 +86,70 @@ var EasyPress = angular.module('EasyPress',['ngRoute','colorpicker.module','lr.u
 
 	.filter('excludeElements', function() {
 		return function(nodelist) {
-			var toExclude = ["BR","#text"];
+
+			var toExcludeByNodeName = ["BR","#text"];
+			var toExcludeByClassName = []
+
 			var nodeArray = [].slice.call(nodelist);
 			
 			for (var i = 0; i < nodeArray.length; i++) {
-				if (toExclude.indexOf(nodeArray[i].nodeName) != -1) {
-					console.log("Splicing: ", nodeArray[i].nodeName);
+				if (toExcludeByNodeName.indexOf(nodeArray[i].nodeName) != -1) {
+					//console.log("Splicing: ", nodeArray[i].nodeName);
 					nodeArray.splice(i,1);
 					i--; //One element less
 				}
 			}
 			return nodeArray;
 		};
-	}); 
+	}) 
 
+	.factory('ContentService',function(){
+
+		var lastBlog;
+
+		return {
+			setActiveBlog:function(element){
+				lastBlog = element; 
+				console.log("Setting blog to: ",element);
+			},
+			getBlogName:function(){
+				console.log("blog is now: ",lastBlog);
+				console.log(lastBlog.parentNode);
+				return lastBlog.parentNode.getAttribute('name');
+			},
+			getHTMLshallow:function(node){
+				var elem = document.createElement('div');
+				elem.appendChild(node.cloneNode(false));
+				return elem.innerHTML;
+			},
+			getBlogHTML:function(){
+				var elem = document.createElement('div');
+				elem.appendChild(lastBlog.cloneNode(false));
+				var inner, HTMLstring = elem.innerHTML;
+				inner = HTMLstring.indexOf('>')+1;
+				HTMLstring = HTMLstring.substring(0, inner)+lastBlog.innerHTML + HTMLstring.substring(inner);
+				console.log(HTMLstring);
+				return HTMLstring;
+			}
+		};
+	});
+/*
+	.factory('BloggerService',function(){
+		return {
+			createModule: function(attributes,type){
+				var module = document.createElement('div');
+				for (var i in attributes) {
+					module.setAttribute(i,attributes[i]);
+				}
+				module.setAttribute('ng-include','blog_post.html');
+				module.setAttribute('ng-controller','BlogController');
+				return module;
+			},
+			createPost: function(module,blogdata){
+				console.log(module,blogdata);
+				console.log("scope: ",angular.element(module).scope());
+				angular.element(module).scope().blogs.unshift(blogdata);
+			}
+		};
+	});
+	*/

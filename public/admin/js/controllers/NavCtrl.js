@@ -57,8 +57,9 @@ EasyPress.controller('NavController',['$scope',function($scope){
 				list = '<div id="navbarCollapse-' + navCollapses + '" class="collapse navbar-collapse">' + list + '</div>';
 			}
 			navbar.innerHTML = header + list;
-			$scope.active.element.insertBefore(navbar,$scope.active.element.firstChild);
+			$scope.insertBefore(navbar, $scope.TARGET_BODY.firstChild);
 			$scope.active.element = navbar;
+			$scope.setMenu('main_menu');
 		}
 
 		else if (element == 'tabs') {

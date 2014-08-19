@@ -1,27 +1,35 @@
 <!DOCTYPE html>
 <html>
   <head>
-  	<meta charset="utf8">
+  	<meta charset="utf8" ng-app="Queen">
   	<meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ title }}</title>
     <link rel='stylesheet' type='text/css' href='/admin/css/bootstrap.min.css' />
 	<link class="theme" rel='stylesheet' type='text/css' href='{{theme}}' />
-	{{{style}}}
-	<script>
-		hello = "hello, world!";
-		console.log(hello);
-	</script>
-  </head>
-  <body>
 
-  	<div class="container">
-		<h1>My super blog</h1>
-  		<div class="row">
-  			{{#content}}
-  				<article>{{{txt}}}</article>
-  			{{/content}}
-  		</div>
-	</div>
+	{{{style}}}
+
+	<script class="application-scripts"></script>
+	<script class="user-scripts"></script>
+	<script></script>
+  </head>
+  <body ng-controller="QueenController">
+	
+  {{{content}}}
 
   </body>
+
+
 </html>
+
+<!--
+
+	<script src="js/queen.js"></script>
+	<script src="admin/js/modules/blogger.js"></script>
+	<script src="admin/lib/angular/angular.min.js"></script>
+	<script src="admin/lib/angular-bootstrap/ui-bootstrap.min.js"></script>
+	<script src="admin/lib/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+	<script src="admin/lib/angular-route/angular-route.min.js"></script>
+
+
+-->

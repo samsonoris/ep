@@ -13,8 +13,10 @@
 </div>
 
 <div id="DragQueen" class="jumbotron">
-	<span class="label label-info">Active Element <span class="badge">{{ active.string }}</span></span>
+	<button class="btn btn-default" ng-click="setMenu('main_menu')">Home</button>
+	<span class="label label-info">Active Element <span class="badge" ng-bind="active.string"></span></span>
 	<p></p>
 	<div ng-include="activeMenu" ng-controller="MenuController"></div>
+	<button class="btn  btn-default" ng-click="collectDocument()">Collect HTML</button>
+	<button class="btn  btn-default" ng-click="collectStyle()">Collect Style</button>
 </div>
-

@@ -1,32 +1,28 @@
-<div class="center-block" ng-controller="AddBlogController">
 	<h3>Create Blog Site</h3>
-	<div>
-		<div class="input-group input-group-md">
-  		<span class="input-group-addon">Blog Name</span>
-  			<input type="text" class="form-control" ng-model="blog.name" name="name" required>
-  				<label>&nbsp; &nbsp;Show Title in Header &nbsp;</label>
-					<input type="checkbox" ng-model="blog.showTitle" name="showTitle">
-		</div>
-		<div class="input-group input-group-md">
-  		<span class="input-group-addon">Date Format</span>
-  			<input type="text" class="form-control" ng-model="blog.dateFormat" name="dateFormat">
-  				<label>Social Media Links &nbsp;</label>
-					<input type="checkbox" ng-model="blog.social" name="social"><br>
-		</div>
+		<form>
+			<div class="input-group input-group-md">
+			<span class="input-group-addon">Blog Name</span>
+			<input type="text" class="form-control" ng-model="blogModule.name" name="name" required>
+			<label>&nbsp; &nbsp;Show Title in Header &nbsp;</label>
+			<input type="checkbox" ng-model="blogModule.title" name="title">
+			</div>
+			<div class="input-group input-group-md">
+			<span class="input-group-addon">Date Format</span>
+			<input type="text" class="form-control" ng-model="blogModule.date" name="date">
+			<label>Social Media Links &nbsp;</label>
+			<input type="checkbox" ng-model="blogModule.social" name="social"><br>
+			</div>
 
-		<label>Authors</label>
-      <select class="form-control" id="select" ng-model="author" ng-change="authors.push(author)" name="authors">
-        <option value="Pelle">Pelle</option>
-        <option value="Marita">Marita</option>
-        <option value="Samuel">Samuel</option>
-        <option value="Fredrik">Fredrik</option>
-      </select>
-    </div>
+			<label>Authors</label>
+			<select class="form-control" id="select" ng-model="author" ng-change="authors.push(author)" name="authors" required>
+				<option value="Pelle">Pelle</option>
+				<option value="Marita">Marita</option>
+				<option value="Samuel">Samuel</option>
+				<option value="Fredrik">Fredrik</option>
+			</select>
+		</form>
 
     {{authors.join(', ')}}
 
-	</div>
-</div>
+	<button class="btn btn-success" ng-click="createBlogModule(blogModule)">Create Module</button>
 
-		<button class="btn btn-success" ng-click="createBlogModule(blog)">Create Module</button>
-		<button class="btn btn-success" ng-click="createBlogPost(social,dateFormat,heading)">Create Post</button>

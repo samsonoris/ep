@@ -1,20 +1,6 @@
 
 EasyPress.controller("TreeController", ['$scope', function($scope) {
 
-	/*
-    $scope.delete = function(data) {
-        data.nodes = [];
-    };
-    $scope.add = function(data) {
-        var post = data.nodes.length + 1;
-        var newName = data.name + '-' + post;
-        data.nodes.push({name: newName,nodes: []});
-    };
-	$scope.excludeElements = function(node) {
-		console.log("In exclude. Node = ",node.nodeName);
-		return  node.nodeName != "BR";
-	};
-	*/
-
+	$scope.opaque = new RegExp(/navbar|blog-module/);
 
 }]);
