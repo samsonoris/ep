@@ -37,7 +37,7 @@ EasyPress.controller('GridController', ['$scope', function($scope) {
 		$scope.active.element = newElements[0];
 
 		nextRow++;
-		$scope.setMenu("main_menu");
+		$scope.setMenu("main");
 	};
 
 	var nextContainer = 1;

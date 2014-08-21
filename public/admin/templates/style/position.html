@@ -1,0 +1,66 @@
+
+<!-- POSITION -->
+
+<form class="form-horizontal" >
+	<div class="form-group">
+		<label class="control-label col-lg-4">Position: </label>
+		<div class="col-lg-8">
+			<select class="bootstrap-select btn form-control" ng-change="applyStyle(selector,'position',position)" ng-model="position">
+				<option value="absolute">absolute</option>
+				<option value="fixed">fixed</option>
+				<option value="relative">relative</option>
+				<option value="static">static</option>
+				<option value="inherit">inherit</option>
+			</select>
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="control-label col-lg-4">Top: </label>
+		<div class="col-lg-8">
+			<input type="text" class="text form-control" ng-model="top" ng-keypress="$event.keyCode == 13 && applyStyle(selector,'top', top)">
+		</div>
+		<label class="control-label col-lg-4">Bottom: </label>
+		<div class="col-lg-8">
+			<input type="text" class="text form-control" ng-model="bottom" ng-keypress="$event.keyCode == 13 && applyStyle(selector,'bottom', bottom)">
+		</div>
+		<label class="control-label col-lg-4">Left: </label>
+		<div class="col-lg-8">
+			<input type="text" class="text form-control" ng-model="left" ng-keypress="$event.keyCode == 13 && applyStyle(selector,'left', left)">
+		</div>
+		<label class="control-label col-lg-4">Right: </label>
+		<div class="col-lg-8">
+			<input type="text" class="text form-control" ng-model="right" ng-keypress="$event.keyCode == 13 && applyStyle(selector,'right', right)">
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="control-label col-lg-4">Float: </label>
+		<div class="col-lg-8">
+			<select class="bootstrap-select btn form-control" ng-model="float" ng-change="applyStyle(selector,'float',float)">
+				<option value="left">left</option>
+				<option value="right">right</option>
+				<option value="none">none</option>
+			</select>
+		</div>
+		<label class="control-label col-lg-4">Clear: </label>
+		<div class="col-lg-8">
+			<select class="bootstrap-select btn form-control" ng-model="clear" ng-change="applyStyle(selector,'clear',clear)">
+				<option value="left">left</option>
+				<option value="right">right</option>
+				<option value="both">both</option>
+				<option value="none">none</option>
+			</select>
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="control-label col-lg-4">Overflow: </label>
+		<div class="col-lg-8">
+			<select class="bootstrap-select btn form-control" ng-model="overflow" ng-change="applyStyle(selector,'overflow',overflow)">
+				<option value="auto">auto</option>
+				<option value="hidden">hidden</option>
+				<option value="scroll">scroll</option>
+				<option value="visible">visible</option>
+				<option value="inherit">inherit</option>
+			</select>
+		</div>
+	</div>
+</form>

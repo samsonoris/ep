@@ -3,14 +3,45 @@
 
 EasyPress.controller('MainController', ['$scope', '$http', '$location','ContentService', function($scope, $http, $location,ContentService) {
 
-	$scope.title;
+	$scope.title = "Queen";
+	$scope.highlightHover = true;
+	$scope.clickSelect = true;
+	$scope.Editor = {};
+
+	var candidate;
 	var workSheet;
-	var newTitle;
-	var newTheme;
-	var newStyle;
-	var page;
 	
+	$scope.addEvent = function(node, ename, handler, capture)
+	{
+		if(typeof document.addEventListener != 'undefined')
+		{
+			node.addEventListener(ename, handler, capture);
+		}
+		else if(typeof document.attachEvent != 'undefined')
+		{
+			node.attachEvent('on' + ename, handler);
+		}
+	}
+
+	$scope.setCandidate = function(element) {
+		candidate = element;
+		if (["HTML","BODY","HEAD"].indexOf(candidate.nodeName) == -1) {
+			candidate.style.outline = "2px solid red";
+		}
+	};
+
+	$scope.resetOutlines = function() {
+		if (candidate === $scope.active.element && candidate.nodeName !== "BODY") {
+			candidate.style.outline = "2px solid -webkit-focus-ring-color";
+			candidate.style.boxShadow = "0 0 4px #00ffff";
+		}
+		else if (candidate) {
+			candidate.style.outline = "";
+		}
+	}
+
 	$scope.setUpTarget = function() {
+
 		$scope.TARGET_DOCUMENT = document.getElementById('MainContent').contentDocument;
 		$scope.TARGET_HEAD = $scope.TARGET_DOCUMENT.getElementsByTagName('head')[0];
 		$scope.TARGET_BODY = $scope.TARGET_DOCUMENT.getElementsByTagName('body')[0];
@@ -19,16 +50,122 @@ EasyPress.controller('MainController', ['$scope', '$http', '$location','ContentS
 		$scope.TARGET_STYLE.type = 'text/css';
 		$scope.TARGET_HEAD.appendChild($scope.TARGET_STYLE);
 		workSheet = $scope.TARGET_STYLE.sheet || $scope.TARGET_STYLE.styleSheet;
+
+		// Start angular module of target document
 		angular.bootstrap($scope.TARGET_DOCUMENT.documentElement,['Queen']);
+		$scope.active = {
+			"element": $scope.TARGET_BODY,
+			"string": "body",
+		};
+		$scope.$watch('active.element',function() {
+			$scope.active.string = $scope.active.element.id || $scope.active.element.nodeName.toLowerCase();
+		});
+		$scope.$apply();
+
+		$scope.addEvent($scope.TARGET_DOCUMENT, 'mouseover', function (e) {
+			if ($scope.highlightHover) {
+				e = e ? e : window.event;
+				var target = e.target ? e.target : e.srcElement;
+				if (candidate != null && candidate.style) {
+					$scope.resetOutlines();
+				}
+				$scope.setCandidate(target);
+			}
+		});
+		$scope.addEvent($scope.TARGET_DOCUMENT, 'click', function (e) {
+			if ($scope.clickSelect) {
+				var target = e.target ? e.target : e.srcElement;
+				if (target === $scope.active.element) {
+					return; // 
+				}
+				if (target.nodeName == "HTML") {
+					$scope.setActive($scope.TARGET_BODY);
+				}
+				else {
+					$scope.setActive(target);
+				}
+				$scope.$apply();
+			}
+		});
+		$scope.addEvent($scope.TARGET_DOCUMENT, 'mouseout', function(e) {
+			e = e ? e : window.event;
+			var from = e.relatedTarget || e.toElement;
+			if (!from || from.nodeName === "HTML" && candidate) {
+				$scope.resetOutlines();
+			}
+		});
 	}
 
-	$scope.setTheme = function(fileName){
-		document.head.getElementsByClassName('theme')[0].href = "/admin/css/custom-theme/" + fileName;
-		$scope.TARGET_HEAD.getElementsByClassName('theme')[0].href = "/admin/css/custom-theme/" + fileName;
-		newTheme = fileName;
-  	};
+	// Main menu of the application
 	
+	var menuItems = {
+		"main": "admin/templates/main.html",
+		"tree": "admin/templates/tree.html",
+		"style": "admin/templates/style.html",
+		"grid": "admin/templates/grid.html",
+		"bootstrap": "admin/templates/bootstrap.html",
+		"html": "admin/templates/html.html",
+		"tags": "admin/templates/tags.html",
+		"archive": "admin/templates/archive.html",
+		"blog": "admin/templates/createBlog.html",
+		"elements": "admin/templates/elements.html",
+		"richtext": "admin/templates/richtext.html"
+	};
+
+	$scope.setMenu = function(menu){
+		console.log(menu);
+		$scope.activeMenu = menuItems[menu];
+	};
+	$scope.setMenu('main');
+
+
+	// When these elements are selected a rich text editor will be invoked
+	var editables = ["P","ARTICLE","SECTION","BLOG-POST","SPAN","H1","H2","H3","H4","H5","H6","B","I","U","EM","STRONG","SPAN"];
+
+	$scope.setActive = function(element) {
+		// Disable glow on old element
+		$scope.active.element.style.outline = "";
+		$scope.active.element.style.boxShadow = "";
+
+		if (!element) return;
+		$scope.active.element = element;
+
+		var limbs = $scope.TARGET_BODY.getElementsByTagName("*");
+		for (var i = 0; i < limbs.length; i++) {
+			limbs[i].contentEditable = "inherit";
+		}
+
+		if (element !== $scope.TARGET_BODY && element.nodeName != "HTML") {
+			element.style.outline = "2px solid -webkit-focus-ring-color";
+			element.style.boxShadow = "0 0 4px #00ffff";
+		}
+		if (editables.indexOf(element.nodeName) != -1) {
+			//$scope.active.element.contentEditable = true;
+			//$scope.active.element.spellcheck = false;
+			//$scope.active.element.focus();
+			//document.execCommand('styleWithCss',false,true);
+			console.log("activeMenu: ", $scope.activeMenu);
+			if ($scope.activeMenu.indexOf("richtext") != -1) {
+				console.log("setting editor");
+				$scope.active.element.contentEditable = true;
+				$scope.Editor.element = $scope.active.element;
+			}
+			else {	
+				$scope.setMenu("richtext");
+			}
+		}
+		else {
+			$scope.setMenu('main');
+		}
+	};
 	// Methods to manipulate DOM
+	//$scope.prepend = function(element) {
+
+	$scope.append = function(element) {
+		var elem = document.createElement(element);
+		$scope.active.element.appendChild(elem);
+		$scope.setActive(elem);
+	};
 	$scope.insertBefore = function(newNode,referenceNode){
 		referenceNode.parentNode.insertBefore(newNode,referenceNode);
 	}
@@ -63,16 +200,15 @@ EasyPress.controller('MainController', ['$scope', '$http', '$location','ContentS
 	};
 
 	$scope.saveRevision = function(){
-		$scope.collectStyle();
-		$scope.collectDocument();
+		
 		$http({
 			url: "/save",
 			method: "POST",
 			data: {
-				title: newTitle,
+				title: newTitle, //replace with function calls
 				theme: newTheme,
-				style: '<style type="text/css" class="user-style-sheet">' + newStyle + '</style>',
-				content: page
+				style: $scope.collectStyle(),
+				content: $scope.collectDocument()
 			},
 			headers: {
 				'Content-Type': 'application/json'
@@ -82,23 +218,21 @@ EasyPress.controller('MainController', ['$scope', '$http', '$location','ContentS
 		}).error(function(data){
 
 		});
-		newStyle = "";
 	};
 	
 	// Collect HTML before save
-	var fragments = [];
-	var closings = [];
 	$scope.collectDocument = function(){
+		var fragments = [];
+		var closings = [];
 		walkTheDOM($scope.TARGET_BODY);
-		console.log("Page array: ",page = fragments.join(''));
-		fragments = [];
-		closings = [];
-	};
+		console.log(fragments.join(''));
+		return fragments.join('');
+	
+		// Recursion from hell
+		function walkTheDOM(node) {
 
-	// Recursion from hell
-	function walkTheDOM(node) {
-		page = "";
-		var html,open,close;
+			page = "";
+			var html,open,close;
 
 			if (node.nodeType === 1 && node.nodeName != "BODY") {
 				html = ContentService.getHTMLshallow(node);
@@ -135,7 +269,8 @@ EasyPress.controller('MainController', ['$scope', '$http', '$location','ContentS
 					fragments.push(closings.pop());
 				}
 			}
-	}
+		}
+	};
 
 	// Collect styles before save
 	$scope.collectStyle = function(){
@@ -186,14 +321,15 @@ EasyPress.controller('MainController', ['$scope', '$http', '$location','ContentS
 			}
 			//TODO safeguard for shorthand properties
 		}
-
-		console.log("In the End,new Style: ", newStyle);
+		newStyle = '<style type="text/css" class="user-style-sheet">' + newStyle + '</style>';
+		console.log("Collected styles: ", newStyle);
+		return newStyle;
 	}
 
 	//Logout function
-   $scope.logout = function(){
+   	$scope.logout = function(){
 		$http.post('/logout').success(
 			function(){$location.path('/login');
 		});
-   };
+   	};
 }]);

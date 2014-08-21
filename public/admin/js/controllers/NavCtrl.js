@@ -59,7 +59,7 @@ EasyPress.controller('NavController',['$scope',function($scope){
 			navbar.innerHTML = header + list;
 			$scope.insertBefore(navbar, $scope.TARGET_BODY.firstChild);
 			$scope.active.element = navbar;
-			$scope.setMenu('main_menu');
+			$scope.setMenu('main');
 		}
 
 		else if (element == 'tabs') {

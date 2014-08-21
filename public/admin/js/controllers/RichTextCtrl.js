@@ -1,9 +1,48 @@
 
-EasyPress.controller('RichTextController', ['$scope','$http','$element','ContentService',function($scope,$http,$element,ContentService){
+EasyPress.controller('RichTextController', ['$scope','$http','ContentService',function($scope,$http,ContentService){
 
-	$scope.user = {name: "Marita"};
+	console.log("in editor...",$scope.active.element);
+
+
+	$scope.Editor = new Medium({
+		debug: true,
+		element: $scope.active.element,
+		modifier: 'auto',
+		autofocus: "auto",
+		autoHR: true,
+		mode: Medium.richMode,
+		modifiers: {
+			'b': 'bold',
+			'i': 'italic',
+			'u': 'underline',
+			'p': 'paste'
+		},
+		tags: {
+			break: 'br',
+			horizontalRule: 'hr',
+			paragraph: 'p',
+			outerLevel: ['pre','blockquote','figure'],
+			innerLevel: ['a','b','u','i','img','strong']
+		},
+		attributes: {
+			remove: []
+		},
+		pasteAsText: true,
+		beforeInvokeElement: function() {
+
+		},
+		beforeInsertHtml: function() {
+
+		},
+		beforeAddTag: function(tag, shouldFocus, isEditable, afterElement) {
+		
+		},
+		keyContext: {
+			27: exitEditor
+		}
+	});
+
 	$scope.blog = $scope.active.element.nodeName == 'BLOG-POST';
-	$scope.editable = $scope.active.element.getAttribute('contenteditable');
 
 	if ($scope.blog) {
 		ContentService.setActiveBlog($scope.active.element); 
@@ -16,6 +55,16 @@ EasyPress.controller('RichTextController', ['$scope','$http','$element','Content
 		}
 	}
 
+	/*
+	$scope.doCommand = function(command,argument){
+		console.log("in func..");
+		if (command == 'insertImage') {
+			argument = '../images/' + prompt('Submit the name of the image file:');
+		}
+		$scope.TARGET_DOCUMENT.execCommand(command,false,argument);
+		$scope.active.element.focus();
+	};
+*/
 	$scope.saveBlog = function(){
 		console.log("in func!");
 		
@@ -39,5 +88,12 @@ EasyPress.controller('RichTextController', ['$scope','$http','$element','Content
 			method: 'POST'
 		});
 	};
+
+	function exitEditor(){
+		console.log("ESC pressed...");
+		Editor.destroy();
+		$scope.addEvent(window,'keydown',$scope.keyDown,true);
+		$scope.setMenu('main');
+	}
 
 }]);

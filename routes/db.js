@@ -21,7 +21,7 @@ function login(username,password,done){
 		if(err) {
 			return console.error('could not connect to postgres', err);
 		}
-		client.query("SELECT user_id,firstname,lastname,email,username,credentials,alias FROM account WHERE username='" + username + "' AND password='" + password + "'",function(err, result){
+		client.query("SELECT userid,firstname,lastname,email,username,credentials,alias FROM account WHERE username='" + username + "' AND password='" + password + "'",function(err, result){
 			if(err) {
 				return console.error('error checking login:', err);
 			}
@@ -60,8 +60,8 @@ function register(req, res){
 function account(req, res){
 
 	var u = req.body.userData;
-	var id = u.user_id;
-	delete u.user_id;
+	var id = u.userid;
+	delete u.userid;
 	var sql = "UPDATE account ";
 
 	for (var i in u) {
@@ -150,7 +150,7 @@ function saveToBase(pageData){
 			});
 		}
 		if (pageData.content) {
-			client.query('INSERT INTO test (rev_date,content) VALUES (now(),$1)',[pageData.content], function(err, result) {
+			client.query('INSERT INTO body (rev_date,content) VALUES (now(),$1)',[pageData.content], function(err, result) {
 				done();
                 if(err) console.error('error saving content', err);
                 console.log("Content Success!!");

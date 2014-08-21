@@ -27,7 +27,11 @@ app.use(bodyParser.urlencoded());
 app.use(busboy());
 app.use(cookieParser());
 app.use(methodOverride());
-app.use(session({ secret: 'securedsession' }));
+app.use(session({ 
+	secret: 'securedsession',
+	resave: true,
+	saveUninitialized: true
+}));
 app.use(passport.initialize()); // Add passport initialization
 app.use(passport.session());    // Add passport initialization
 

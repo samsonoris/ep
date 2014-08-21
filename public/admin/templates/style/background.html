@@ -1,0 +1,98 @@
+
+
+<!-- BACKGROUND -->
+
+<form class="form-horizontal" >
+	<div class="form-group">
+		<label class="control-label col-xs-5">Background: </label>
+		<div class="col-xs-7">
+			<input type="text" class="text form-control" ng-model="background" ng-keypress="$event.keyCode == 13 && applyStyle(selector,'background', background)">
+		</div>
+		<hr>
+		<label class="control-label col-xs-5">Attachment: </label>
+		<div class="col-xs-7">
+			<select class="text form-control" ng-model="backgroundAttachment" ng-change="applyStyle(selector,'background-attachment', backgroundAttachment)">
+					<option value="scroll">scroll</option>
+					<option value="fixed">fixed</option>
+					<option value="local">local</option>
+					<option value="initial">initial</option>
+					<option value="inherit">inherit</option>
+				</select>
+		</div>
+		<label class="control-label col-xs-5">Blend Mode: </label>
+		<div class="col-xs-7">
+			<input type="text" class="text form-control" ng-model="backgroundBlendMode" ng-keypress="$event.keyCode == 13 && applyStyle(selector,'background-blend-mode', backgroundBlendMode)">
+		</div>
+		<label class="control-label col-xs-5">Clip: </label>
+		<div class="col-xs-7">
+			<select class="text form-control" ng-model="backgroundClip" ng-change="applyStyle(selector,'background-clip', backgroundClip)">
+					<option value="border-box">border-box</option>
+					<option value="padding-box">padding-box</option>
+					<option value="content-box">content-box</option>
+					<option value="initial">initial</option>
+					<option value="inherit">inherit</option>
+				</select>
+		</div>
+		<label class="control-label col-xs-5">Color: </label>
+		<div class="col-xs-7">
+
+			<input class="form-control"
+				   ng-model="backgroundColor"
+
+				   ng-keypress="($event.keyCode == 13) && applyStyle(selector,'background-color',backgroundColor)"
+				   ng-pattern="/^#([0-9a-fA-F][0-9a-fA-F][0-9a-fA-F])([0-9a-fA-F][0-9a-fA-F][0-9a-fA-F])?$/">
+
+			<button colorpicker="" type="button" colorpicker-position="right" class="btn btn-success ng-pristine ng-valid clrpck" ng-model="backgroundColor">Change color</button>
+		</div>
+		<label class="control-label col-xs-5">Image: </label>
+		<div class="col-xs-7">
+			<input type="text" class="text form-control" ng-model="backgroundImage" ng-keypress="$event.keyCode == 13 && applyStyle(selector,'background-image', backgroundImage)">
+			<upload-button class="btn btn-success btn-upload" url="/image" on-success="uploadSuccess(response,'backgroundImage')" >Upload</upload-button>
+		</div>
+		<label class="control-label col-xs-5">Origin: </label>
+		<div class="col-xs-7">
+			<select class="text form-control" ng-model="backgroundOrigin" ng-change="applyStyle(selector,'background-origin', backgroundOrigin)">
+					<option value="border-box">border-box</option>
+					<option value="padding-box">padding-box</option>
+					<option value="content-box">content-box</option>
+					<option value="initial">initial</option>
+					<option value="inherit">inherit</option>
+				</select>
+		</div>
+		<label class="control-label col-xs-5">Position: </label>
+		<div class="col-xs-7">
+			<input type="text" class="text form-control" ng-model="backgroundPosition" ng-keypress="$event.keyCode == 13 && applyStyle(selector,'background-position', backgroundPosition)">
+		</div>
+		<label class="control-label col-xs-5">PositionX: </label>
+		<div class="col-xs-7">
+			<input type="text" class="text form-control" ng-model="backgroundPositionX" ng-keypress="$event.keyCode == 13 && applyStyle(selector,'background-position-x', backgroundPositionX)">
+		</div>
+		<label class="control-label col-xs-5">PositionY: </label>
+		<div class="col-xs-7">
+			<input type="text" class="text form-control" ng-model="backgroundPositionY" ng-keypress="$event.keyCode == 13 && applyStyle(selector,'background-position-y', backgroundPositionY)">
+		</div>
+		<label class="control-label col-xs-5">Repeat: </label>
+		<div class="col-xs-7">
+			<select class="text form-control" ng-model="backgroundRepeat" ng-change="applyStyle(selector,'background-repeat', backgroundRepeat)">
+					<option value="no-repeat">no-repeat</option>
+					<option value="repeat">repeat</option>
+					<option value="repeat-x">repeat-x</option>
+					<option value="repeat-y">repeat-y</option>
+					<option value="initial">initial</option>
+					<option value="inherit">inherit</option>
+				</select>
+		</div>
+		<label class="control-label col-xs-5">RepeatX: </label>
+		<div class="col-xs-7">
+			<input type="text" class="text form-control" ng-model="backgroundRepeatX" ng-keypress="$event.keyCode == 13 && applyStyle(selector,'background-repeat-x', backgroundRepeatX)">
+		</div>
+		<label class="control-label col-xs-5">RepeatY: </label>
+		<div class="col-xs-7">
+			<input type="text" class="text form-control" ng-model="backgroundRepeatY" ng-keypress="$event.keyCode == 13 && applyStyle(selector,'background-repeat-y', backgroundRepeatY)">
+		</div>
+		<label class="control-label col-xs-5">Size: </label>
+		<div class="col-xs-7">
+			<input type="text" class="text form-control" ng-model="backgroundSize" ng-keypress="$event.keyCode == 13 && applyStyle(selector,'background-size', backgroundSize)">
+		</div>
+	</div>
+</form>

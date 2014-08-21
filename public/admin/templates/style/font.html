@@ -1,0 +1,98 @@
+
+<!-- Font -->
+
+<form class="form-horizontal" >
+	<div class="form-group">
+		<fieldset>
+			<legend>Short notation</legend>
+			<label class="control-label col-xs-5">Font</label>
+			<div class="col-xs-7">
+				<input type="text" class="text form-control" ng-model="font" ng-keypress="$event.keyCode == 13 && applyStyle(selector,'font', font)">
+			</div>
+		</fieldset>
+	</div>
+	<div class="form-group">
+		<fieldset>
+			<legend>Separate notation</legend>
+			<label class="control-label col-xs-5">Font Style</label>
+			<div class="col-xs-7">
+				<select class="text form-control" ng-model="fontStyle" ng-change="applyStyle(selector,'font-style', fontStyle)">
+					<option value="normal">normal</option>
+					<option value="italic">italic</option>
+					<option value="oblique">oblique</option>
+					<option value="initial">initial</option>
+					<option value="inherit">inherit</option>
+				</select>
+			</div>
+			<label class="control-label col-xs-5">Font Variant</label>
+			<div class="col-xs-7">
+				<select class="text form-control" ng-model="fontVariant" ng-change="applyStyle(selector,'font-variant', fontVariant)">
+					<option value="normal">normal</option>
+					<option value="small-caps">small-caps</option>
+					<option value="initial">initial</option>
+					<option value="inherit">inherit</option>
+				</select>
+			</div>
+
+			<label class="control-label col-xs-5">Font Weight</label>
+			<div class="col-xs-7">
+				<select class="text form-control" ng-model="fontWeight" ng-change="applyStyle(selector,'font-weight', fontWeight)">
+					<option value="normal">normal</option>
+					<option value="bold">bold</option>
+					<option value="bolder">bolder</option>
+					<option value="lighter">lighter</option>
+					<option value="100">100</option>
+					<option value="200">200</option>
+					<option value="300">300</option>
+					<option value="400">400</option>
+					<option value="500">500</option>
+					<option value="600">600</option>
+					<option value="700">700</option>
+					<option value="800">800</option>
+					<option value="900">900</option>
+					<option value="initial">initial</option>
+					<option value="inherit">inherit</option>
+				</select>
+			</div>
+			<label class="control-label col-xs-5">Font Size</label>
+			<div class="col-xs-7">
+				<input type="text" class="text form-control" ng-model="fontSize" ng-keypress="$event.keyCode == 13 && applyStyle(selector,'font-size', fontSize)">
+			</div>
+			<label class="control-label col-xs-5">Font Family</label>
+			<div class="col-xs-7">
+				<input type="text" class="text form-control" ng-model="fontFamily" ng-keypress="$event.keyCode == 13 && applyStyle(selector,'font-family', fontFamily)">
+			</div>
+		</fieldset>
+	</div>
+	<div class="form-group">
+		<fieldset>
+			<legend>Extras</legend>
+			<label class="control-label col-xs-5">Font Variant Ligatures</label>
+			<div class="col-xs-7">
+				<input type="text" class="text form-control" ng-model="fontVariantLigatures" ng-keypress="$event.keyCode == 13 && applyStyle(selector,'font-variant-ligatures', fontVariantLigatures)">
+			</div>
+			<label class="control-label col-xs-5">Font Stretch</label>
+			<div class="col-xs-7">
+				<select class="text form-control" ng-model="fontStretch" ng-change="applyStyle(selector,'font-stretch', fontStretch)">
+					<option value="normal">normal</option>
+					<option value="wider">wider</option>
+					<option value="narrower">narrower</option>
+					<option value="ultra-condensed">ultra-condensed</option>
+					<option value="extra-condensed">extra-condensed</option>
+					<option value="condensed">condensed</option>
+					<option value="semi-condensed">semi-condensed</option>
+					<option value="semi-expanded">semi-expanded</option>
+					<option value="expanded">expanded</option>
+					<option value="extra-expanded">extra-expanded</option>
+					<option value="ultra-expanded">ultra-expanded</option>
+					<option value="initial">initial</option>
+					<option value="inherit">inherit</option>
+				</select>
+			</div>
+			<label class="control-label col-xs-5">Font Kerning</label>
+			<div class="col-xs-7">
+				<input type="text" class="text form-control" ng-model="fontKerning" ng-keypress="$event.keyCode == 13 && applyStyle(selector,'font-kerning', fontKerning)">
+			</div>
+		</fieldset>
+	</div>
+</form>

@@ -1,0 +1,189 @@
+
+<!-- TEXT -->
+
+<form class="form-horizontal" >
+	<div class="form-group">
+		<fieldset>
+			<legend>General</legend>
+			<label class="control-label col-xs-5">Color</label>
+			<div class="col-xs-7">
+				<input type="text" class="text form-control" ng-model="color" ng-keypress="$event.keyCode == 13 && applyStyle(selector,'color',color)">
+			</div>
+			<label class="control-label col-xs-5">Text Align</label>
+			<div class="col-xs-7">
+				<select class="text form-control" ng-model="textAlign" ng-change="applyStyle(selector,'text-align', textAlign)">
+					<option value="left">left</option>
+					<option value="right">right</option>
+					<option value="center">center</option>
+					<option value="justify">justify</option>
+					<option value="initial">initial</option>
+					<option value="inherit">inherit</option>
+				</select>
+			</div>
+			<label class="control-label col-xs-5">Text Anchor</label>
+			<div class="col-xs-7">
+				<input type="text" class="text form-control" ng-model="textAnchor" ng-keypress="$event.keyCode == 13 && applyStyle(selector,'text-anchor', textAnchor)">
+			</div>
+			<label class="control-label col-xs-5">Text Decoration</label>
+			<div class="col-xs-7">
+				<select class="text form-control" ng-model="textDecoration" ng-change="applyStyle(selector,'text-decoration', textDecoration)">
+					<option value="none">none</option>
+					<option value="underline">underline</option>
+					<option value="overline">overline</option>
+					<option value="line-through">line-through</option>
+					<option value="initial">initial</option>
+					<option value="inherit">inherit</option>
+				</select>
+			</div>
+			<label class="control-label col-xs-5">Text Indent</label>
+			<div class="col-xs-7">
+				<input type="text" class="text form-control" ng-model="textIndent" ng-keypress="$event.keyCode == 13 && applyStyle(selector,'text-indent', textIndent)">
+			</div>
+			<label class="control-label col-xs-5">Text Overflow</label>
+			<div class="col-xs-7">
+				<select class="text form-control" ng-model="textOverflow" ng-change="applyStyle(selector,'text-overflow', textOverflow)">
+					<option value="clip">clip</option>
+					<option value="ellipsis">ellipsis</option>
+					<option value="initial">initial</option>
+				</select>
+			</div>
+			<label class="control-label col-xs-5">Text Rendering</label>
+			<div class="col-xs-7">
+				<input type="text" class="text form-control" ng-model="textRendering" ng-keypress="$event.keyCode == 13 && applyStyle(selector,'text-rendering', textRendering)">
+			</div>
+			<label class="control-label col-xs-5">Text Shadow</label>
+			<div class="col-xs-7">
+				<input type="text" class="text form-control" ng-model="textShadow" ng-keypress="$event.keyCode == 13 && applyStyle(selector,'text-shadow', textShadow)">
+			</div>
+			<label class="control-label col-xs-5">Text Transform</label>
+			<div class="col-xs-7">
+				<select class="text form-control" ng-model="textTransform" ng-change="applyStyle(selector,'text-transform', textTransform)">
+					<option value="capitalize">capitalize</option>
+					<option value="uppercase">uppercase</option>
+					<option value="lowercase">lowercase</option>
+					<option value="initial">initial</option>
+					<option value="inherit">inherit</option>
+				</select>
+			</div>
+		</fieldset>
+	</div>
+	<div class="form-group">
+		<fieldset>
+			<legend>Text Underline</legend>
+			<label class="control-label col-xs-5">Mode</label>
+			<div class="col-xs-7">
+				<input type="text" class="text form-control" ng-model="underlineMode" ng-keypress="$event.keyCode == 13 && applyStyle(selector,'underline-mode', underlineMode)">
+			</div>
+			<label class="control-label col-xs-5">Width</label>
+			<div class="col-xs-7">
+				<input type="text" class="text form-control" ng-model="underlineWidth" ng-keypress="$event.keyCode == 13 && applyStyle(selector,'underline-width', underlineWidth)">
+			</div>
+			<label class="control-label col-xs-5">Style</label>
+			<div class="col-xs-7">
+				<select class="text form-control" ng-model="underlineStyle" ng-change="applyStyle(selector,'underline-style', underlineStyle)">
+					<option value="solid">solid</option>
+					<option value="double">double</option>
+					<option value="dotted">dotted</option>
+					<option value="dashed">dashed</option>
+					<option value="wavy">wavy</option>
+					<option value="initial">initial</option>
+					<option value="inherit">inherit</option>
+				</select>
+			</div>
+			<label class="control-label col-xs-5">Color</label>
+			<div class="col-xs-7">
+				<input type="text" class="text form-control" ng-model="underlineColor" ng-keypress="$event.keyCode == 13 && applyStyle(selector,'underline-color', underlineColor)">
+			</div>
+		</fieldset>
+	</div>
+	<div class="form-group" ng-show="textDecoration == 'line-through'">
+		<fieldset>
+			<legend>Text Line Through</legend>
+			<label class="control-label col-xs-5">Mode</label>
+			<div class="col-xs-7">
+				<input type="text" class="text form-control" ng-model="lineThroughMode" ng-keypress="$event.keyCode == 13 && applyStyle(selector,'line-through-mode', lineThroughMode)">
+			</div>
+			<label class="control-label col-xs-5">Width</label>
+			<div class="col-xs-7">
+				<input type="text" class="text form-control" ng-model="lineThroughWidth" ng-keypress="$event.keyCode == 13 && applyStyle(selector,'line-through-width', lineThroughWidth)">
+			</div>
+			<label class="control-label col-xs-5">Style</label>
+			<div class="col-xs-7">
+				<select class="text form-control" ng-model="lineThroughStyle" ng-change="applyStyle(selector,'line-through-style', lineThroughStyle)">
+					<option value="solid">solid</option>
+					<option value="double">double</option>
+					<option value="dotted">dotted</option>
+					<option value="dashed">dashed</option>
+					<option value="wavy">wavy</option>
+					<option value="initial">initial</option>
+					<option value="inherit">inherit</option>
+				</select>
+			</div>
+			<label class="control-label col-xs-5">Color</label>
+			<div class="col-xs-7">
+				<input type="text" class="text form-control" ng-model="lineThroughColor" ng-keypress="$event.keyCode == 13 && applyStyle(selector,'line-through-color', lineThroughColor)">
+			</div>
+		</fieldset>
+	</div>
+	<div class="form-group">
+		<fieldset>
+			<legend>Text Overline</legend>
+			<label class="control-label col-xs-5">Mode</label>
+			<div class="col-xs-7">
+				<input type="text" class="text form-control" ng-model="overlineMode" ng-keypress="$event.keyCode == 13 && applyStyle(selector,'overline-mode', overlineMode)">
+			</div>
+			<label class="control-label col-xs-5">Width</label>
+			<div class="col-xs-7">
+				<input type="text" class="text form-control" ng-model="overlineWidth" ng-keypress="$event.keyCode == 13 && applyStyle(selector,'overline-width', overlineWidth)">
+			</div>
+			<label class="control-label col-xs-5">Style</label>
+			<div class="col-xs-7">
+				<select class="text form-control" ng-model="overlineStyle" ng-change="applyStyle(selector,'overline-style', overlineStyle)">
+					<option value="solid">solid</option>
+					<option value="double">double</option>
+					<option value="dotted">dotted</option>
+					<option value="dashed">dashed</option>
+					<option value="wavy">wavy</option>
+					<option value="initial">initial</option>
+					<option value="inherit">inherit</option>
+				</select>
+			</div>
+			<label class="control-label col-xs-5">Color</label>
+			<div class="col-xs-7">
+				<input type="text" class="text form-control" ng-model="overlineColor" ng-keypress="$event.keyCode == 13 && applyStyle(selector,'overline-color', overlineColor)">
+			</div>
+		</fieldset>
+	</div>
+	<div class="form-group">
+		<fieldset>
+			<legend>Word properties</legend>
+			<label class="control-label col-xs-5">Word Break</label>
+			<div class="col-xs-7">
+				<select class="text form-control" ng-model="wordBreak" ng-change="applyStyle(selector,'word-break', wordBreak)">
+					<option value="normal">normal</option>
+					<option value="break-all">break-all</option>
+					<option value="keep-all">keep-all</option>
+					<option value="initial">initial</option>
+					<option value="inherit">inherit</option>
+				</select>
+			</div>
+			<label class="control-label col-xs-5">Word Spacing</label>
+			<div class="col-xs-7">
+				<input type="text" class="text form-control" ng-model="wordSpacing" ng-keypress="$event.keyCode == 13 && applyStyle(selector,'word-spacing', wordSpacing)">
+			</div>
+			<label class="control-label col-xs-5">Word Wrap</label>
+			<div class="col-xs-7">
+				<select class="text form-control" ng-model="wordWrap" ng-change="applyStyle(selector,'word-wrap', wordWrap)">
+					<option value="normal">normal</option>
+					<option value="break-word">break-word</option>
+					<option value="initial">initial</option>
+					<option value="inherit">inherit</option>
+				</select>
+			</div>
+			<label class="control-label col-xs-5">Writing Mode</label>
+			<div class="col-xs-7">
+				<input type="text" class="text form-control" ng-model="writingMode" ng-keypress="$event.keyCode == 13 && applyStyle(selector,'writing-mode', writingMode)">
+			</div>
+		</fieldset>
+	</div>
+</form>

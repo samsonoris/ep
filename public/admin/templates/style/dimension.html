@@ -1,0 +1,37 @@
+
+<!-- Dimension -->
+
+<form class="form-horizontal" >
+	<div class="form-group">
+		<label class="control-label col-lg-4">Width: </label>
+		<div class="col-lg-8">
+			<input type="text" class="text form-control" ng-model="width" ng-keypress="$event.keyCode == 13 && applyStyle(selector,'width', width)">
+		</div>
+		<label class="control-label col-lg-4">Height: </label>
+		<div class="col-lg-8">
+			<input type="text" class="text form-control" ng-model="height" ng-keypress="$event.keyCode == 13 && applyStyle(selector,'height', height)">
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="control-label col-lg-4">Padding: </label>
+		<div class="col-lg-8">
+			<input type="text" class="text form-control" ng-model="padding" ng-keypress="$event.keyCode == 13 && applyStyle(selector,'padding', padding)">
+		</div>
+		<label class="control-label col-lg-4">Padding Top: </label>
+		<div class="col-lg-8">
+			<input type="text" class="text form-control" ng-model="paddingTop" ng-keypress="$event.keyCode == 13 && applyStyle(selector,'padding-top', paddingTop)">
+		</div>
+		<label class="control-label col-lg-4">Padding Right: </label>
+		<div class="col-lg-8">
+			<input type="text" class="text form-control" ng-model="paddingRight" ng-keypress="$event.keyCode == 13 && applyStyle(selector,'padding-right', paddingRight)">
+		</div>
+		<label class="control-label col-lg-4">Padding Bottom: </label>
+		<div class="col-lg-8">
+			<input type="text" class="text form-control" ng-model="paddingBottom" ng-keypress="$event.keyCode == 13 && applyStyle(selector,'padding-bottom', paddingBottom)">
+		</div>
+		<label class="control-label col-lg-4">Padding Left: </label>
+		<div class="col-lg-8">
+			<input type="text" class="text form-control" ng-model="paddingLeft" ng-keypress="$event.keyCode == 13 && applyStyle(selector,'padding-left', paddingLeft)">
+		</div>
+	</div>
+</form>

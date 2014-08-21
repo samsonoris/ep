@@ -1,0 +1,28 @@
+
+<!-- Display -->
+
+<form class="form-horizontal" >
+	<div class="form-group">
+		<label class="control-label col-lg-4">Display: </label>
+		<div class="col-lg-8">
+			<select class="bootstrap-select btn form-control" ng-model="display" ng-change="applyStyle(selector,'display',display)">
+				<option value="block">block</option>
+				<option value="inline">inline</option>
+				<option value="inline-block">inline-block</option>
+				<option value="none">none</option>
+			</select>
+		</div>
+		<label class="control-label col-lg-4">Visibility: </label>
+		<div class="col-lg-8">
+			<select class="bootstrap-select btn form-control" ng-model="visibility" ng-change="applyStyle(selector,'visibility',visibility)">
+				<option value="visible">visible</option>
+				<option value="hidden">hidden</option>
+				<option value="none">none</option>
+			</select>
+		</div>
+		<label class="control-label col-lg-4">Z-index: </label>
+		<div class="col-lg-8">
+			<input type="text" class="text form-control" ng-model="zIndex" ng-keypress="$event.keyCode == 13 && applyStyle(selector,'z-index', zIndex)">
+		</div>
+	</div>
+</form>

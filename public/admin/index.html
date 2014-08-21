@@ -9,15 +9,21 @@
 
 		<title>{{title}}</title>
 
+		<!-- Styles for libraries -->
 		<link rel="stylesheet" type='text/css' href="admin/lib/bootstrap/dist/css/bootstrap.min.css">
 		<link rel="stylesheet" type='text/css' href="admin/lib/bootstrap-select/dist/css/bootstrap-select.min.css">
 		<link rel="stylesheet" type='text/css' href="admin/lib/angular-bootstrap-colorpicker/css/colorpicker.css">
 		<link rel="stylesheet" type='text/css' href="admin/lib/bootstrap-tagsinput/dist/bootstrap-tagsinput.css">
-		<link rel="stylesheet" type='text/css' href="admin/css/style.css"> <!-- custom styles -->
-		<link rel='stylesheet' type='text/css' href='admin/css/dragqueen.css'>
+		<link rel="stylesheet" type='text/css' href="admin/lib/medium/medium.css">
 		<link rel="stylesheet" type='text/css' href="admin/lib/font-awesome/css/font-awesome.min.css">
-		<link class="theme" rel="stylesheet" type='text/css' href=""><!-- custom styles -->
 
+		<!-- Theme: href dynamically set from app -->
+		<link class="theme" rel="stylesheet" type='text/css' href="">
+		
+		<!-- Custom styles -->
+		<link rel='stylesheet' type='text/css' href='admin/css/dragqueen.css'>
+
+		<!-- Libraries -->
 		<script src="admin/lib/jquery/dist/jquery.min.js"></script>
 		<script src="admin/lib/angular/angular.min.js"></script>
 		<script src="admin/lib/angular-bootstrap/ui-bootstrap.min.js"></script>
@@ -27,21 +33,36 @@
 		<script src="admin/lib/angular-upload/angular-upload.min.js"></script>
 		<script src="admin/lib/bootstrap-tagsinput/dist/bootstrap-tagsinput-angular.min.js"></script>
 		<script src="admin/lib/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js"></script>
+					 <!-- rangy.js  -->
+		<script src="admin/lib/rangy/rangy-core.js"></script>
+		<script src="admin/lib/rangy/rangy-cssclassapplier.js"></script>
+		<script src="admin/lib/rangy/rangy-selectionsaverestore.js"></script>
+		<script src="admin/lib/rangy/rangy-serializer.js"></script>
+		<script src="admin/lib/rangy/rangy-textrange.js"></script>
+		    <!--	 end rangy.js --> 
+		<script src="admin/lib/undo/undo.js"></script>
+		<script src="admin/lib/medium/medium.js"></script>
+
+		<!-- Application scripts -->
 		<script src="admin/js/app.js"></script>
 		<script src="js/queen.js"></script>
 		<script src="admin/js/modules/blogger.js"></script>
 		<script src="admin/js/controllers/LoginCtrl.js"></script>
+
+		<!-- Main functional interfaces -->
 		<script src="admin/js/controllers/MainCtrl.js"></script>
 		<script src="admin/js/controllers/DragQueenCtrl.js"></script>
+		<script src="admin/js/controllers/RichTextCtrl.js"></script>
+
+		<!-- Controllers for submenus/templates in DragQueen -->
 		<script src="admin/js/controllers/MenuCtrl.js"></script>
 		<script src="admin/js/controllers/GridCtrl.js"></script>
 		<script src="admin/js/controllers/StyleCtrl.js"></script>
 		<script src="admin/js/controllers/BootstrapCtrl.js"></script>
-		<script src="admin/js/controllers/TreeCtrl.js"></script>
 		<script src="admin/js/controllers/NavCtrl.js"></script>
 		<script src="admin/js/controllers/TagsCtrl.js"></script>
 		<script src="admin/js/controllers/ArchiveCtrl.js"></script>
-		<script src="admin/js/controllers/RichTextCtrl.js"></script>
+
 	</head>
 
 	<body >

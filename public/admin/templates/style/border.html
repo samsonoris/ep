@@ -1,0 +1,284 @@
+
+<!-- BORDER -->
+
+<form class="form-horizontal" >
+
+	<!-- SHORT FORM -->
+
+	<div class="form-group">
+		<fieldset>
+			<legend>Border (all sides, short notation)</legend>
+			<label class="control-label col-xs-5">Border: </label>
+			<div class="col-xs-7">
+				<input type="text" class="text form-control" ng-model="border" ng-keypress="$event.keyCode == 13 && applyStyle(selector,'border', border)">
+			</div>
+		</fieldset>
+	</div>
+
+	<div class="form-group">
+		<fieldset>
+			<legend>Border (all sides)</legend>
+			<label class="control-label col-xs-5">Width: </label>
+			<div class="col-xs-7">
+				<input type="text" class="text form-control" ng-model="borderWidth" ng-keypress="$event.keyCode == 13 && applyStyle(selector,'border-width', borderWidth)">
+			</div>
+			<label class="control-label col-xs-5">Style: </label>
+			<div class="col-xs-7">
+				<select class="text form-control" ng-model="borderStyle" ng-change="applyStyle(selector,'border-style', borderStyle)">
+					<option value="none">none</option>
+					<option value="hidden">hidden</option>
+					<option value="dotted">dotted</option>
+					<option value="dashed">dashed</option>
+					<option value="solid">solid</option>
+					<option value="double">double</option>
+					<option value="groove">groove</option>
+					<option value="ridge">ridge</option>
+					<option value="inset">inset</option>
+					<option value="outset">outset</option>
+					<option value="initial">initial</option>
+					<option value="inherit">inherit</option>
+				</select>
+			</div>
+			<label class="control-label col-xs-5">Color: </label>
+			<div class="col-xs-7">
+				<input type="text" class="text form-control" ng-model="borderColor" ng-keypress="$event.keyCode == 13 && applyStyle(selector,'border-color', borderColor)">
+			</div>
+		</fieldset>
+	</div>
+
+	<!-- SHORT PER DIRECTION -->
+
+	<div class="form-group">
+		<fieldset>
+			<legend>Border (separate sides, short notation)</legend>
+			<label class="control-label col-xs-5">Border Top: </label>
+			<div class="col-xs-7">
+				<input type="text" class="text form-control" ng-model="borderTop" ng-keypress="$event.keyCode == 13 && applyStyle(selector,'border-top', borderTop)">
+			</div>
+			<label class="control-label col-xs-5">Border Right: </label>
+			<div class="col-xs-7">
+				<input type="text" class="text form-control" ng-model="borderRight" ng-keypress="$event.keyCode == 13 && applyStyle(selector,'border-right', borderRight)">
+			</div>
+			<label class="control-label col-xs-5">Border Bottom: </label>
+			<div class="col-xs-7">
+				<input type="text" class="text form-control" ng-model="borderBottom" ng-keypress="$event.keyCode == 13 && applyStyle(selector,'border-bottom', borderBottom)">
+			</div>
+			<label class="control-label col-xs-5">Border Left: </label>
+			<div class="col-xs-7">
+				<input type="text" class="text form-control" ng-model="borderLeft" ng-keypress="$event.keyCode == 13 && applyStyle(selector,'border-left', borderLeft)">
+			</div>
+		</fieldset>
+	</div>
+
+	<!-- SEPARATE PER DIRECTION -->
+
+	<div class="form-group">
+		<fieldset>
+			<legend>Border Top</legend>
+			<label class="control-label col-xs-5">Width: </label>
+			<div class="col-xs-7">
+				<input type="text" class="text form-control" ng-model="borderTopWidth" ng-keypress="$event.keyCode == 13 && applyStyle(selector,'border-top-width', borderTopWidth)">
+			</div>
+			<label class="control-label col-xs-5">Style: </label>
+			<div class="col-xs-7">
+				<select class="text form-control" ng-model="borderTopStyle" ng-change="applyStyle(selector,'border-top-style', borderTopStyle)">
+					<option value="none">none</option>
+					<option value="hidden">hidden</option>
+					<option value="dotted">dotted</option>
+					<option value="dashed">dashed</option>
+					<option value="solid">solid</option>
+					<option value="double">double</option>
+					<option value="groove">groove</option>
+					<option value="ridge">ridge</option>
+					<option value="inset">inset</option>
+					<option value="outset">outset</option>
+					<option value="initial">initial</option>
+					<option value="inherit">inherit</option>
+				</select>
+			</div>
+			<label class="control-label col-xs-5">Color: </label>
+			<div class="col-xs-7">
+				<input type="text" class="text form-control" ng-model="borderTopColor" ng-keypress="$event.keyCode == 13 && applyStyle(selector,'border-top-color', borderTopColor)">
+			</div>
+		</fieldset>
+	</div>
+	<div class="form-group">
+		<fieldset>
+			<legend>Border Right</legend>
+			<label class="control-label col-xs-5">Width: </label>
+			<div class="col-xs-7">
+				<input type="text" class="text form-control" ng-model="borderRightWidth" ng-keypress="$event.keyCode == 13 && applyStyle(selector,'border-right-width', borderRightWidth)">
+			</div>
+			<label class="control-label col-xs-5">Style: </label>
+			<div class="col-xs-7">
+					<select class="text form-control" ng-model="borderRightStyle" ng-change="applyStyle(selector,'border-right-style', borderRightStyle)">
+					<option value="none">none</option>
+					<option value="hidden">hidden</option>
+					<option value="dotted">dotted</option>
+					<option value="dashed">dashed</option>
+					<option value="solid">solid</option>
+					<option value="double">double</option>
+					<option value="groove">groove</option>
+					<option value="ridge">ridge</option>
+					<option value="inset">inset</option>
+					<option value="outset">outset</option>
+					<option value="initial">initial</option>
+					<option value="inherit">inherit</option>
+				</select>
+			</div>
+			<label class="control-label col-xs-5">Color: </label>
+			<div class="col-xs-7">
+				<input type="text" class="text form-control" ng-model="borderRightColor" ng-keypress="$event.keyCode == 13 && applyStyle(selector,'border-right-color', borderRightColor)">
+			</div>
+		</fieldset>
+	</div>
+	<div class="form-group">
+		<fieldset>
+			<legend>Border Bottom</legend>
+			<label class="control-label col-xs-5">Width: </label>
+			<div class="col-xs-7">
+				<input type="text" class="text form-control" ng-model="borderBottomWidth" ng-keypress="$event.keyCode == 13 && applyStyle(selector,'border-bottom-width', borderBottomWidth)">
+			</div>
+			<label class="control-label col-xs-5">Style: </label>
+			<div class="col-xs-7">
+					<select class="text form-control" ng-model="borderBottomStyle" ng-change="applyStyle(selector,'border-bottom-style', borderBottomStyle)">
+					<option value="none">none</option>
+					<option value="hidden">hidden</option>
+					<option value="dotted">dotted</option>
+					<option value="dashed">dashed</option>
+					<option value="solid">solid</option>
+					<option value="double">double</option>
+					<option value="groove">groove</option>
+					<option value="ridge">ridge</option>
+					<option value="inset">inset</option>
+					<option value="outset">outset</option>
+					<option value="initial">initial</option>
+					<option value="inherit">inherit</option>
+				</select>
+			</div>
+			<label class="control-label col-xs-5">Color: </label>
+			<div class="col-xs-7">
+				<input type="text" class="text form-control" ng-model="borderBottomColor" ng-keypress="$event.keyCode == 13 && applyStyle(selector,'border-bottom-color', borderBottomColor)">
+			</div>
+		</fieldset>
+	</div>
+	<div class="form-group">
+		<fieldset>
+			<legend>Border Left</legend>
+			<label class="control-label col-xs-5">Width: </label>
+			<div class="col-xs-7">
+				<input type="text" class="text form-control" ng-model="borderLeftWidth" ng-keypress="$event.keyCode == 13 && applyStyle(selector,'border-left-width', borderLeftWidth)">
+			</div>
+			<label class="control-label col-xs-5">Style: </label>
+			<div class="col-xs-7">
+					<select class="text form-control" ng-model="borderLeftStyle" ng-change="applyStyle(selector,'border-left-style', borderLeftStyle)">
+					<option value="none">none</option>
+					<option value="hidden">hidden</option>
+					<option value="dotted">dotted</option>
+					<option value="dashed">dashed</option>
+					<option value="solid">solid</option>
+					<option value="double">double</option>
+					<option value="groove">groove</option>
+					<option value="ridge">ridge</option>
+					<option value="inset">inset</option>
+					<option value="outset">outset</option>
+					<option value="initial">initial</option>
+					<option value="inherit">inherit</option>
+				</select>
+			</div>
+			<label class="control-label col-xs-5">Color: </label>
+			<div class="col-xs-7">
+				<input type="text" class="text form-control" ng-model="borderLeftColor" ng-keypress="$event.keyCode == 13 && applyStyle(selector,'border-left-color', borderLeftColor)">
+			</div>
+		</fieldset>
+	</div>
+
+	<!-- COMMON PROPERTIES -->
+
+	<div class="form-group">
+		<fieldset>
+			<legend>Common properties</legend>
+			<label class="control-label col-xs-5">Radius: </label>
+			<div class="col-xs-7">
+				<input type="text" class="text form-control" ng-model="borderRadius" ng-keypress="$event.keyCode == 13 && applyStyle(selector,'border-radius', borderRadius)">
+			</div>
+			<label class="control-label col-xs-5">Collapse: </label>
+			<div class="col-xs-7">
+				<select class="text form-control" ng-model="borderCollapse" ng-change="applyStyle(selector,'border-collapse', borderCollapse)">
+					<option value="separate">separate</option>
+					<option value="collapse">collapse</option>
+					<option value="initial">initial</option>
+					<option value="inherit">inherit</option>
+				</select>
+			</div>
+			<label class="control-label col-xs-5">Spacing: </label>
+			<div class="col-xs-7">
+				<input type="text" class="text form-control" ng-model="borderSpacing" ng-keypress="$event.keyCode == 13 && applyStyle(selector,'border-spacing', borderSpacing)">
+			</div>
+			<label class="control-label col-xs-5">Image: </label>
+			<div class="col-xs-7">
+				<input type="text" class="text form-control" ng-model="borderImage" ng-keypress="$event.keyCode == 13 && applyStyle(selector,'border-image', borderImage)">
+			</div>
+		</fieldset>
+	</div>
+
+	<!-- RADIUS -->
+
+	<div class="form-group">
+		<fieldset>
+			<legend>Border Radius (separate corners)</legend>
+			<label class="control-label col-xs-5">Top Right Radius: </label>
+			<div class="col-xs-7">
+				<input type="text" class="text form-control" ng-model="borderTopRightRadius" ng-keypress="$event.keyCode == 13 && applyStyle(selector,'border-top-right-radius', borderTopRightRadius)">
+			</div>
+			<label class="control-label col-xs-5">Bottom Right Radius: </label>
+			<div class="col-xs-7">
+				<input type="text" class="text form-control" ng-model="borderBottomRightRadius" ng-keypress="$event.keyCode == 13 && applyStyle(selector,'border-bottom-right-radius', borderBottomRightRadius)">
+			</div>
+			<label class="control-label col-xs-5">Bottom Left Radius: </label>
+			<div class="col-xs-7">
+				<input type="text" class="text form-control" ng-model="borderBottomLeftRadius" ng-keypress="$event.keyCode == 13 && applyStyle(selector,'border-bottom-left-radius', borderBottomLeftRadius)">
+			</div>
+			<label class="control-label col-xs-5">Top Left Radius: </label>
+			<div class="col-xs-7">
+				<input type="text" class="text form-control" ng-model="borderTopLeftRadius" ng-keypress="$event.keyCode == 13 && applyStyle(selector,'border-top-left-radius', borderTopLeftRadius)">
+			</div>
+		</fieldset>
+	</div>
+
+	<!-- IMAGE -->
+
+	<div class="form-group">
+		<fieldset>
+			<legend>Border Image</legend>
+			<label class="control-label col-xs-5">Source: </label>
+			<div class="col-xs-7">
+				<input type="text" class="text form-control" ng-model="borderImageSource" ng-keypress="$event.keyCode == 13 && applyStyle(selector,'border-image-source', borderImageSource)">
+				<upload-button class="btn btn-success btn-upload" url="/image" on-success="uploadSuccess(response,'borderImageSource')" >Upload</upload-button>
+			</div>
+			<label class="control-label col-xs-5">Width: </label>
+			<div class="col-xs-7">
+				<input type="text" class="text form-control" ng-model="borderImageWidth" ng-keypress="$event.keyCode == 13 && applyStyle(selector,'border-image-width', borderImageWidth)">
+			</div>
+			<label class="control-label col-xs-5">Outset: </label>
+			<div class="col-xs-7">
+				<input type="text" class="text form-control" ng-model="borderImageOutset" ng-keypress="$event.keyCode == 13 && applyStyle(selector,'border-image-outset', borderImageOutset)">
+			</div>
+			<label class="control-label col-xs-5">Repeat: </label>
+			<div class="col-xs-7">
+				<select class="text form-control" ng-model="borderImageRepeat" ng-change="applyStyle(selector,'border-image-repeat', borderImageRepeat)">
+					<option value="stretch">stretch</option>
+					<option value="repeat">repeat</option>
+					<option value="round">round</option>
+					<option value="space">space</option>
+					<option value="initial">initial</option>
+					<option value="inherit">inherit</option>
+				</select>
+			</div>
+			<label class="control-label col-xs-5">Slice: </label>
+			<div class="col-xs-7">
+				<input type="text" class="text form-control" ng-model="borderImageSlice" ng-keypress="$event.keyCode == 13 && applyStyle(selector,'border-image-slice', borderImageSlice)">
+			</div>
+		</fieldset>
+	</div>
+</form>

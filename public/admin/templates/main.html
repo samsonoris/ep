@@ -1,13 +1,20 @@
 
+<button class="btn btn-default fa fa-home" ng-click="setMenu('main')"></button>
+<button class="btn btn-default fa fa-edit" ng-click="setMenu('richtext')"></button>
+
 <button class="btn btn-default fa fa-code-fork" ng-click="setMenu('tree')"> Select Element</button>
 <button class="btn btn-default fa fa-eye" ng-click="setMenu('style')"> Style</button>
 <button class="btn btn-default fa fa-building-o" ng-click="setMenu('grid')"> The Grid System</button>
 <button class="btn btn-default fa fa-navicon" ng-click="setMenu('bootstrap')"> Bootstrap</button>
-<button class="btn btn-default fa fa-file-code-o" ng-click="append('article')"> Create Article</button>
+<button class="btn btn-default fa fa-navicon" ng-click="setMenu('elements')"> Elements</button>
 <button class="btn btn-default fa fa-file-code-o" ng-click="setMenu('blog')"> Create Blog</button>
 <button class="btn btn-default fa fa-tag" ng-click="setMenu('tags')"> Tags</button>
 <button class="btn btn-default fa fa-history" ng-click="setMenu('archive')"> Archive</button>
-<button class="btn btn-success" ng-click="createBlogPost()">Create Blog Post</button>
+
+<button class="btn btn-default fa fa-file-code-o" ng-click="createBlogPost()">Create Blog Post</button>
+
 <button class="btn btn-danger fa fa-sign-out" ng-click="logout()"> Logout</button>
 
-
+<!--
+<button class="btn btn-default fa fa-file-code-o" ng-click="append('article')"> Create Article</button>
+-->

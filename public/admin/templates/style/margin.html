@@ -1,0 +1,27 @@
+
+<!-- Margin -->
+
+<form class="form-horizontal" >
+	<div class="form-group">
+		<label class="control-label col-lg-4">Margin: </label>
+		<div class="col-lg-8">
+			<input type="text" class="text form-control" ng-model="margin" ng-keypress="$event.keyCode == 13 && applyStyle(selector,'margin', margin)">
+		</div>
+		<label class="control-label col-lg-4">Margin Top: </label>
+		<div class="col-lg-8">
+			<input type="text" class="text form-control" ng-model="marginTop" ng-keypress="$event.keyCode == 13 && applyStyle(selector,'margin-top', marginTop)">
+		</div>
+		<label class="control-label col-lg-4">Margin Right: </label>
+		<div class="col-lg-8">
+			<input type="text" class="text form-control" ng-model="marginRight" ng-keypress="$event.keyCode == 13 && applyStyle(selector,'margin-right', marginRight)">
+		</div>
+		<label class="control-label col-lg-4">Margin Bottom: </label>
+		<div class="col-lg-8">
+			<input type="text" class="text form-control" ng-model="marginBottom" ng-keypress="$event.keyCode == 13 && applyStyle(selector,'margin-bottom', marginBottom)">
+		</div>
+		<label class="control-label col-lg-4">Margin Left: </label>
+		<div class="col-lg-8">
+			<input type="text" class="text form-control" ng-model="marginLeft" ng-keypress="$event.keyCode == 13 && applyStyle(selector,'margin-left', marginLeft)">
+		</div>
+	</div>
+</form>

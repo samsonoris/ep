@@ -1,4 +1,32 @@
 
+@import "../lib/bootstrap/less/bootstrap.less";
+@import "../lib/angular-upload/src/directives/btnUpload.less";
+
+#queen-logo{
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+html, body, #MainContent {
+	height: 100vh;
+}
+
+html, body {
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	overflow:hidden;
+}
+
+iframe {
+	position: absolute;
+	border: 0;
+}
+
 #DragQueen {
 	position:absolute;
 	top: 10%;
@@ -26,6 +54,29 @@
 	opacity: 1.0;
 }
 
+// Navigator panel
+
+.navigator {
+	width: 132px;
+	clear: both;
+	float: left;
+	margin-bottom: 20px;
+}
+
+.navigator span {
+	display: inline-block;
+	padding: 10px;
+}
+
+.navigator-hint:hover {
+	background-color: #fff;
+	outline: 1px solid gray;
+}
+
+// RichText editor
+
+// Style menus
+
 .colorpicker.dropdown {
 	z-index:11000;
 }
@@ -42,12 +93,62 @@ legend {
 	padding: 20px 0px;
 }
 
-iframe {
-	position: absolute;
-	border: 0;
-}
 
 input.ng-invalid {
 	background: #FFE6E6;
 }
 
+
+// TreeView elements
+
+ul.tree {
+	list-style: none;
+	padding-left: 0;
+	text-align: left;
+}
+
+.tree li {
+	margin-top: 5px;
+	margin-left: 20px;
+}
+
+span.select {
+	margin-right: 15px;
+	line-height: @font-size-large;
+}
+
+span.select:hover {
+	font-size: @font-size-large;
+	text-decoration: underline;
+	background: #FFF;
+}
+
+span.treeControls {
+	position: absolute;
+	right: 0;
+	margin-right: 15px;
+}
+
+.treeControls i {
+	padding: 3px 5px 3px 3px;
+}
+
+.treeControls i:hover {
+	border: 1px solid gray;
+	border-radius: 3px;
+	background: #FFF;
+}
+
+.treeControls i:active {
+	background: red;
+}
+
+// EditView elements
+
+#theme-dropdown-align-center{
+  margin-left: 39%;
+}
+
+
+@iconSpritePath: "/images/bootstrap/glyphicons-halflings.png";
+@iconWhiteSpritePath:     "/images/bootstrap/glyphicons-halflings-white.png";

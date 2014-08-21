@@ -79,7 +79,7 @@ var EasyPress = angular.module('EasyPress',['ngRoute','colorpicker.module','lr.u
 		return {
 			restrict: 'A',
 			link: function(scope,elem,attrs){
-				elem.load(scope.initSite);
+				elem.load(scope.setUpTarget);
 			}
 		};
 	})
@@ -133,23 +133,3 @@ var EasyPress = angular.module('EasyPress',['ngRoute','colorpicker.module','lr.u
 			}
 		};
 	});
-/*
-	.factory('BloggerService',function(){
-		return {
-			createModule: function(attributes,type){
-				var module = document.createElement('div');
-				for (var i in attributes) {
-					module.setAttribute(i,attributes[i]);
-				}
-				module.setAttribute('ng-include','blog_post.html');
-				module.setAttribute('ng-controller','BlogController');
-				return module;
-			},
-			createPost: function(module,blogdata){
-				console.log(module,blogdata);
-				console.log("scope: ",angular.element(module).scope());
-				angular.element(module).scope().blogs.unshift(blogdata);
-			}
-		};
-	});
-	*/
