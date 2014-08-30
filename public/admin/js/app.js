@@ -84,6 +84,20 @@ var EasyPress = angular.module('EasyPress',['ngRoute','colorpicker.module','lr.u
 		};
 	})
 
+	.directive('editor', function($parse){
+		return {
+			restrict: 'C',
+			link: function(scope,element,attrs){
+				var getKey = $parse('editKey(e)');
+				element.on('keydown',function(e){
+					scope.$apply(function(){
+						getKey(scope,{$event: e});
+					});
+				});
+			}
+		};
+	})
+
 	.filter('excludeElements', function() {
 		return function(nodelist) {
 

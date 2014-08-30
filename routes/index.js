@@ -60,19 +60,31 @@ var setContent = function(data){
 	pageData.title = data.title;
 	pageData.theme = data.theme;
 	pageData.style = data.style;
-	//pageData.script = data.script;
+	pageData.editor = data.editor;
 	pageData.content = data.content;
 	console.log(pageData);
 };
 
 db.getIndexContent(setContent);
 
+// LIVEPAGE
 router.get('/', function(req, res) {
 	res.render('index', { 
 		title: pageData.title, 
 		theme: pageData.theme, 
 		style: pageData.style,
 		//script: pageData.script,
+		content: pageData.content 
+	});
+});
+
+// LIVEPAGE TO IFRAME
+router.get('/edit', function(req, res) {
+	res.render('index', { 
+		title: pageData.title, 
+		theme: pageData.theme, 
+		style: pageData.style,
+		editor: pageData.editor,
 		content: pageData.content 
 	});
 });

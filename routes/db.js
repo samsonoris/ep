@@ -119,8 +119,16 @@ function getIndexContent(callback) {
 						data.content = result.rows[0].content;
 					console.log(result.rows);
 
-					client.end();
-					callback(data);
+					client.query("SELECT content FROM scripts WHERE name='editor'", function(err,result) {
+						if(err) {
+							return console.error('error getting scripts', err);
+						}
+						data.editor = result.rows[0].content;
+						console.log(result.rows);
+
+						client.end();
+						callback(data);
+					});
 				});
 			});
 		});

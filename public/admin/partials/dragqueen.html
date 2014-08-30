@@ -1,38 +1,38 @@
+	<div style="z-index: 0"> <!-- iframe event shield -->
 
-<div style="z-index: 0"> <!-- iframe event shield -->
+		<iframe live-page
+				id="MainContent"
+				src='/edit'
+				width="100%"
+				frameborder="0"
+				allowtransparency="true"
+				scrolling="no"
+				> <!-- ng-keydown="keyDown($event)" -->
+		</iframe>
 
-	<iframe live-page
-			id="MainContent"
-			src='/'
-			width="100%"
-			frameborder="0"
-			allowtransparency="true"
-			scrolling="no">
-	</iframe>
+	</div>
 
-</div>
-
-<div id="DragQueen" class="jumbotron">
-	<div class="row">
-		<div class="col-md-3">
-			<div ng-class="{navigator: true, shrinked: editorMode}">
-				<span class="fa fa-chevron-up navigator-hint hint-up" ng-click="navigate('up')"></span><br>
-				<span class="fa fa-chevron-left navigator-hint hint-left" ng-click="navigate('left')"></span>
-				<span class="navigator-hint hint-home" ng-show="!editorMode" ng-click="navigate('home')">DOM</span>
-				<span class="fa fa-chevron-right navigator-hint hint-right" ng-click="navigate('right')"></span>
-				<span class="fa fa-chevron-down navigator-hint hint-down" ng-click="navigate('down')"></span>
+	<div id="DragQueen" class="jumbotron" onclick="">
+		<div class="row">
+			<div class="col-md-3">
+				<div ng-class="{navigator: true, shrinked: editorMode}">
+					<span class="fa fa-chevron-up navigator-hint hint-up" ng-click="navigate('up')"></span><br>
+					<span class="fa fa-chevron-left navigator-hint hint-left" ng-click="navigate('left')"></span>
+					<span class="navigator-hint hint-home" ng-show="!editorMode" ng-click="navigate('home')">DOM</span>
+					<span class="fa fa-chevron-right navigator-hint hint-right" ng-click="navigate('right')"></span>
+					<span class="fa fa-chevron-down navigator-hint hint-down" ng-click="navigate('down')"></span>
+				</div>
+				<span class="label label-info pull-left" ng-click="">Active Element <span class="badge" ng-bind="active.string"></span></span>
+				<div ng-show="keyIsDown != null">KeyCode:{{keyIsDown}}</div>
 			</div>
-			<span class="label label-info pull-left" ng-click="">Active Element <span class="badge" ng-bind="active.string"></span></span>
-			<div ng-show="keyIsDown != null">KeyCode:{{keyIsDown}}</div>
-		</div>
-		<div class="col-md-9">
+			<div class="col-md-9">
 
 
-			<div ng-include="activeMenu" ng-controller="MenuController"></div>
-			<!-- Only for developement -->
-			<button class="btn  btn-default" ng-click="collectDocument()">Collect HTML</button>
-			<button class="btn  btn-default" ng-click="collectStyle()">Collect Style</button>
+				<div ng-include="activeMenu" ng-controller="MenuController"></div>
+				<!-- Only for developement -->
+				<button class="btn  btn-default" ng-click="collectDocument()">Collect HTML</button>
+				<button class="btn  btn-default" ng-click="collectStyle()">Collect Style</button>
 
+			</div>
 		</div>
 	</div>
-</div>

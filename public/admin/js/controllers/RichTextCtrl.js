@@ -1,22 +1,25 @@
 
 EasyPress.controller('RichTextController', ['$scope','$http','ContentService',function($scope,$http,ContentService){
 
-	console.log("in editor...",$scope.active.element);
+	var elem = $scope.active.element;
+	var Medium = $scope.TARGET_WINDOW.Medium;
+	$scope.removeEvent($scope.TARGET_WINDOW,'keydown',$scope.keyDown);
 
+	console.log("in editor...");
+	elem.focus();
+	elem.spellcheck = false;
 
 	$scope.Editor = new Medium({
 		debug: true,
-		element: $scope.active.element,
-		modifier: 'auto',
-		autofocus: "auto",
-		autoHR: true,
-		mode: Medium.richMode,
-		modifiers: {
-			'b': 'bold',
-			'i': 'italic',
-			'u': 'underline',
-			'p': 'paste'
-		},
+		element: elem,
+		mode: Medium.inlineRichMode,
+		keyContext: {
+			27: exitEditor
+		}
+	}).focus();
+
+	console.log($scope.Editor.behavior());
+/*
 		tags: {
 			break: 'br',
 			horizontalRule: 'hr',
@@ -24,12 +27,19 @@ EasyPress.controller('RichTextController', ['$scope','$http','ContentService',fu
 			outerLevel: ['pre','blockquote','figure'],
 			innerLevel: ['a','b','u','i','img','strong']
 		},
-		attributes: {
-			remove: []
+		beforeInvokeElement: function() {
+			console.log("In before invoke");
+		},
+		modifiers: {
+			'b': 'bold',
+			'i': 'italicize',
+			'u': 'underline',
+			'p': 'paste'
 		},
 		pasteAsText: true,
-		beforeInvokeElement: function() {
-
+		autoHR: true,
+		attributes: {
+			remove: []
 		},
 		beforeInsertHtml: function() {
 
@@ -37,16 +47,13 @@ EasyPress.controller('RichTextController', ['$scope','$http','ContentService',fu
 		beforeAddTag: function(tag, shouldFocus, isEditable, afterElement) {
 		
 		},
-		keyContext: {
-			27: exitEditor
-		}
-	});
-
-	$scope.blog = $scope.active.element.nodeName == 'BLOG-POST';
+ 
+   */
+	$scope.blog = elem.nodeName == 'BLOG-POST';
 
 	if ($scope.blog) {
-		ContentService.setActiveBlog($scope.active.element); 
-		var childs = $scope.active.element.children;
+		ContentService.setActiveBlog(elem); 
+		var childs = elem.children;
 		for (var i in childs) {
 			if (childs[i].nodeName == "ARTICLE") {
 				$scope.setActive(childs[i]);
@@ -62,7 +69,7 @@ EasyPress.controller('RichTextController', ['$scope','$http','ContentService',fu
 			argument = '../images/' + prompt('Submit the name of the image file:');
 		}
 		$scope.TARGET_DOCUMENT.execCommand(command,false,argument);
-		$scope.active.element.focus();
+		elem.focus();
 	};
 */
 	$scope.saveBlog = function(){
@@ -90,10 +97,12 @@ EasyPress.controller('RichTextController', ['$scope','$http','ContentService',fu
 	};
 
 	function exitEditor(){
-		console.log("ESC pressed...");
-		Editor.destroy();
-		$scope.addEvent(window,'keydown',$scope.keyDown,true);
+		console.log("ESC pressed...context");
+		elem.removeAttribute('spellcheck');
+		$scope.Editor.destroy();
+		$scope.addEvent($scope.TARGET_WINDOW,'keydown',$scope.keyDown);
 		$scope.setMenu('main');
+		$scope.$apply();
 	}
 
 }]);

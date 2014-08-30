@@ -1,65 +1,6 @@
 
 EasyPress.controller('DragQueenController', function($scope) {
 
-
-
-	// 'Lynx'-style navigation of the DOM - alters the selected/active element in specified direction
-	//
-	// 	- Right = 	means 'stepping into' an element/tag/node 		-> firstChild
-	// 	- Left - 	means 'stepping out' of current node 			-> parentNode
-	// 	 - Up - 	means going to previous element on same level 	-> previousElementSibling
-	// 	- Down - 	means going to next element on same level 		-> nextElementSibling
-	//
-	// Managed by the arrow buttons on the DragQueen interface or by the arrow keys. 
-	// May also be used programmatically from a template/view, as when leaving richtext editor.
-	
-	$scope.navigate = function(dir) {
-		switch(dir) {
-			case "up":
-				$scope.setActive($scope.active.element.previousElementSibling)
-				break;
-			case "left":
-				if ($scope.active.element.nodeName !== "BODY")
-					$scope.setActive($scope.active.element.parentNode);
-				break;
-			case "right":
-				if ($scope.active.element.children.length)
-					$scope.setActive($scope.active.element.children[0]);
-				break;
-			case "down":
-				$scope.setActive($scope.active.element.nextElementSibling)
-				break;
-			case "home":
-				$scope.setActive($scope.TARGET_BODY);
-				break;
-		}
-	};
-
-	// EVENT HANDLERS //
-	
-	// Keybindings for navigation (and other things)
-	
-	function keyDown(e){
-		e = e ? e : window.event;
-		$scope.keyIsDown = e.keyCode;
-		switch (e.keyCode){
-			// Navigation
-			case 37:
-				$scope.navigate('left');
-				break;
-			case 38:
-				$scope.navigate('up');
-				break;
-			case 39:
-				$scope.navigate('right');
-				break;
-			case 40:
-				$scope.navigate('down');
-				break;
-		}
-		$scope.$apply();
-	}
-
 	// When hovering over the arrow buttons (navigation interface)
 	// the target element will be highlighted as candidate for selection
 	
@@ -95,29 +36,6 @@ EasyPress.controller('DragQueenController', function($scope) {
 		$scope.resetOutlines();
 	}
 
-	// Only debug/devel-tool
-	function keyUp(e){
-		setTimeout(function(){
-			$scope.keyIsDown = null;
-			$scope.$apply()
-		},1000);
-	}
-
-	var offX;
-	var offY;
-
-	$scope.addEvent(document.getElementById('DragQueen'),'mouseover', mouseEnter, true);
-	$scope.addEvent(document.getElementById('DragQueen'),'mousedown', mouseDown);
-	$scope.addEvent(window,'mouseup', mouseUp);
-
-	var directions = document.getElementsByClassName('navigator-hint');
-	for (var i = 0; i < 4; i++) {
-		$scope.addEvent(directions[i],'mouseover', navigationHint, true);
-		$scope.addEvent(directions[i],'mouseout', navigationHintOff, true);
-	}
-
-	$scope.addEvent(window,'keydown',keyDown);
-	$scope.addEvent(window,'keyup',keyUp);
 
 	function mouseEnter(e) {
 		// When mouse enter DragQueen the hover-highlighted element should restore to normal
@@ -155,4 +73,18 @@ EasyPress.controller('DragQueenController', function($scope) {
 			window.removeEventListener('mousemove', divMove, true);
 		}
 	}
+
+	var offX;
+	var offY;
+
+	$scope.addEvent(document.getElementById('DragQueen'),'mouseover', mouseEnter, true);
+	$scope.addEvent(document.getElementById('DragQueen'),'mousedown', mouseDown);
+	$scope.addEvent(window,'mouseup', mouseUp);
+
+	var directions = document.getElementsByClassName('navigator-hint');
+	for (var i = 0; i < 4; i++) {
+		$scope.addEvent(directions[i],'mouseover', navigationHint, true);
+		$scope.addEvent(directions[i],'mouseout', navigationHintOff, true);
+	}
+
 });

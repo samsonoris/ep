@@ -1,18 +1,21 @@
 
 // angular.module('MainCtrl', [])
 
-EasyPress.controller('MainController', ['$scope', '$http', '$location','ContentService', function($scope, $http, $location,ContentService) {
+EasyPress.controller('MainController', ['$scope', '$http', '$location','$compile','ContentService', function($scope, $http, $location, $compile, ContentService) {
 
 	$scope.title = "Queen";
 	$scope.highlightHover = true;
 	$scope.clickSelect = true;
 	$scope.Editor = {};
+	$scope.Actions = [];
 
 	var candidate;
 	var workSheet;
 	
-	$scope.addEvent = function(node, ename, handler, capture)
-	{
+	// When these elements are selected a rich text editor will be invoked
+	var editables = ["P","ARTICLE","SECTION","BLOG-POST","SPAN","H1","H2","H3","H4","H5","H6","B","I","U","EM","STRONG","SPAN"];
+
+	$scope.addEvent = function(node, ename, handler, capture) {
 		if(typeof document.addEventListener != 'undefined')
 		{
 			node.addEventListener(ename, handler, capture);
@@ -21,7 +24,17 @@ EasyPress.controller('MainController', ['$scope', '$http', '$location','ContentS
 		{
 			node.attachEvent('on' + ename, handler);
 		}
-	}
+	};
+
+    $scope.removeEvent = function removeEvent(node, ename, handler, capture) {
+		if (typeof document.removeEventListener != 'undefined') {
+			node.removeEventListener(ename, handler, capture || false);
+		} else if (typeof document.detachEvent != 'undefined') {
+			node.detachEvent("on" + ename, handler);
+		} else {
+			element['on' + ename] = null;
+		}
+	};
 
 	$scope.setCandidate = function(element) {
 		candidate = element;
@@ -42,7 +55,9 @@ EasyPress.controller('MainController', ['$scope', '$http', '$location','ContentS
 
 	$scope.setUpTarget = function() {
 
-		$scope.TARGET_DOCUMENT = document.getElementById('MainContent').contentDocument;
+		var iframe = document.getElementById('MainContent');
+		$scope.TARGET_WINDOW = iframe.contentWindow || iframe;
+		$scope.TARGET_DOCUMENT = iframe.contentDocument || iframe.contentWindow.document;
 		$scope.TARGET_HEAD = $scope.TARGET_DOCUMENT.getElementsByTagName('head')[0];
 		$scope.TARGET_BODY = $scope.TARGET_DOCUMENT.getElementsByTagName('body')[0];
 		$scope.TARGET_STORED_STYLE = $scope.TARGET_HEAD.getElementsByClassName('user-style-sheet')[0];
@@ -51,6 +66,9 @@ EasyPress.controller('MainController', ['$scope', '$http', '$location','ContentS
 		$scope.TARGET_HEAD.appendChild($scope.TARGET_STYLE);
 		workSheet = $scope.TARGET_STYLE.sheet || $scope.TARGET_STYLE.styleSheet;
 
+		// Initiate Medium.js editor module
+		//Medium = Medium($scope.TARGET_WINDOW,$scope.TARGET_DOCUMENT);
+		
 		// Start angular module of target document
 		angular.bootstrap($scope.TARGET_DOCUMENT.documentElement,['Queen']);
 		$scope.active = {
@@ -76,9 +94,9 @@ EasyPress.controller('MainController', ['$scope', '$http', '$location','ContentS
 			if ($scope.clickSelect) {
 				var target = e.target ? e.target : e.srcElement;
 				if (target === $scope.active.element) {
-					return; // 
+					$scope.setActive(target, true); //true: Start editor if element is editable
 				}
-				if (target.nodeName == "HTML") {
+				else if (target.nodeName == "HTML") {
 					$scope.setActive($scope.TARGET_BODY);
 				}
 				else {
@@ -94,6 +112,7 @@ EasyPress.controller('MainController', ['$scope', '$http', '$location','ContentS
 				$scope.resetOutlines();
 			}
 		});
+		$scope.addEvent($scope.TARGET_WINDOW, 'keydown', $scope.keyDown);
 	}
 
 	// Main menu of the application
@@ -118,14 +137,20 @@ EasyPress.controller('MainController', ['$scope', '$http', '$location','ContentS
 	};
 	$scope.setMenu('main');
 
-
-	// When these elements are selected a rich text editor will be invoked
-	var editables = ["P","ARTICLE","SECTION","BLOG-POST","SPAN","H1","H2","H3","H4","H5","H6","B","I","U","EM","STRONG","SPAN"];
-
-	$scope.setActive = function(element) {
+	$scope.setActive = function(element,edit) {
 		// Disable glow on old element
 		$scope.active.element.style.outline = "";
 		$scope.active.element.style.boxShadow = "";
+
+		if ($scope.activeMenu == menuItems['richtext']) {
+			console.log("disabling editor...");
+				$scope.$apply(function(){
+					$scope.active.element.contentEditable = false;
+					$scope.active.element.spellcheck = "";
+					//$scope.active.element.blur();
+				});
+			//$scope.active.element.focus();
+		}
 
 		if (!element) return;
 		$scope.active.element = element;
@@ -139,25 +164,106 @@ EasyPress.controller('MainController', ['$scope', '$http', '$location','ContentS
 			element.style.outline = "2px solid -webkit-focus-ring-color";
 			element.style.boxShadow = "0 0 4px #00ffff";
 		}
-		if (editables.indexOf(element.nodeName) != -1) {
-			//$scope.active.element.contentEditable = true;
-			//$scope.active.element.spellcheck = false;
-			//$scope.active.element.focus();
-			//document.execCommand('styleWithCss',false,true);
-			console.log("activeMenu: ", $scope.activeMenu);
-			if ($scope.activeMenu.indexOf("richtext") != -1) {
-				console.log("setting editor");
-				$scope.active.element.contentEditable = true;
-				$scope.Editor.element = $scope.active.element;
-			}
-			else {	
-				$scope.setMenu("richtext");
-			}
+		
+		if (edit) {
+			$scope.setMenu('richtext');
 		}
+		
 		else {
 			$scope.setMenu('main');
 		}
 	};
+
+
+	// 'Lynx'-style navigation of the DOM - alters the selected/active element in specified direction
+	//
+	// 	- Right = 	means 'stepping into' an element/tag/node 		-> firstChild
+	// 	- Left - 	means 'stepping out' of current node 			-> parentNode
+	// 	 - Up - 	means going to previous element on same level 	-> previousElementSibling
+	// 	- Down - 	means going to next element on same level 		-> nextElementSibling
+	//
+	// Managed by the arrow buttons on the DragQueen interface or by the arrow keys. 
+	// May also be used programmatically from a template/view, as when leaving richtext editor.
+	
+	$scope.navigate = function(dir) {
+		console.log("in navigate");
+		var elem = $scope.active.element;
+		switch(dir) {
+			case "up":
+				if (elem !== $scope.TARGET_BODY && elem.previousElementSibling) {
+					$scope.setActive(elem.previousElementSibling)
+				}
+				break;
+			case "left":
+				if (elem.nodeName !== "BODY")
+					$scope.setActive(elem.parentNode);
+				break;
+			case "right":
+				if (elem.children.length)
+					$scope.setActive(elem.children[0]);
+				break;
+			case "down":
+				if (elem.nextElementSibling)
+					$scope.setActive(elem.nextElementSibling);
+				break;
+			case "home":
+				$scope.setActive($scope.TARGET_BODY);
+				break;
+		}
+	};
+
+	// EVENT HANDLERS //
+	
+	// Keybindings for navigation (and other things)
+	
+	$scope.keyDown = function(e){
+		e = e ? e : window.event;
+		$scope.keyIsDown = e.keyCode;
+		console.log("in keydown");
+		switch (e.keyCode){
+			// Navigation
+			case 37:
+				$scope.navigate('left');
+				break;
+			case 38:
+				$scope.navigate('up');
+				break;
+			case 39:
+				$scope.navigate('right');
+				break;
+			case 40:
+				$scope.navigate('down');
+				break
+			case 46:
+			case 68:
+				var elem = $scope.active.element;
+				var next = elem.nextElementSibling || elem.previousElementSibling || elem.parentNode;
+				$scope.removeElement($scope.active.element);
+				$scope.setActive(next);
+				$scope.$apply();
+				break;
+			case 69:
+				$scope.setMenu('richtext');
+				break;
+			case 85:
+				var action = $scope.Actions.pop();
+				action.undo();
+				break;
+		}	
+		$scope.$apply();
+	};
+	
+	// Only debug/devel-tool
+	function keyUp(e){
+		setTimeout(function(){
+			$scope.keyIsDown = null;
+			$scope.$apply()
+		},1000);
+	}
+
+	$scope.addEvent(window,'keydown',$scope.keyDown,true);
+	//$scope.addEvent(window,'keyup',keyUp);
+
 	// Methods to manipulate DOM
 	//$scope.prepend = function(element) {
 
@@ -174,6 +280,15 @@ EasyPress.controller('MainController', ['$scope', '$http', '$location','ContentS
 	};
 	$scope.removeElement = function(element) {
 		var parent = element.parentNode;
+		var action = {
+			undo: function(){
+				parent.appendChild(element);
+			},
+			insert: function(ref){
+				$scope.insertAfter(element,ref);
+			}
+		};
+		$scope.Actions.push(action);
 		parent.removeChild(element);
 	};
 
@@ -205,8 +320,8 @@ EasyPress.controller('MainController', ['$scope', '$http', '$location','ContentS
 			url: "/save",
 			method: "POST",
 			data: {
-				title: newTitle, //replace with function calls
-				theme: newTheme,
+				title: null, //replace with function calls
+				theme: null,
 				style: $scope.collectStyle(),
 				content: $scope.collectDocument()
 			},

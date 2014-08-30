@@ -10,6 +10,9 @@
 	{{{style}}}
 
 	<script class="application-scripts"></script>
+
+	{{{editor}}}
+
 	<script class="user-scripts"></script>
 	<script></script>
   </head>

@@ -759,7 +759,6 @@ var Medium = (function (w, d) {
                     this.medium.makeUndoable();
 
                     applier.toggleSelection(w);
-
                     if (this.clean) {
                         //cleanup
                         this.medium.html.clean();
