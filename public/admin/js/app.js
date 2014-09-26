@@ -101,14 +101,16 @@ var EasyPress = angular.module('EasyPress',['ngRoute','colorpicker.module','lr.u
 	.filter('excludeElements', function() {
 		return function(nodelist) {
 
-			var toExcludeByNodeName = ["BR","#text"];
-			var toExcludeByClassName = []
+			var toExcludeByNodeName = ["BR","#text","B","I","U","SPAN"];
+			var toKeepByClassName = ["title"];
 
 			var nodeArray = [].slice.call(nodelist);
 			
 			for (var i = 0; i < nodeArray.length; i++) {
+
+				console.log("check for splicing: ", nodeArray[i].nodeName, toExcludeByNodeName.indexOf(nodeArray[i].nodeName));
 				if (toExcludeByNodeName.indexOf(nodeArray[i].nodeName) != -1) {
-					//console.log("Splicing: ", nodeArray[i].nodeName);
+					console.log("Splicing: ", nodeArray[i].nodeName);
 					nodeArray.splice(i,1);
 					i--; //One element less
 				}

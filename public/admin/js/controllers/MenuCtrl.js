@@ -2,13 +2,13 @@
 EasyPress.controller('MenuController', ['$scope','$compile','BloggerService', function($scope,$compile,BloggerService){
 
 	// Tree view controller
-	$scope.opaque = new RegExp(/navbar|blog-module/);
+	$scope.opaque = new RegExp(/navbar/);
 
 	// Create blog
 	$scope.authors = [];
 	$scope.createBlogModule = function(module){
 		module.authors = $scope.authors;
-		var bm = BloggerService.createModule(module,'C');
+		var bm = BloggerService.createModule(module,'E');
 		console.log(bm);
 		$scope.active.element.appendChild(bm);
 		$compile(bm)(angular.element($scope.active.element).scope());

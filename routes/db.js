@@ -108,8 +108,10 @@ function getIndexContent(callback) {
 				if(err) {
 					return console.error('error running query 2', err);
 				}
-				data.style = result.rows[0].rules;
-				console.log(result.rows);
+				if (result.rows.length) {
+					data.style = result.rows[0].rules;
+					console.log(result.rows);
+				}
 
 				client.query('SELECT content FROM body ORDER BY rev_date DESC LIMIT 1', function(err, result) {
 					if(err) {

@@ -5,7 +5,7 @@
 		ng-mouseover="node.style.outline='1px solid red'" 
 		ng-mouseleave="node.style.outline=''" 
 		ng-click="node.style.outline=''; setActive(node)">
-			{{node.id || node.className.match(opaque)[0] || node.nodeName.toLowerCase()}}
+			{{ (node.id ? node.id + " (" + node.nodeName.toLowerCase() + ")" : "") || node.nodeName.toLowerCase() + (node.className ? " ." + node.className.replace("ng-scope","").replace("ng-binding","") : "")   }}
 	</span>
 	
 	<span class="treeControls">

@@ -31,10 +31,10 @@ angular.module('blogger.directives')
 			scope: true,
 			template: '<div class="blog-header">' + 
 						'<span class="author" ng-bind="blog.author"></span>' + 
-						'<span class="date" ng-bind="blog.date"></span><div>' + 
+						'<span class="date" ng-bind="blog.date"></span>' + 
 						'<span class="title" ng-if="title" ng-bind="blog.title"></span>' + 
-						'<div class="social-links" ng-if="social">Social Media Links</div>' +
-						'<article class="blog-content" ng-bind="blog.blog"></article></div>'
+						'<div class="social-links" ng-if="social">Social Media Links</div></div>' +
+						'<article class="blog-content" ng-bind="blog.blog"></article>'
 		}
 	});
 
@@ -49,12 +49,26 @@ angular.module('blogger.services')
 	.factory('BloggerService',function($http){
 		return {
 			createModule: function(attributes,type){
-				var module = document.createElement('div');
-				module.className = "blog-module"
+				if (type == 'C') {
+					var module = document.createElement('div');
+					module.className = "blog-module"
+				}
+				else if (type == 'E') {
+					var module = document.createElement('blog-module');
+				}
 				for (var i in attributes) {
 					module.setAttribute(i,attributes[i]);
 				}
 				module.setAttribute('ng-controller','BlogController');
+				$.ajax({
+					method: 'POST',
+					url: '/make-blog-db',
+					data: {"name": attributes.name}
+				}).success(function(data){
+					console.log("Blog created");
+				}).error(function(data){
+					console.log("Failed creating blog");
+				});
 				return module;
 			},
 			createPost: function(module,blog){

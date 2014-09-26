@@ -6,8 +6,8 @@ EasyPress.controller('MainController', ['$scope', '$http', '$location','$compile
 	$scope.title = "Queen";
 	$scope.highlightHover = true;
 	$scope.clickSelect = true;
-	$scope.Editor = {};
 	$scope.Actions = [];
+	
 
 	var candidate;
 	var workSheet;
@@ -112,7 +112,8 @@ EasyPress.controller('MainController', ['$scope', '$http', '$location','$compile
 				$scope.resetOutlines();
 			}
 		});
-		$scope.addEvent($scope.TARGET_WINDOW, 'keydown', $scope.keyDown);
+		$scope.addEvent($scope.TARGET_WINDOW, 'keydown',$scope.keyDown);
+
 	}
 
 	// Main menu of the application
@@ -132,7 +133,7 @@ EasyPress.controller('MainController', ['$scope', '$http', '$location','$compile
 	};
 
 	$scope.setMenu = function(menu){
-		console.log(menu);
+		//console.log(menu);
 		$scope.activeMenu = menuItems[menu];
 	};
 	$scope.setMenu('main');
@@ -141,17 +142,10 @@ EasyPress.controller('MainController', ['$scope', '$http', '$location','$compile
 		// Disable glow on old element
 		$scope.active.element.style.outline = "";
 		$scope.active.element.style.boxShadow = "";
-
 		if ($scope.activeMenu == menuItems['richtext']) {
 			console.log("disabling editor...");
-				$scope.$apply(function(){
-					$scope.active.element.contentEditable = false;
-					$scope.active.element.spellcheck = "";
-					//$scope.active.element.blur();
-				});
-			//$scope.active.element.focus();
+			$scope.addEvent($scope.TARGET_WINDOW,'keydown',$scope.keyDown);
 		}
-
 		if (!element) return;
 		$scope.active.element = element;
 
@@ -164,14 +158,11 @@ EasyPress.controller('MainController', ['$scope', '$http', '$location','$compile
 			element.style.outline = "2px solid -webkit-focus-ring-color";
 			element.style.boxShadow = "0 0 4px #00ffff";
 		}
-		
-		if (edit) {
+		/*
+		if (edit && ) {
 			$scope.setMenu('richtext');
-		}
-		
-		else {
-			$scope.setMenu('main');
-		}
+		}*/
+		$scope.setMenu('main');
 	};
 
 
@@ -186,7 +177,7 @@ EasyPress.controller('MainController', ['$scope', '$http', '$location','$compile
 	// May also be used programmatically from a template/view, as when leaving richtext editor.
 	
 	$scope.navigate = function(dir) {
-		console.log("in navigate");
+		//console.log("in navigate");
 		var elem = $scope.active.element;
 		switch(dir) {
 			case "up":
@@ -217,9 +208,13 @@ EasyPress.controller('MainController', ['$scope', '$http', '$location','$compile
 	// Keybindings for navigation (and other things)
 	
 	$scope.keyDown = function(e){
+		// To suppress console errors on login page
+		if (!document.getElementById('DragQueen')) {
+			return;
+		}
 		e = e ? e : window.event;
 		$scope.keyIsDown = e.keyCode;
-		console.log("in keydown");
+		//console.log("in keydown");
 		switch (e.keyCode){
 			// Navigation
 			case 37:
@@ -243,6 +238,7 @@ EasyPress.controller('MainController', ['$scope', '$http', '$location','$compile
 				$scope.$apply();
 				break;
 			case 69:
+				e.preventDefault(); //To prevent the letter 'e' from trickling down into element when entering editing mode
 				$scope.setMenu('richtext');
 				break;
 			case 85:
@@ -261,7 +257,7 @@ EasyPress.controller('MainController', ['$scope', '$http', '$location','$compile
 		},1000);
 	}
 
-	$scope.addEvent(window,'keydown',$scope.keyDown,true);
+	$scope.addEvent(window,'keydown',$scope.keyDown);
 	//$scope.addEvent(window,'keyup',keyUp);
 
 	// Methods to manipulate DOM
@@ -343,15 +339,17 @@ EasyPress.controller('MainController', ['$scope', '$http', '$location','$compile
 		console.log(fragments.join(''));
 		return fragments.join('');
 	
-		// Recursion from hell
 		function walkTheDOM(node) {
 
 			page = "";
 			var html,open,close;
 
 			if (node.nodeType === 1 && node.nodeName != "BODY") {
+
 				html = ContentService.getHTMLshallow(node);
-					open = html.match(/<[^/][^<]*>/)[0]; 
+				open = html.match(/<[^/][^<]*>/)[0];
+				open = open.replace(/ *(style|spellcheck|contenteditable)="[^"]*" *| *class="" */g,""); 
+
 				if (html.match(/<\/.*>/)) {
 					close = html.match(/<\/.*>/)[0];
 				}
@@ -391,7 +389,10 @@ EasyPress.controller('MainController', ['$scope', '$http', '$location','$compile
 	$scope.collectStyle = function(){
 		var styleMap = {};
 		newStyle = "";
+		console.log("workSheet: ",workSheet);
 		rules = workSheet.cssRules;
+
+		// This loop will extract css rules added in the session and store them in the styleMap variable
 		for (var i in rules) {
 			if (i == "length") break;
 			console.log(i,rules[i],rules[i].selectorText,rules[i].style);
@@ -403,25 +404,29 @@ EasyPress.controller('MainController', ['$scope', '$http', '$location','$compile
 		console.log(styleMap);
 		var storedSheet = $scope.TARGET_STORED_STYLE.sheet || $scope.TARGET_STORED_STYLE.styleSheet;
 		var storedRules = storedSheet.cssRules;
+		console.log("storedSheet: ",storedSheet);
+
+		// This loop will compare sessions added rules to already existing rules
+		// overriding where necessary and collecting the others
 		for (var j in storedRules) {
 			if (j == "length") break;
 			var completed = 0;
 			for (var selector in styleMap) {
+				console.log("styleMap selector: ",selector);
 				if (storedRules[j].selectorText == selector) {
 					for (var prop in styleMap[selector]) {
 						storedRules[j].style[prop] = styleMap[selector][prop];
 					}
 					delete styleMap[selector];
 					newStyle += storedRules[j].cssText;
-					console.log("In for loop: ", newStyle);
-					check = 1;
+					completed = 1;
 				}
 			}
-			if (!completed) {
+			if (!completed) { // && !storedRules[j].selectorText.match(/ng-scope/)) {
 				newStyle += storedRules[j].cssText;
 			}
 		}
-		// If selector didn't match an old rule
+		// If a new rules selector didn't match any old rule it is added to the final style sheet
 		for (var selector in styleMap) {
 			var started = 0;
 			for (var prop in styleMap[selector]) {

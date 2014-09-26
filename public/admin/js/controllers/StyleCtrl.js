@@ -49,7 +49,7 @@ EasyPress.controller("StyleController", ['$scope','upload', function($scope) {
 	};
 
 	var elem = $scope.active.element;
-	$scope.selector = elem.id ? "#" + elem.id : ( elem.className ? "." + elem.className : elem.nodeName.toLowerCase() );
+	$scope.selector = elem.id ? "#" + elem.id : ( elem.className && elem.className != 'ng-scope' ? "." + elem.className.replace(/ng-scope/g,"") : elem.nodeName.toLowerCase() );
 
 	var css = window.getComputedStyle(elem);
 
@@ -59,4 +59,11 @@ EasyPress.controller("StyleController", ['$scope','upload', function($scope) {
 		}
 	}
 
+	$(document).on('focus', '.form-control', function(){
+		$scope.removeEvent(document,'keydown',$scope.keyDown);
+	});
+
+	$(document).on('focus', '.form-control', function(){
+		$scope.addEvent(document,'keydown',$scope.keyDown);
+	});
 }]);

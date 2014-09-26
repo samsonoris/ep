@@ -1,25 +1,27 @@
 
 EasyPress.controller('RichTextController', ['$scope','$http','ContentService',function($scope,$http,ContentService){
 
+	console.log("in editor...");
+
+	$scope.removeEvent($scope.TARGET_WINDOW,'keydown',$scope.keyDown);
+	$scope.removeEvent(document,'keydown',$scope.keyDown);
 	var elem = $scope.active.element;
 	var Medium = $scope.TARGET_WINDOW.Medium;
-	$scope.removeEvent($scope.TARGET_WINDOW,'keydown',$scope.keyDown);
-
-	console.log("in editor...");
-	elem.focus();
-	elem.spellcheck = false;
-
-	$scope.Editor = new Medium({
+	editor = new Medium({
 		debug: true,
 		element: elem,
 		mode: Medium.inlineRichMode,
 		keyContext: {
-			27: exitEditor
-		}
-	}).focus();
-
-	console.log($scope.Editor.behavior());
-/*
+			27: function exitEditor(){
+					console.log("ESC pressed...context");
+					elem.removeAttribute('spellcheck');
+					editor.destroy();
+					$scope.addEvent($scope.TARGET_WINDOW,'keydown',$scope.keyDown);
+					$scope.addEvent(document,'keydown',$scope.keyDown);
+					$scope.setMenu('main');
+					$scope.$apply();
+			}
+		},
 		tags: {
 			break: 'br',
 			horizontalRule: 'hr',
@@ -30,11 +32,12 @@ EasyPress.controller('RichTextController', ['$scope','$http','ContentService',fu
 		beforeInvokeElement: function() {
 			console.log("In before invoke");
 		},
+		modifier: 'Ctrl',
 		modifiers: {
 			'b': 'bold',
 			'i': 'italicize',
 			'u': 'underline',
-			'p': 'paste'
+			'v': 'paste'
 		},
 		pasteAsText: true,
 		autoHR: true,
@@ -46,10 +49,32 @@ EasyPress.controller('RichTextController', ['$scope','$http','ContentService',fu
 		},
 		beforeAddTag: function(tag, shouldFocus, isEditable, afterElement) {
 		
-		},
+		}
+	});
  
-   */
-	$scope.blog = elem.nodeName == 'BLOG-POST';
+	elem.focus();
+	elem.spellcheck = false;
+	
+	console.log(editor);
+	
+	$scope.doCommand = function(command,argument){
+		console.log("in func, command: ", command);
+		if (command == 'insertImage') {
+			argument = '../images/' + prompt('Submit the name of the image file:');
+		}
+		switch (command) {
+			case 'b':
+			case 'i':
+			case 'u':
+				editor.invokeElement(command,{});
+				break;
+		}
+		elem.focus();
+		return false;
+	};
+
+/*
+	$scope.blog = (elem.nodeName == 'BLOG-POST');
 
 	if ($scope.blog) {
 		ContentService.setActiveBlog(elem); 
@@ -62,16 +87,6 @@ EasyPress.controller('RichTextController', ['$scope','$http','ContentService',fu
 		}
 	}
 
-	/*
-	$scope.doCommand = function(command,argument){
-		console.log("in func..");
-		if (command == 'insertImage') {
-			argument = '../images/' + prompt('Submit the name of the image file:');
-		}
-		$scope.TARGET_DOCUMENT.execCommand(command,false,argument);
-		elem.focus();
-	};
-*/
 	$scope.saveBlog = function(){
 		console.log("in func!");
 		
@@ -96,13 +111,6 @@ EasyPress.controller('RichTextController', ['$scope','$http','ContentService',fu
 		});
 	};
 
-	function exitEditor(){
-		console.log("ESC pressed...context");
-		elem.removeAttribute('spellcheck');
-		$scope.Editor.destroy();
-		$scope.addEvent($scope.TARGET_WINDOW,'keydown',$scope.keyDown);
-		$scope.setMenu('main');
-		$scope.$apply();
-	}
+*/
 
 }]);
